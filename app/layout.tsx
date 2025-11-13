@@ -25,8 +25,9 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           {children}
         </ThemeProvider>
-        <script src="https://www.youtube.com/iframe_api" async defer></script>
+       
         <Analytics />
+         <script src="https://www.youtube.com/iframe_api" async defer></script>
       </body>
     </html>
   )

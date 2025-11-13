@@ -1,9 +1,9 @@
 "use client"
 
 import Link from "next/link"
+import { useState, useEffect } from "react"
 import { Logo } from "@/components/logo"
 import { MobileMenu } from "@/components/mobile-menu"
-import { useState, useEffect } from "react"
 import { ThemeToggle } from "./theme-toggle"
 import { Button } from "@/components/ui/button"
 import { User, ArrowRight } from "lucide-react"
@@ -11,68 +11,121 @@ import { User, ArrowRight } from "lucide-react"
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState("")
+  const [isDesktop, setIsDesktop] = useState(false)
 
   useEffect(() => {
+    const checkScreenSize = () => {
+      setIsDesktop(window.innerWidth >= 1024) // 1024px = xl breakpoint
+    }
+
+    // Initial check
+    checkScreenSize()
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10)
-      
-      // Update active section based on scroll position
-      const sections = ['home', 'about', 'services', 'courses', 'process', 'testimonials', 'pricing', 'contact']
+
+      // Improved active section detection
+      const sections = [
+        "home",
+        "services",
+        "about",
+        "process",
+        "testimoni",
+        "courses",
+        "pricing",
+        "contact",
+      ]
+
+      let currentSection = ""
       
       for (const section of sections) {
         const element = document.getElementById(section)
         if (element) {
           const rect = element.getBoundingClientRect()
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveSection(section)
+          const elementTop = rect.top + window.scrollY
+          const elementBottom = elementTop + rect.height
+          
+          // Check if element is in viewport with offset
+          if (window.scrollY >= elementTop - 100 && window.scrollY < elementBottom - 100) {
+            currentSection = section
             break
           }
         }
       }
+
+      // Fallback: if no section found, check which section is closest to top
+      if (!currentSection) {
+        let closestSection = ""
+        let closestDistance = Infinity
+
+        for (const section of sections) {
+          const element = document.getElementById(section)
+          if (element) {
+            const rect = element.getBoundingClientRect()
+            const distance = Math.abs(rect.top)
+            if (distance < closestDistance) {
+              closestDistance = distance
+              closestSection = section
+            }
+          }
+        }
+        currentSection = closestSection
+      }
+
+      setActiveSection(currentSection)
     }
 
     window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
+    window.addEventListener("resize", checkScreenSize)
+    
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+      window.removeEventListener("resize", checkScreenSize)
+    }
   }, [])
 
   const navItems = [
-    { href: "#about", label: "About" },
     { href: "#services", label: "Services" },
-    { href: "#courses", label: "Courses" },
+    { href: "#about", label: "About" },
     { href: "#process", label: "Process" },
-    { href: "#testimonials", label: "Success Stories" },
+    { href: "#testimoni", label: "Testimoni" },
+    { href: "#courses", label: "Courses" },
     { href: "#pricing", label: "Pricing" },
     { href: "#contact", label: "Contact" },
   ]
 
-  const isActive = (href: string) => {
-    const section = href.replace('#', '')
-    return activeSection === section
-  }
+  const isActive = (href: string) => activeSection === href.replace("#", "")
 
   return (
     <nav
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-        isScrolled ? "bg-background/80 backdrop-blur-lg border-b border-border shadow-sm" : "bg-transparent"
+        isScrolled
+          ? "bg-background/95 backdrop-blur-md border-b border-border shadow-sm"
+          : "bg-background/70 backdrop-blur-sm"
       }`}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
+      <div className="container mx-auto px-3 sm:px-4 lg:px-6">
+        <div className="flex h-14 sm:h-16 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="hover:opacity-80 transition-opacity flex items-center gap-2">
-            <Logo />
-            <span className="font-bold text-lg bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
-              CareerPath
+          <Link
+            href="/"
+            className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+          >
+            <div className="w-8 h-8 sm:w-9 sm:h-9">
+              <Logo />
+            </div>
+            <span className="font-bold text-lg sm:text-xl bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
+              EduQuest
             </span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-6">
+          {/* Desktop Navigation - Only show on screens >= 1024px */}
+          <div className="hidden xl:flex items-center justify-center gap-6 flex-1">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`text-sm font-medium transition-all duration-300 relative py-2 ${
+                className={`text-sm font-medium relative transition-all duration-200 py-2 px-1 ${
                   isActive(item.href)
                     ? "text-primary font-semibold"
                     : "text-foreground/80 hover:text-primary"
@@ -80,30 +133,31 @@ export function Navbar() {
               >
                 {item.label}
                 {isActive(item.href) && (
-                  <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary rounded-full" />
+                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4/5 h-0.5 bg-primary rounded-full" />
                 )}
               </Link>
             ))}
           </div>
 
-          {/* Right Side - Theme Toggle & Login */}
-          <div className="flex items-center gap-3">
-            <div className="hidden sm:flex items-center gap-2">
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                className="flex items-center gap-2 text-foreground/80 hover:text-primary"
+          {/* Right Section */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* Desktop Auth Buttons - Only show on screens >= 1024px */}
+            <div className="hidden xl:flex items-center gap-2">
+              <Button
+                variant="ghost"
+                size="sm"
                 asChild
+                className="text-foreground/80 hover:text-primary hover:bg-accent/50"
               >
-                <Link href="/login">
+                <Link href="/login" className="flex items-center gap-2">
                   <User className="h-4 w-4" />
-                  Login
+                  <span>Login</span>
                 </Link>
               </Button>
-              <Button 
-                size="sm" 
-                className="bg-primary hover:bg-primary/90 text-primary-foreground"
+              <Button
+                size="sm"
                 asChild
+                className="bg-primary hover:bg-primary/90 text-primary-foreground"
               >
                 <Link href="#pricing" className="flex items-center gap-1">
                   Get Started
@@ -111,9 +165,42 @@ export function Navbar() {
                 </Link>
               </Button>
             </div>
-            
-            <ThemeToggle />
-            <MobileMenu />
+
+            {/* Desktop Theme Toggle - Only show on screens >= 1024px */}
+            <div className="hidden xl:flex">
+              <ThemeToggle />
+            </div>
+
+            {/* Mobile Section - Show on screens < 1024px */}
+            <div className="flex xl:hidden items-center gap-2">
+              <ThemeToggle />
+
+              {/* Compact buttons for mobile */}
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-foreground/80 hover:text-primary h-9 w-9"
+                asChild
+              >
+                <Link href="/login">
+                  <User className="h-4 w-4" />
+                  <span className="sr-only">Login</span>
+                </Link>
+              </Button>
+              <Button
+                size="sm"
+                asChild
+                className="px-3 bg-primary hover:bg-primary/90 text-primary-foreground h-9"
+              >
+                <Link href="#pricing">
+                  Start
+                  <ArrowRight className="h-3 w-3 ml-1" />
+                </Link>
+              </Button>
+
+              {/* Mobile Menu - Always visible on screens < 1024px */}
+              <MobileMenu />
+            </div>
           </div>
         </div>
       </div>

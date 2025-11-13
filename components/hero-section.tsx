@@ -1,9 +1,10 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Sparkles, Target, GraduationCap, Gamepad, Brain } from "lucide-react"
+import { ArrowRight, Sparkles, Target, Gamepad, Brain } from "lucide-react"
 import { useEffect, useState } from "react"
 import { useTheme } from "next-themes"
+import { motion, Variants } from "framer-motion"
 
 export function HeroSection() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
@@ -23,10 +24,59 @@ export function HeroSection() {
 
   const mouseFollowColor = theme === "light" ? "bg-primary/30" : "bg-muted/20"
 
+  // Framer Motion variants dengan tipe yang tepat
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3
+      }
+    }
+  }
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  }
+
+  const drawUnderline: Variants = {
+    hidden: { pathLength: 0, opacity: 0 },
+    visible: {
+      pathLength: 1,
+      opacity: 1,
+      transition: {
+        pathLength: { duration: 1.5, ease: "easeInOut", delay: 1 },
+        opacity: { duration: 0.3 }
+      }
+    }
+  }
+
+  const featureCardVariants: Variants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: i * 0.2 + 0.8,
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    })
+  }
+
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden">
+      {/* Keep your original background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Soft animated background */}
         <div 
           className="absolute w-[500px] h-[500px] rounded-full bg-muted/40 blur-3xl animate-pulse"
           style={{ 
@@ -45,7 +95,6 @@ export function HeroSection() {
           }}
         />
         
-        {/* Mouse-following gradient — only render on client */}
         {isClient && (
           <div 
             className={`absolute w-[300px] h-[300px] rounded-full blur-3xl transition-all duration-700 ease-out ${mouseFollowColor}`}
@@ -57,39 +106,67 @@ export function HeroSection() {
         )}
       </div>
 
-      {/* Floating icons */}
-      <div className="absolute inset-0 pointer-events-none">
-        <Target className="absolute text-muted-foreground/30 animate-float" style={{ top: "15%", left: "15%" }} size={40} />
-        <Brain className="absolute text-muted-foreground/30 animate-float" style={{ top: "25%", right: "20%", animationDelay: "2s" }} size={35} />
-        <Gamepad className="absolute text-muted-foreground/30 animate-float" style={{ bottom: "20%", left: "20%", animationDelay: "1s" }} size={30} />
-        <GraduationCap className="absolute text-muted-foreground/30 animate-float" style={{ bottom: "30%", right: "15%", animationDelay: "1.5s" }} size={32} />
-      </div>
-
-      {/* Main Content */}
-      <div className="container mx-auto text-center max-w-5xl relative z-10">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6 animate-fade-in-up">
+      {/* Main Content with Framer Motion */}
+      <motion.div 
+        className="container mx-auto text-center max-w-5xl relative z-10"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        {/* Badge */}
+        <motion.div 
+          variants={itemVariants}
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6"
+        >
           <Sparkles className="w-4 h-4 text-primary" />
           <span className="text-sm font-medium text-primary">
             AI-Powered Career Discovery
           </span>
-        </div>
+        </motion.div>
 
-        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 animate-fade-in-up text-balance">
+        {/* Main Heading with Draw Underline */}
+        <motion.h1 
+          variants={itemVariants}
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 text-balance"
+        >
           Find Your{" "}
           <span className="text-primary relative inline-block">
             Perfect Career
-            <svg className="absolute -bottom-2 left-0 w-full" height="12" viewBox="0 0 200 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M2 10C50 5 150 5 198 10" stroke="currentColor" strokeWidth="3" strokeLinecap="round" className="text-primary" />
+            <svg 
+              className="absolute -bottom-2 left-0 w-full" 
+              height="12" 
+              viewBox="0 0 200 12" 
+              fill="none" 
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <motion.path 
+                d="M2 10C50 5 150 5 198 10" 
+                stroke="currentColor" 
+                strokeWidth="3" 
+                strokeLinecap="round" 
+                className="text-primary"
+                variants={drawUnderline}
+                initial="hidden"
+                animate="visible"
+              />
             </svg>
           </span>
           {" "}Path
-        </h1>
+        </motion.h1>
 
-        <p className="text-xl sm:text-2xl text-muted-foreground mb-10 max-w-3xl mx-auto animate-fade-in-up animate-delay-100 leading-relaxed">
+      
+        <motion.p 
+          variants={itemVariants}
+          className="text-xl sm:text-2xl text-muted-foreground mb-10 max-w-3xl mx-auto leading-relaxed"
+        >
           Stop guessing, start knowing. Our AI-powered assessment reveals your ideal career path, then guides you through engaging gamified courses to build the skills you need to succeed.
-        </p>
+        </motion.p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in-up animate-delay-200 mb-12">
+        {/* Buttons */}
+        <motion.div 
+          variants={itemVariants}
+          className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
+        >
           <Button 
             size="lg" 
             className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-6 text-lg group shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all"
@@ -101,44 +178,46 @@ export function HeroSection() {
             </a>
           </Button>
           
-          <Button 
-            size="lg" 
-            variant="outline" 
-            className="border-2 border-primary/20 text-foreground hover:bg-primary/5 hover:border-primary font-semibold px-8 py-6 text-lg backdrop-blur-sm bg-transparent"
-            asChild
-          >
-            <a href="#how-it-works">How It Works</a>
-          </Button>
+        <Button 
+          size="lg" 
+  variant="outline" 
+  className="border-2 border-primary/20 text-foreground hover:text-primary font-semibold px-8 py-6 text-lg backdrop-blur-sm transition-all"
+  asChild
+>
+  <a href="#how-it-works">How It Works</a>
+</Button>
+
+        </motion.div>
+
+        {/* Features Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-12">
+          {[
+            { icon: Brain, title: "AI Career Assessment", description: "Personalized survey that matches you with ideal career paths" },
+            { icon: Gamepad, title: "Gamified Learning", description: "Earn points, level up, and unlock advanced courses through quizzes" },
+            { icon: Target, title: "Structured Career Path", description: "Clear roadmap from beginner to advanced in your chosen field" }
+          ].map((feature, index) => (
+            <motion.div
+              key={index}
+              custom={index}
+              variants={featureCardVariants}
+              initial="hidden"
+              animate="visible"
+              className="flex flex-col items-center text-center p-4"
+            >
+              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-3">
+                <feature.icon className="w-6 h-6 text-primary" />
+              </div>
+              <h3 className="font-semibold mb-2">{feature.title}</h3>
+              <p className="text-sm text-muted-foreground">{feature.description}</p>
+            </motion.div>
+          ))}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto animate-fade-in-up animate-delay-300">
-          <div className="flex flex-col items-center text-center p-4">
-            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-3">
-              <Brain className="w-6 h-6 text-primary" />
-            </div>
-            <h3 className="font-semibold mb-2">AI Career Assessment</h3>
-            <p className="text-sm text-muted-foreground">Personalized survey that matches you with ideal career paths</p>
-          </div>
-          
-          <div className="flex flex-col items-center text-center p-4">
-            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-3">
-              <Gamepad className="w-6 h-6 text-primary" />
-            </div>
-            <h3 className="font-semibold mb-2">Gamified Learning</h3>
-            <p className="text-sm text-muted-foreground">Earn points, level up, and unlock advanced courses through quizzes</p>
-          </div>
-          
-          <div className="flex flex-col items-center text-center p-4">
-            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-3">
-              <Target className="w-6 h-6 text-primary" />
-            </div>
-            <h3 className="font-semibold mb-2">Structured Career Path</h3>
-            <p className="text-sm text-muted-foreground">Clear roadmap from beginner to advanced in your chosen field</p>
-          </div>
-        </div>
-
-        {/* Stats section */}
-        <div className="flex flex-wrap justify-center items-center gap-8 text-sm text-muted-foreground mt-12 animate-fade-in-up animate-delay-400">
+        {/* Stats Section */}
+        <motion.div 
+          variants={itemVariants}
+          className="flex flex-wrap justify-center items-center gap-8 text-sm text-muted-foreground"
+        >
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
             <span>10,000+ Career Paths Discovered</span>
@@ -151,8 +230,8 @@ export function HeroSection() {
             <div className="w-2 h-2 rounded-full bg-primary animate-pulse" style={{ animationDelay: "1s" }} />
             <span>Interactive Gamified Courses</span>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   )
 }

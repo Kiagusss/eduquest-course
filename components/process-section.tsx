@@ -33,7 +33,7 @@ const steps = [
 
 export function ProcessSection() {
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30 relative overflow-hidden">
+    <section id="process" className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30 relative overflow-hidden">
       <div className="absolute inset-0 bg-grid-pattern opacity-5" />
 
       <div className="container mx-auto max-w-7xl relative z-10">

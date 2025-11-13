@@ -85,7 +85,7 @@ export function TestimonialsSection() {
   }
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30 overflow-hidden">
+    <section id="testimoni" className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30 overflow-hidden">
       <div className="container mx-auto max-w-7xl">
         <div className="text-center mb-16">
           <div className="inline-block mb-4 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold">

@@ -11,7 +11,7 @@ const navItems = [
   { href: "#services", label: "Services" },
   { href: "#courses", label: "Courses" },
   { href: "#process", label: "Process" },
-  { href: "#testimonials", label: "Success Stories" },
+  { href: "#testimonials", label: "Testimoni" },
   { href: "#pricing", label: "Pricing" },
   { href: "#contact", label: "Contact" },
 ]
@@ -22,22 +22,21 @@ export function MobileMenu() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="ghost" size="icon" className="md:hidden">
+        <Button variant="ghost" size="icon" className="h-9 w-9">
           <Menu className="h-5 w-5" />
           <span className="sr-only">Open menu</span>
         </Button>
       </DialogTrigger>
       <DialogContent className="w-[90vw] max-w-[400px] mx-auto data-[state=open]:slide-in-from-top data-[state=closed]:slide-out-to-top">
-       
         <DialogTitle className="sr-only">Navigation Menu</DialogTitle>
         
         <div className="flex flex-col max-h-[80vh]">
-     
+          {/* Header with Close Button */}
           <div className="flex items-center justify-between mb-6">
             <span className="font-bold text-xl bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
-              CareerPath
+              EduQuest
             </span>
-          
+           
           </div>
 
           {/* Navigation Items */}
