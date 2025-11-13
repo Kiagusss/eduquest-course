@@ -20,19 +20,12 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-<<<<<<< HEAD
     <html lang="en" suppressHydrationWarning>
-=======
-    <html lang="nl" suppressHydrationWarning>
->>>>>>> 1db27fb0255a20cd916333fad63ea92c6a82c2cb
       <body className={`font-sans antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           {children}
         </ThemeProvider>
-<<<<<<< HEAD
         <script src="https://www.youtube.com/iframe_api" async defer></script>
-=======
->>>>>>> 1db27fb0255a20cd916333fad63ea92c6a82c2cb
         <Analytics />
       </body>
     </html>
