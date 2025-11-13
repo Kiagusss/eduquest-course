@@ -12,23 +12,6 @@ export const metadata: Metadata = {
   title: "ms-webdesign | Hoogwaardige Websites",
   description: "Moderne, resultaatgerichte webdesigns die bezoekers omzetten in klanten",
   generator: "v0.app",
-  icons: {
-    icon: [
-      {
-        url: "/icon-light-32x32.png",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        url: "/icon-dark-32x32.png",
-        media: "(prefers-color-scheme: dark)",
-      },
-      {
-        url: "/icon.svg",
-        type: "image/svg+xml",
-      },
-    ],
-    apple: "/apple-icon.png",
-  },
 }
 
 export default function RootLayout({
@@ -37,12 +20,19 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
+<<<<<<< HEAD
     <html lang="en" suppressHydrationWarning>
+=======
+    <html lang="nl" suppressHydrationWarning>
+>>>>>>> 1db27fb0255a20cd916333fad63ea92c6a82c2cb
       <body className={`font-sans antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           {children}
         </ThemeProvider>
+<<<<<<< HEAD
         <script src="https://www.youtube.com/iframe_api" async defer></script>
+=======
+>>>>>>> 1db27fb0255a20cd916333fad63ea92c6a82c2cb
         <Analytics />
       </body>
     </html>
