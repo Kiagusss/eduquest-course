@@ -1,63 +1,89 @@
 "use client"
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Layout, Palette, Code, Share2, Target, Search } from "lucide-react"
+import { Brain, Gamepad, Target, GraduationCap, TrendingUp, Users, Rocket, Award, BarChart3, Clock, Shield, Zap } from "lucide-react"
 
 const services = [
   {
-    icon: Layout,
-    title: "Web Design",
-    description:
-      "Wij ontwerpen websites die niet alleen visueel aantrekkelijk zijn, maar ook functioneel en gebruiksvriendelijk. Bij MSwebdesign staat jouw merk centraal en zorgen we ervoor dat jouw online uitstraling aansluit bij de doelen en waarden van je bedrijf.",
+    icon: Brain,
+    title: "AI Career Assessment",
+    description: "Take our intelligent personality and skills survey powered by advanced AI. Get personalized career recommendations that match your strengths, interests, and aspirations perfectly.",
   },
   {
-    icon: Palette,
-    title: "Graphic Design",
-    description:
-      "Van logo's tot social media posts, wij leveren creatieve grafische ontwerpen die jouw merk versterken. Onze ontwerpen zijn uniek en professioneel, zodat ze de juiste indruk maken op jouw doelgroep.",
-  },
-  {
-    icon: Code,
-    title: "Web Development",
-    description:
-      "We bouwen websites die technisch sterk en toekomstbestendig zijn. Ons team zorgt voor betrouwbare, schaalbare en snelle websites die je bedrijf digitaal laten groeien en professioneel laten overkomen.",
-  },
-  {
-    icon: Share2,
-    title: "Social Media",
-    description:
-      "Een goede aanwezigheid op sociale media maakt tegenwoordig het verschil. Wij helpen je om impact te maken met aantrekkelijke visuals en effectieve strategieën, zodat je merk zichtbaar en betrokken blijft.",
+    icon: Gamepad,
+    title: "Gamified Learning",
+    description: "Learn through interactive courses with video lessons and fun quizzes. Earn points, unlock achievements, and level up as you progress through your personalized learning journey.",
   },
   {
     icon: Target,
-    title: "Resultaatgericht",
-    description:
-      "Bij MSwebdesign gaan we voor succes. Onze aanpak is altijd gericht op het behalen van meetbare resultaten die bijdragen aan de groei van jouw bedrijf. Samen kijken we naar wat écht werkt.",
+    title: "Personalized Career Roadmap",
+    description: "Receive a clear, step-by-step career path tailored just for you. Know exactly what skills to learn and in what order to reach your career goals efficiently.",
   },
   {
-    icon: Search,
-    title: "SEO",
-    description:
-      "Vindbaarheid is essentieel. Wij optimaliseren je website met de nieuwste SEO-technieken, zodat je hoger scoort in Google en je doelgroep je makkelijk kan vinden.",
+    icon: GraduationCap,
+    title: "Structured Courses",
+    description: "Access carefully curated courses that progress from beginner to advanced levels. Each course builds on previous knowledge with engaging video content and practical exercises.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Progress Tracking",
+    description: "Monitor your learning journey with detailed analytics. Track your skill development, course completion, and career readiness as you advance through the program.",
+  },
+  {
+    icon: Users,
+    title: "Career Community",
+    description: "Connect with peers on similar career paths. Share experiences, get support, and network with other young professionals building their futures.",
+  },
+  {
+    icon: Rocket,
+    title: "Skill Development",
+    description: "Build in-demand skills that employers are looking for. Our courses focus on practical, real-world abilities that prepare you for today's job market.",
+  },
+  {
+    icon: Award,
+    title: "Achievement System",
+    description: "Earn badges and certificates as you master new skills. Showcase your accomplishments to potential employers and build a portfolio of verified competencies.",
+  },
+  {
+    icon: BarChart3,
+    title: "Career Analytics",
+    description: "Get insights into job market trends and salary expectations for your chosen career path. Make informed decisions about your professional future.",
+  },
+  {
+    icon: Clock,
+    title: "Flexible Learning",
+    description: "Learn at your own pace, anytime, anywhere. Our platform adapts to your schedule, allowing you to balance education with other commitments.",
+  },
+  {
+    icon: Shield,
+    title: "Career Confidence",
+    description: "Gain the confidence to pursue your dream career. Our guided approach ensures you're always moving forward with clarity and purpose.",
+  },
+  {
+    icon: Zap,
+    title: "Rapid Skill Acquisition",
+    description: "Accelerate your learning with our optimized curriculum. Focus on what matters most and avoid wasting time on irrelevant content.",
   },
 ]
 
 export function ServicesSection() {
   return (
-    <section id="diensten" className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <section id="services" className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/5 animate-pulse" />
 
       <div className="container mx-auto max-w-7xl relative z-10">
-        <div className="inline-block mb-4 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mx-auto block w-fit">
-          ✨ Onze Expertise
+        <div className="text-center mb-16">
+          <div className="inline-block mb-4 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mx-auto">
+            🚀 Our Services
+          </div>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-4 text-balance">
+            Everything You Need to <span className="text-primary">Launch Your Career</span>
+          </h2>
+          <p className="text-center text-muted-foreground max-w-3xl mx-auto text-pretty leading-relaxed text-lg">
+            From career discovery to skill mastery - we provide the complete toolkit to transform your potential into a successful career path.
+          </p>
         </div>
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-4 text-balance">
-          Waar we <span className="text-primary">écht goed</span> in zijn
-        </h2>
-        <p className="text-center text-muted-foreground mb-12 max-w-3xl mx-auto text-pretty leading-relaxed text-lg">
-          Van concept tot lancering - wij transformeren jouw digitale ambities naar krachtige online oplossingen die
-          resultaat opleveren.
-        </p>
+        
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => (
             <Card
@@ -79,4 +105,4 @@ export function ServicesSection() {
       </div>
     </section>
   )
-}
+} 

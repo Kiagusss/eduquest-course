@@ -7,7 +7,8 @@ import { TestimonialsSection } from "@/components/testimonials-section"
 import { PricingSection } from "@/components/pricing-section"
 import { ContactSection } from "@/components/contact-section"
 import { Footer } from "@/components/footer"
-import { PortfolioSection } from "@/components/portofolio-section"
+import { CoursesExample } from "@/components/course-example"
+
 
 export default function Home() {
   return (
@@ -18,7 +19,7 @@ export default function Home() {
       <AboutSection />
       <ProcessSection />
       <TestimonialsSection />
-      <PortfolioSection />
+      <CoursesExample />
       <PricingSection />
       <ContactSection />
       <Footer />
