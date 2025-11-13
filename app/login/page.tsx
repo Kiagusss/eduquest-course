@@ -116,7 +116,7 @@ export default function LoginPage() {
         {/* Sign Up Link */}
         <p className="mt-8 text-gray-600 text-sm">
           Belum punya akun?{" "}
-          <a href="#" className="text-[#8B5CF6] hover:text-[#06B6D4] font-semibold transition-colors">
+          <a href="/register" className="text-[#8B5CF6] hover:text-[#06B6D4] font-semibold transition-colors">
             Daftar sekarang
           </a>
         </p>

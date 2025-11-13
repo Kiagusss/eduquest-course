@@ -79,12 +79,9 @@ export default function CourseDashboard() {
         <div className="flex items-center justify-between mb-6">
           <div>
             <h1 className="text-3xl font-bold text-foreground">Courses</h1>
-            <p className="text-muted-foreground mt-1">Create and manage courses in your school.</p>
+            <p className="text-muted-foreground mt-1">Belajar dengan semangat bersama kami.</p>
           </div>
-          <button className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-white hover:opacity-90 transition-opacity font-medium">
-            <Plus className="w-5 h-5" />
-            New Course
-          </button>
+          
         </div>
 
         <CourseFilters selectedCategory={selectedCategory} onCategoryChange={setSelectedCategory} />
