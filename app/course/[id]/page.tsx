@@ -5,13 +5,13 @@ import Link from "next/link"
 import { ChevronLeft, Play, Download, Share2, BookOpen } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-
+import Image from "next/image"
 const coursesData = [
   {
     id: 1,
     title: "UI/UX Design Level Up with Prototyping",
     category: "UI/UX Design",
-    image: "/ui-ux-design-concept.png",
+    image: "/ui.jpg",
     createdDate: "16 Jan 2025",
     sales: "$1,250",
     status: "Published",
@@ -136,7 +136,7 @@ const coursesData = [
     id: 6,
     title: "Advanced UI/UX Design Patterns",
     category: "UI/UX Design",
-    image: "/advanced-ui-ux.jpg",
+    image: "/ui-ux.jpg",
     createdDate: "10 Jan 2025",
     sales: "$1,100",
     status: "Published",
@@ -220,12 +220,15 @@ export default function CourseDetailPage({ params }: PageProps) {
               </div>
 
               <h1 className="text-4xl font-bold text-foreground mb-4 text-balance">{course.title}</h1>
+                <div className="w-full h-96 relative rounded-xl mb-6 overflow-hidden">
+                  <Image
+                    src={course.image || "/placeholder.svg"}
+                    alt={course.title}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
 
-              <img
-                src={course.image || "/placeholder.svg"}
-                alt={course.title}
-                className="w-full h-96 object-cover rounded-xl mb-6"
-              />
 
               <div className="space-y-4">
                 <div>
@@ -250,20 +253,15 @@ export default function CourseDetailPage({ params }: PageProps) {
                   </div>
 
                   <div className="border-t border-border pt-4">
-                    <p className="text-sm text-muted-foreground">Price</p>
+                    <p className="text-sm text-muted-foreground">Point</p>
                     <p className="text-lg font-bold text-foreground">{course.sales}</p>
                   </div>
 
                   <div className="border-t border-border pt-4 space-y-2">
                     <Button className="w-full bg-primary hover:bg-primary/90 text-white">
-                      <Play className="h-4 w-4 mr-2" />
-                      Start Learning
+                      Buy By Your Point
                     </Button>
-                    <Button variant="outline" className="w-full bg-transparent">
-                      <Download className="h-4 w-4 mr-2" />
-                      Download
-                    </Button>
-                    <Button variant="outline" className="w-full bg-transparent">
+                    <Button variant="outline" className="w-full bg-transparent hover:bg-primary/90">
                       <Share2 className="h-4 w-4 mr-2" />
                       Share
                     </Button>
@@ -333,10 +331,10 @@ export default function CourseDetailPage({ params }: PageProps) {
                       </ul>
                     </div>
                     <div className="flex gap-2">
-                      <Button size="sm" className="bg-primary hover:bg-primary/90 text-white">
+                      <Link href={`/course/${course.id}/learn`} className="inline-flex items-center bg-primary hover:bg-primary/90 text-white px-3 py-1 rounded">
                         <Play className="h-4 w-4 mr-2" />
                         Watch
-                      </Button>
+                      </Link>
                       <Button size="sm" variant="outline">
                         <Download className="h-4 w-4 mr-2" />
                         Resources
