@@ -1,5 +1,4 @@
 "use client"
-
 import { useState, useCallback } from "react"
 import { VideoPlayer } from "@/components/video-player"
 import { QuizComponent } from "@/components/quiz"
