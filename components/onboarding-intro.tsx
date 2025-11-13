@@ -32,37 +32,7 @@ export default function OnboardingIntro({ onStart }: OnboardingIntroProps) {
             />
           </div>
 
-          {/* Icon Grid */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
-            className="mb-12 flex items-center justify-center gap-4"
-          >
-            <motion.div
-              animate={{ y: [0, -6, 0] }}
-              transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
-              className="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center shadow-md hover:shadow-lg transition-shadow"
-            >
-              <Zap className="w-7 h-7 text-primary-foreground" />
-            </motion.div>
-            <motion.div
-              animate={{ y: [0, -6, 0] }}
-              transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY, delay: 0.2 }}
-              className="w-14 h-14 rounded-2xl bg-accent flex items-center justify-center shadow-md hover:shadow-lg transition-shadow"
-            >
-              <Target className="w-7 h-7 text-accent-foreground" />
-            </motion.div>
-            <motion.div
-              animate={{ y: [0, -6, 0] }}
-              transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY, delay: 0.4 }}
-              className="w-14 h-14 rounded-2xl bg-secondary flex items-center justify-center shadow-md hover:shadow-lg transition-shadow"
-            >
-              <Lightbulb className="w-7 h-7 text-secondary-foreground" />
-            </motion.div>
-          </motion.div>
-
-          {/* Main Heading */}
+        
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
