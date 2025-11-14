@@ -1,8 +1,8 @@
 "use client"
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Check, Star, Crown, Zap } from "lucide-react"
-import { QuoteFormDialog } from "@/components/quote-form-dialog"
+import { Button } from "@/components/ui/button"
+import { Check, Star, Crown, Zap, ArrowRight } from "lucide-react"
 
 const pricingTiers = [
   {
@@ -19,6 +19,9 @@ const pricingTiers = [
     ],
     highlighted: false,
     icon: Zap,
+    buttonText: "Start Free Trial",
+    buttonVariant: "outline" as const,
+    customButtonClass: "dark:bg-white dark:text-black dark:border-white dark:hover:bg-gray-100 dark:hover:border-gray-100"
   },
   {
     name: "Career Builder",
@@ -36,6 +39,8 @@ const pricingTiers = [
     ],
     highlighted: true,
     icon: Crown,
+    buttonText: "Start Free Trial",
+    buttonVariant: "default" as const,
   },
   {
     name: "Career Accelerator",
@@ -53,10 +58,25 @@ const pricingTiers = [
     ],
     highlighted: false,
     icon: Star,
+    buttonText: "Get Custom Quote",
+    buttonVariant: "outline" as const,
+    customButtonClass: "dark:bg-white dark:text-black dark:border-white dark:hover:bg-gray-100 dark:hover:border-gray-100"
   },
 ]
 
 export function PricingSection() {
+  const handleGetStarted = (tierName: string, price: string) => {
+    console.log(`Selected plan: ${tierName} at ${price}`)
+    // Here you can add your logic for handling the button click
+    // For example: redirect to signup, open a modal, etc.
+  }
+
+  const handleCustomQuote = () => {
+    console.log("Requesting custom quote")
+    // Here you can add your logic for handling custom quote requests
+    // For example: redirect to contact form, open a modal, etc.
+  }
+
   return (
     <section id="pricing" className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       <div className="absolute inset-0 -z-10">
@@ -125,13 +145,23 @@ export function PricingSection() {
                     </li>
                   ))}
                 </ul>
-                <QuoteFormDialog
-                  packageName={tier.name}
-                  variant={tier.highlighted ? "default" : "outline"}
-                  className={`w-full ${tier.highlighted ? "shadow-lg shadow-primary/20" : ""}`}
+                
+                {/* Pricing Button */}
+                <Button
+                  variant={tier.buttonVariant}
+                  size="lg"
+                  className={`w-full group ${
+                    tier.highlighted ? "shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30" : ""
+                  } ${tier.customButtonClass || ""}`}
+                  onClick={() => 
+                    tier.price === "Custom" 
+                      ? handleCustomQuote() 
+                      : handleGetStarted(tier.name, tier.price)
+                  }
                 >
-                  {tier.price === "Custom" ? "Get Custom Quote" : "Start Free Trial"}
-                </QuoteFormDialog>
+                  {tier.buttonText}
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </Button>
               </CardContent>
             </Card>
           ))}
@@ -167,6 +197,31 @@ export function PricingSection() {
             <h3 className="font-semibold">Career Support</h3>
             <p className="text-sm text-muted-foreground">Ongoing guidance and community to help you succeed</p>
           </div>
+        </div>
+
+        {/* CTA Section */}
+        <div className="text-center mt-16">
+          <div className="inline-flex flex-col sm:flex-row gap-4 items-center justify-center">
+            <Button 
+              size="lg" 
+              className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-6 text-lg"
+              onClick={() => handleGetStarted("Career Builder", "$99")}
+            >
+              Start Your Free Trial
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="border-2 border-primary/20 font-semibold px-8 py-6 text-lg dark:bg-white dark:text-black dark:border-white dark:hover:bg-gray-100 dark:hover:border-gray-100"
+              onClick={handleCustomQuote}
+            >
+              Need Custom Solution?
+            </Button>
+          </div>
+          <p className="text-muted-foreground mt-6 max-w-2xl mx-auto">
+            Join thousands of professionals who have transformed their careers with our platform
+          </p>
         </div>
       </div>
     </section>

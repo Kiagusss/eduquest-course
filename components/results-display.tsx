@@ -4,7 +4,8 @@ import { motion } from "framer-motion"
 import { useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { BookOpen, Briefcase, Trophy, RotateCcw } from "lucide-react"
+import { BookOpen, Briefcase, Trophy, RotateCcw, ArrowRight } from "lucide-react"
+import Link from "next/link"
 
 interface ResultsDisplayProps {
   career: string
@@ -270,13 +271,32 @@ export default function ResultsDisplay({ career, onRetake }: ResultsDisplayProps
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
-          className="text-center space-y-4"
+          className="text-center space-y-6"
         >
-          <p className="text-lg text-muted-foreground">Ready to explore more careers or want to retake the survey?</p>
-          <Button onClick={onRetake} className="gap-2 bg-primary hover:bg-primary/90 px-8 py-6 text-lg">
-            <RotateCcw className="w-5 h-5" />
-            Retake Survey
-          </Button>
+          <p className="text-lg text-muted-foreground">
+            Ready to start learning or want to explore other career options?
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Button 
+              asChild
+              className="gap-2 bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg flex-1 sm:flex-none transition-all duration-300"
+            >
+              <Link href="/course">
+                Go to Course
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+            </Button>
+            
+            <Button 
+              onClick={onRetake} 
+              variant="outline"
+              className="gap-2 px-8 py-6 text-lg flex-1 sm:flex-none border-2 border-primary/20 hover:border-primary hover:bg-primary/5 text-foreground transition-all duration-300"
+            >
+              <RotateCcw className="w-5 h-5" />
+              Retake Survey
+            </Button>
+          </div>
         </motion.div>
       </div>
     </div>
