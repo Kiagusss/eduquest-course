@@ -9,9 +9,14 @@ const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "ms-webdesign | Hoogwaardige Websites",
-  description: "Moderne, resultaatgerichte webdesigns die bezoekers omzetten in klanten",
-  generator: "v0.app",
+  title: "EduQuest",
+  description: "Eduquest Course Platfrom",
+  generator: "EduQuest Team",
+    icons: {
+    icon: "/images/eduquest_logo.png",                // default icon
+    shortcut: "/images/eduquest_logo.png",            // optional
+    apple: "/images/eduquest_logo.png",      // optional
+  },
 }
 
 export default function RootLayout({
@@ -21,6 +26,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="nl" suppressHydrationWarning>
+      <head>
+            <link rel="icon" href="/images/eduquest_logo.png" />
+      </head>
       <body className={`font-sans antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           {children}
