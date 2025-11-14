@@ -73,12 +73,12 @@ export function QuizComponent({ quiz, isLocked, onQuizComplete }: QuizProps) {
 
   if (isLocked) {
     return (
-      <Card className="p-6 text-center bg-muted/50 border-dashed">
+      <Card className="p-6 text-center bg-muted/50 dark:bg-slate-500 border-dashed">
         <div className="flex items-center justify-center gap-2 text-muted-foreground mb-2">
-          <Lock className="w-5 h-5" />
-          <p className="font-medium">Quiz Locked</p>
+          <Lock className="w-5 h-5 dark:text-slate-200" />
+          <p className="font-medium dark:text-slate-200">Quiz Locked</p>
         </div>
-        <p className="text-sm text-muted-foreground">Tonton video terlebih dahulu untuk mengakses quiz</p>
+        <p className="text-sm text-muted-foreground dark:text-slate-300">Tonton video terlebih dahulu untuk mengakses quiz</p>
       </Card>
     )
   }
