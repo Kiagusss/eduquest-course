@@ -147,7 +147,8 @@ export function PricingSection() {
                 </ul>
                 
                 {/* Pricing Button */}
-                <Button
+                <a href="/login">
+                    <Button
                   variant={tier.buttonVariant}
                   size="lg"
                   className={`w-full group ${
@@ -162,6 +163,8 @@ export function PricingSection() {
                   {tier.buttonText}
                   <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
+                </a>
+              
               </CardContent>
             </Card>
           ))}
