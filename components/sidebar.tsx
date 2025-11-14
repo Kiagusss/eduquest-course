@@ -1,8 +1,33 @@
 import type React from "react"
 import Link from "next/link"
 import { Home, Globe, BarChart3, Mail, Zap, Settings, Book, Users2, Download, Video, Layers } from "lucide-react"
+import { Moon, Sun,Trophy } from "lucide-react"
+import { useState, useEffect } from "react"
 
 export default function Sidebar({ open, setOpen }: { open: boolean; setOpen: (open: boolean) => void }) {
+  const [theme, setTheme] = useState<"light" | "dark">("dark")
+      const [mounted, setMounted] = useState(false)
+    
+      useEffect(() => {
+        setMounted(true)
+        const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
+        const initialTheme = savedTheme || (prefersDark ? "dark" : "light")
+        setTheme(initialTheme)
+        document.documentElement.classList.toggle("dark", initialTheme === "dark")
+      }, [])
+    
+      const toggleTheme = () => {
+        const newTheme = theme === "light" ? "dark" : "light"
+        setTheme(newTheme)
+        localStorage.setItem("theme", newTheme)
+        document.documentElement.classList.toggle("dark", newTheme === "dark")
+      }
+    
+      if (!mounted) return null
+    
+      const isDark = theme === "dark"
+      
   return (
     <aside
       className={`${open ? "w-64" : "w-20"} transition-all duration-300 bg-white dark:bg-slate-700 border-r border-border dark:border-slate-500 h-screen overflow-y-auto sticky top-0`}
@@ -12,11 +37,24 @@ export default function Sidebar({ open, setOpen }: { open: boolean; setOpen: (op
           <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold">
             M
           </div>
-          {open && <span className="font-bold text-lg text-foreground">Mentori</span>}
+
+          {open && <span className="font-bold text-lg text-foreground dark:text-white">Mentori</span>}
+          <button
+            onClick={toggleTheme}
+            className={`justify-end mx-auto  rounded-lg transition-all duration-300 ${
+              isDark
+                ? "  text-[#06B6D4]"
+                : "  text-[#8B5CF6]"
+            }`}
+            aria-label="Toggle theme"
+          >
+            {isDark ? <Sun size={18} className="sm:w-5 sm:h-5" /> : <Moon size={18} className="sm:w-5 sm:h-5" />}
+          </button>
         </div>
       </div>
 
       <nav className="p-4 space-y-2">
+        
         {/* Main Menu */}
         <NavItem icon={Home} label="Home" open={open} />
         <NavItem icon={Users2} label="Users" open={open} />

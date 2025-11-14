@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Sidebar from "@/components/sidebar"
 import CourseDashboard from "@/components/course-dashboard"
 
