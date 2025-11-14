@@ -1,11 +1,13 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { ChevronLeft, Play, Download, Share2, BookOpen } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import Image from "next/image"
+import { Moon, Sun, Trophy } from "lucide-react"
+
 const coursesData = [
   {
     id: 1,
@@ -167,12 +169,37 @@ export default function CourseDetailPage({ params }: PageProps) {
   const course = coursesData.find((c) => c.id === Number.parseInt(id))
   const [expandedEpisode, setExpandedEpisode] = useState<number | null>(0)
 
+  const [theme, setTheme] = useState<"light" | "dark">("dark")
+      const [mounted, setMounted] = useState(false)
+    
+      useEffect(() => {
+        setMounted(true)
+        const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
+        const initialTheme = savedTheme || (prefersDark ? "dark" : "light")
+        setTheme(initialTheme)
+        document.documentElement.classList.toggle("dark", initialTheme === "dark")
+      }, [])
+    
+      const toggleTheme = () => {
+        const newTheme = theme === "light" ? "dark" : "light"
+        setTheme(newTheme)
+        localStorage.setItem("theme", newTheme)
+        document.documentElement.classList.toggle("dark", newTheme === "dark")
+      }
+    
+      if (!mounted) return null
+    
+      const isDark = theme === "dark"
+      
+    
+
   if (!course) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-foreground mb-2">Course not found</h1>
-          <Link href="/">
+          <Link href="/course">
             <Button className="bg-primary hover:bg-primary/90">Back to Courses</Button>
           </Link>
         </div>
@@ -187,8 +214,22 @@ export default function CourseDetailPage({ params }: PageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
+    <div className="min-h-screen bg-background dark:bg-gradient-to-br dark:from-[#0F172A] dark:via-[#1a2540] dark:to-[#0F172A]">
+      <div className=" w-full flex justify-end p-5">
+
+      <button
+        onClick={toggleTheme}
+        className={`flex-none p-2 sm:p-3  m rounded-lg transition-all duration-300 border ${
+        isDark
+              ? "bg-slate-800 border-slate-700 hover:bg-slate-700 text-[#06B6D4]"
+              : "bg-slate-100 border-slate-300 hover:bg-slate-200 text-[#8B5CF6]"
+        }`}
+        aria-label="Toggle theme"
+        >
+          {isDark ? <Sun size={18} className="sm:w-5 sm:h-5" /> : <Moon size={18} className="sm:w-5 sm:h-5" />}
+            </button>
+      </div>
+
       <div className="border-b border-border">
         <div className="px-8 py-6">
           <Link href="/" className="inline-flex items-center gap-2 text-primary hover:text-primary/80 mb-4">
@@ -219,7 +260,7 @@ export default function CourseDetailPage({ params }: PageProps) {
                 </span>
               </div>
 
-              <h1 className="text-4xl font-bold text-foreground mb-4 text-balance">{course.title}</h1>
+              <h1 className="text-4xl font-bold text-foreground dark:text-white mb-4 text-balance">{course.title}</h1>
                 <div className="w-full h-96 relative rounded-xl mb-6 overflow-hidden">
                   <Image
                     src={course.image || "/placeholder.svg"}
@@ -232,36 +273,36 @@ export default function CourseDetailPage({ params }: PageProps) {
 
               <div className="space-y-4">
                 <div>
-                  <h2 className="text-xl font-bold text-foreground mb-2">About this course</h2>
-                  <p className="text-muted-foreground leading-relaxed">{course.longDescription}</p>
+                  <h2 className="text-xl font-bold text-foreground mb-2 dark:text-slate-200">About this course</h2>
+                  <p className="text-muted-foreground leading-relaxed dark:text-slate-300">{course.longDescription}</p>
                 </div>
               </div>
             </div>
 
             {/* Sidebar */}
-            <div className="lg:col-span-1">
-              <Card className="p-6 sticky top-6">
+            <div className="lg:col-span-1 ">
+              <Card className="p-6 sticky top-6 dark:bg-slate-700 dark:border-slate-700">
                 <div className="space-y-4">
                   <div>
-                    <p className="text-sm text-muted-foreground">Instructor</p>
-                    <p className="text-lg font-bold text-foreground">{course.instructor}</p>
+                    <p className="text-sm text-muted-foreground dark:text-slate-200">Instructor</p>
+                    <p className="text-lg font-bold text-foreground dark:text-white">{course.instructor}</p>
                   </div>
 
                   <div className="border-t border-border pt-4">
-                    <p className="text-sm text-muted-foreground">Duration</p>
-                    <p className="text-lg font-bold text-foreground">{course.duration}</p>
+                    <p className="text-sm text-muted-foreground dark:text-slate-200">Duration</p>
+                    <p className="text-lg font-bold text-foreground dark:text-white">{course.duration}</p>
                   </div>
 
                   <div className="border-t border-border pt-4">
-                    <p className="text-sm text-muted-foreground">Point</p>
-                    <p className="text-lg font-bold text-foreground">{course.sales}</p>
+                    <p className="text-sm text-muted-foreground dark:text-slate-200">Point</p>
+                    <p className="text-lg font-bold text-foreground dark:text-white">{course.sales}</p>
                   </div>
 
                   <div className="border-t border-border pt-4 space-y-2">
                     <Button className="w-full bg-primary hover:bg-primary/90 text-white">
                       Buy By Your Point
                     </Button>
-                    <Button variant="outline" className="w-full bg-transparent hover:bg-primary/90">
+                    <Button variant="outline" className="w-full bg-transparent dark:bg-slate-600 text-white hover:bg-primary/90">
                       <Share2 className="h-4 w-4 mr-2" />
                       Share
                     </Button>
@@ -278,32 +319,32 @@ export default function CourseDetailPage({ params }: PageProps) {
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center gap-3 mb-6">
             <BookOpen className="h-6 w-6 text-primary" />
-            <h2 className="text-2xl font-bold text-foreground">Course Content</h2>
-            <span className="text-sm text-muted-foreground bg-muted px-3 py-1 rounded-full">
+            <h2 className="text-2xl font-bold text-foreground dark:text-white">Course Content</h2>
+            <span className="text-sm text-muted-foreground dark:text-slate-500 bg-muted px-3 py-1 rounded-full">
               {course.episodes.length} episodes
             </span>
           </div>
 
           <div className="space-y-3">
             {course.episodes.map((episode, index) => (
-              <div key={index} className="border border-border rounded-lg overflow-hidden transition-all">
+              <div key={index} className="border border-border dark:border-slate-700 rounded-lg overflow-hidden transition-all">
                 <button
                   onClick={() => setExpandedEpisode(expandedEpisode === index ? null : index)}
-                  className="w-full p-4 flex items-center justify-between hover:bg-muted transition-colors text-left"
+                  className="w-full p-4 flex items-center justify-between hover:bg-muted dark:bg-slate-700 dark:hover:bg-slate-600 transition-colors text-left"
                 >
                   <div className="flex items-center gap-4 flex-1">
-                    <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary font-bold">
+                    <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 dark:bg-slate-800 text-primary font-bold">
                       {index + 1}
                     </div>
                     <div className="flex-1">
-                      <p className="font-semibold text-foreground">{episode}</p>
-                      <p className="text-sm text-muted-foreground">~45 minutes</p>
+                      <p className="font-semibold text-foreground dark:text-white">{episode}</p>
+                      <p className="text-sm text-muted-foreground dark:text-slate-300">~45 minutes</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="text-xs bg-accent/10 text-accent px-2 py-1 rounded font-medium">Video</span>
                     <svg
-                      className={`w-5 h-5 text-muted-foreground transition-transform ${
+                      className={`w-5 h-5 text-muted-foreground dark:text-slate-200 transition-transform ${
                         expandedEpisode === index ? "rotate-180" : ""
                       }`}
                       fill="none"
@@ -321,10 +362,10 @@ export default function CourseDetailPage({ params }: PageProps) {
                 </button>
 
                 {expandedEpisode === index && (
-                  <div className="border-t border-border p-4 bg-muted/50 space-y-4">
+                  <div className="border-t border-border dark:border-slate-500 p-4 bg-muted/50 dark:bg-slate-600 space-y-4">
                     <div>
-                      <h4 className="font-semibold text-foreground mb-2">Learning objectives:</h4>
-                      <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
+                      <h4 className="font-semibold text-foreground dark:text-white mb-2">Learning objectives:</h4>
+                      <ul className="text-sm text-muted-foreground dark:text-slate-200 space-y-1 list-disc list-inside">
                         <li>Understand key concepts and methodologies</li>
                         <li>Practice with real-world examples</li>
                         <li>Apply knowledge to your own projects</li>
@@ -335,8 +376,8 @@ export default function CourseDetailPage({ params }: PageProps) {
                         <Play className="h-4 w-4 mr-2" />
                         Watch
                       </Link>
-                      <Button size="sm" variant="outline">
-                        <Download className="h-4 w-4 mr-2" />
+                      <Button size="sm" variant="outline" className="dark:text-white">
+                        <Download className="h-4 w-4 mr-2 dark:text-white" />
                         Resources
                       </Button>
                     </div>

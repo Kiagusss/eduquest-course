@@ -73,12 +73,12 @@ export function QuizComponent({ quiz, isLocked, onQuizComplete }: QuizProps) {
 
   if (isLocked) {
     return (
-      <Card className="p-6 text-center bg-muted/50 border-dashed">
+      <Card className="p-6 text-center bg-muted/50 dark:bg-slate-500 border-dashed">
         <div className="flex items-center justify-center gap-2 text-muted-foreground mb-2">
-          <Lock className="w-5 h-5" />
-          <p className="font-medium">Quiz Locked</p>
+          <Lock className="w-5 h-5 dark:text-slate-200" />
+          <p className="font-medium dark:text-slate-200">Quiz Locked</p>
         </div>
-        <p className="text-sm text-muted-foreground">Tonton video terlebih dahulu untuk mengakses quiz</p>
+        <p className="text-sm text-muted-foreground dark:text-slate-300">Tonton video terlebih dahulu untuk mengakses quiz</p>
       </Card>
     )
   }
@@ -97,7 +97,7 @@ export function QuizComponent({ quiz, isLocked, onQuizComplete }: QuizProps) {
       {showResults ? (
         <div className="space-y-6">
           <Card
-            className={`p-8 text-center bg-gradient-to-br border-2 transition-all ${
+            className={`p-8 text-center bg-gradient-to-br  border-2 dark:border-slate-500 transition-all ${
               isPassed
                 ? "from-green-50 to-blue-50 dark:from-green-950/20 dark:to-blue-950/20 border-green-200 dark:border-green-800"
                 : "from-red-50 to-orange-50 dark:from-red-950/20 dark:to-orange-950/20 border-red-200 dark:border-red-800"
@@ -110,7 +110,7 @@ export function QuizComponent({ quiz, isLocked, onQuizComplete }: QuizProps) {
             >
               Quiz {isPassed ? "Passed!" : "Failed"} {isPassed ? "✓" : "✗"}
             </h2>
-            <p className="text-lg text-foreground mb-6">
+            <p className="text-lg text-foreground dark:text-white mb-6">
               Nilai Anda:{" "}
               <span className={`font-bold text-2xl ${isPassed ? "text-green-600" : "text-red-600"}`}>{score}</span> /{" "}
               {quiz.questions.length}
@@ -136,12 +136,12 @@ export function QuizComponent({ quiz, isLocked, onQuizComplete }: QuizProps) {
 
           {/* Review Answers */}
           <div className="space-y-4">
-            <h3 className="font-semibold text-lg">Review Jawaban Anda</h3>
+            <h3 className="font-semibold text-lg  dark:text-white">Review Jawaban Anda</h3>
             {quiz.questions.map((q, index) => {
               const isCorrect = answers[index] === q.correctAnswer
               return (
-                <Card key={q.id} className="p-4">
-                  <div className="flex items-start gap-3">
+                <Card key={q.id} className="p-4 dark:bg-slate-700 dark:text-slate-200">
+                  <div className="flex items-start gap-3 ">
                     {isCorrect ? (
                       <CheckCircle className="w-5 h-5 text-green-600 mt-1 flex-shrink-0" />
                     ) : (
@@ -151,7 +151,7 @@ export function QuizComponent({ quiz, isLocked, onQuizComplete }: QuizProps) {
                       <p className="font-medium mb-2">
                         {index + 1}. {q.question}
                       </p>
-                      <p className="text-sm text-muted-foreground mb-2">
+                      <p className="text-sm text-muted-foreground dark:text-slate-300 mb-2">
                         Jawaban Anda:{" "}
                         <span className={isCorrect ? "text-green-600" : "text-red-600"}>
                           {q.options[answers[index]]}
@@ -160,7 +160,7 @@ export function QuizComponent({ quiz, isLocked, onQuizComplete }: QuizProps) {
                       {!isCorrect && (
                         <p className="text-sm text-green-600">Jawaban Benar: {q.options[q.correctAnswer]}</p>
                       )}
-                      {q.explanation && <p className="text-sm text-muted-foreground mt-2 italic">{q.explanation}</p>}
+                      {q.explanation && <p className="text-sm text-muted-foreground dark:text-slate-400 mt-2 italic">{q.explanation}</p>}
                     </div>
                   </div>
                 </Card>
@@ -189,8 +189,8 @@ export function QuizComponent({ quiz, isLocked, onQuizComplete }: QuizProps) {
           </div>
 
           {/* Question Card */}
-          <Card className="p-6 border-2 border-border">
-            <h3 className="text-lg font-semibold mb-6 text-foreground">{question.question}</h3>
+          <Card className="p-6 border-2 border-border dark:bg-slate-700">
+            <h3 className="text-lg font-semibold mb-6 text-foreground dark:text-white">{question.question}</h3>
 
             {/* Options */}
             <div className="space-y-3 mb-6">
@@ -205,7 +205,7 @@ export function QuizComponent({ quiz, isLocked, onQuizComplete }: QuizProps) {
                     key={index}
                     onClick={() => handleAnswerSelect(index)}
                     disabled={showResults}
-                    className={`w-full p-4 text-left rounded-lg border-2 transition-all ${
+                    className={`w-full p-4 text-left rounded-lg border-2 dark:border-slate-500 transition-all ${
                       isSelected
                         ? "border-purple-500 bg-purple-50 dark:bg-purple-950/20"
                         : "border-border hover:border-purple-300"
@@ -213,13 +213,13 @@ export function QuizComponent({ quiz, isLocked, onQuizComplete }: QuizProps) {
                   >
                     <div className="flex items-center gap-3">
                       <div
-                        className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                        className={`w-5 h-5  rounded-full border-2 flex items-center justify-center ${
                           isSelected ? "border-purple-500 bg-purple-500" : "border-border"
                         }`}
                       >
                         {isSelected && <div className="w-2 h-2 bg-white rounded-full" />}
                       </div>
-                      <span className="flex-1">{option}</span>
+                      <span className="flex-1 dark:text-white">{option}</span>
                       {showCorrect && <CheckCircle className="w-5 h-5 text-green-600" />}
                       {showIncorrect && <XCircle className="w-5 h-5 text-red-600" />}
                     </div>
@@ -231,7 +231,7 @@ export function QuizComponent({ quiz, isLocked, onQuizComplete }: QuizProps) {
 
           {/* Navigation */}
           <div className="flex gap-3">
-            <Button variant="outline" onClick={handlePrevious} disabled={currentQuestion === 0}>
+            <Button variant="outline" className="dark:text-white" onClick={handlePrevious} disabled={currentQuestion === 0}>
               ← Sebelumnya
             </Button>
             <div className="flex-1" />
