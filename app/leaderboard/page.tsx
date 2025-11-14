@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { Moon, Sun, Trophy } from 'lucide-react'
-
+import Sidebar from "@/components/sidebar"
 interface LeaderboardEntry {
   rank: number
   name: string
@@ -28,6 +28,7 @@ const leaderboardData: LeaderboardEntry[] = [
 export default function LeaderboardPage() {
   const [theme, setTheme] = useState<"light" | "dark">("dark")
   const [mounted, setMounted] = useState(false)
+  const [sidebarOpen, setSidebarOpen] = useState(true)
 
   useEffect(() => {
     setMounted(true)
@@ -52,13 +53,15 @@ export default function LeaderboardPage() {
   const restOfLeaderboard = leaderboardData.slice(3)
 
   return (
+   
     <div
-      className={`min-h-screen transition-colors duration-300 ${
-        isDark
-          ? "bg-gradient-to-br from-[#0F172A] via-[#1a2540] to-[#0F172A]"
-          : "bg-gradient-to-br from-slate-50 via-white to-slate-100"
-      }`}
+    className={`min-h-screen transition-colors duration-300 ${
+      isDark
+      ? "bg-gradient-to-br from-[#0F172A] via-[#1a2540] to-[#0F172A]"
+      : "bg-gradient-to-br from-slate-50 via-white to-slate-100"
+    }`}
     >
+
       <header
         className={`border-b backdrop-blur-sm transition-colors ${
           isDark ? "border-slate-800 bg-[#0F172A]/95" : "border-slate-200 bg-white/95"
@@ -314,6 +317,7 @@ export default function LeaderboardPage() {
             ))}
           </div>
         </div>
+
       </main>
     </div>
   )
