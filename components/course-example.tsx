@@ -222,7 +222,7 @@ export function CoursesExample() {
 
               <CardFooter>
                 <Button className="w-full group/btn" size="lg" asChild>
-                  <Link href={`/course/detail/${course.id}`}>
+                  <Link href={`/course/${course.id}`}>
                     Start Learning
                     <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
                   </Link>

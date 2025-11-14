@@ -15,7 +15,7 @@ interface EpisodeListProps {
 export function EpisodeList({ episodes, currentEpisodeId, episodeProgress, onSelectEpisode }: EpisodeListProps) {
   return (
     <div className="space-y-3">
-      <h3 className="font-semibold text-lg">Episodes</h3>
+      <h3 className="font-semibold text-lg dark:text-white">Episodes</h3>
       <div className="space-y-2">
         {episodes.map((episode, index) => {
           const progress = episodeProgress[episode.id]
@@ -36,13 +36,13 @@ export function EpisodeList({ episodes, currentEpisodeId, episodeProgress, onSel
                 className={`p-4 border-2 transition-all ${
                   isCurrentEpisode
                     ? "border-purple-500 bg-purple-50/50 dark:bg-purple-950/20"
-                    : "border-border hover:border-border"
+                    : "border-border hover:border-border dark:bg-slate-500"
                 }`}
               >
                 <div className="flex items-start gap-3">
                   <div className="mt-1 flex-shrink-0">
                     {isLocked ? (
-                      <Lock className="w-5 h-5 text-muted-foreground" />
+                      <Lock className="w-5 h-5 text-muted-foreground dark:text-slate-200" />
                     ) : isCompleted ? (
                       <CheckCircle className="w-5 h-5 text-green-600" />
                     ) : (
@@ -52,12 +52,12 @@ export function EpisodeList({ episodes, currentEpisodeId, episodeProgress, onSel
 
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
-                      <h4 className="font-medium">{episode.title}</h4>
+                      <h4 className="font-medium dark:text-slate-200">{episode.title}</h4>
                       {isCompleted && <Badge className="bg-green-600">Completed</Badge>}
                       {isLocked && <Badge variant="secondary">Locked</Badge>}
                     </div>
-                    <p className="text-sm text-muted-foreground line-clamp-1">{episode.description}</p>
-                    <div className="flex items-center gap-1 text-xs text-muted-foreground mt-2">
+                    <p className="text-sm text-muted-foreground line-clamp-1 dark:text-slate-300">{episode.description}</p>
+                    <div className="flex items-center gap-1 text-xs text-muted-foreground dark:text-slate-300 mt-2">
                       <Clock className="w-3 h-3" />
                       <span>{Math.floor(episode.duration / 60)} min</span>
                     </div>
@@ -66,7 +66,7 @@ export function EpisodeList({ episodes, currentEpisodeId, episodeProgress, onSel
                   {isCompleted && (
                     <div className="text-right flex-shrink-0">
                       <div className="text-sm font-bold text-green-600">{progress?.quizScore}/10</div>
-                      <div className="text-xs text-muted-foreground">Score</div>
+                      <div className="text-xs text-muted-foreground dark:text-slate-300">Score</div>
                     </div>
                   )}
                 </div>

@@ -1,5 +1,5 @@
 "use client"
-import { useState, useCallback } from "react"
+import { useState, useCallback, useEffect } from "react"
 import { VideoPlayer } from "@/components/video-player"
 import { QuizComponent } from "@/components/quiz"
 import { EpisodeList } from "@/components/episode-list"
@@ -9,13 +9,15 @@ import { sampleCourse, sampleQuiz } from "@/lib/quiz-data"
 import type { QuizResult, UserProgress, EpisodeProgress } from "@/lib/types"
 import { ArrowLeft, Clock, Users, Award, Trophy } from "lucide-react"
 import Link from "next/link"
+import { Moon, Sun } from "lucide-react"
+
 
 export default function CoursePage() {
   const course = sampleCourse
   const [currentEpisodeId, setCurrentEpisodeId] = useState(course.episodes[0].id)
   const [videoProgress, setVideoProgress] = useState(0)
   const [videoCompleted, setVideoCompleted] = useState(false)
-
+   
   const [episodeProgress, setEpisodeProgress] = useState<Record<string, EpisodeProgress>>({
     "ep-1": {
       episodeId: "ep-1",
@@ -129,33 +131,70 @@ export default function CoursePage() {
     return <div>Episode not found</div>
   }
 
+  const [theme, setTheme] = useState<"light" | "dark">("dark")
+        const [mounted, setMounted] = useState(false)
+      
+        useEffect(() => {
+          setMounted(true)
+          const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null
+          const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
+          const initialTheme = savedTheme || (prefersDark ? "dark" : "light")
+          setTheme(initialTheme)
+          document.documentElement.classList.toggle("dark", initialTheme === "dark")
+        }, [])
+      
+        const toggleTheme = () => {
+          const newTheme = theme === "light" ? "dark" : "light"
+          setTheme(newTheme)
+          localStorage.setItem("theme", newTheme)
+          document.documentElement.classList.toggle("dark", newTheme === "dark")
+        }
+      
+        if (!mounted) return null
+      
+        const isDark = theme === "dark"
+        
+      
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <div className="bg-card border-b border-border sticky top-0 z-50">
+    <div className="min-h-screen bg-background dark:bg-gradient-to-br  dark:from-[#0F172A] dark:via-[#1a2540] dark:to-[#0F172A]">
+      
+     
+      <div className="bg-card dark:bg-slate-700 border-b border-border sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center gap-4">
-          <Link href="/" className="text-muted-foreground hover:text-foreground transition">
+          <Link href="/course" className="text-muted-foreground dark:text-slate-200 dark:hover:text-slate-300 hover:text-foreground transition">
             <ArrowLeft className="w-6 h-6" />
           </Link>
           <div className="flex-1">
-            <h1 className="font-bold text-xl">{course.title}</h1>
-            <p className="text-sm text-muted-foreground">by {course.instructor}</p>
+            <h1 className="font-bold text-xl dark:text-white">{course.title}</h1>
+            <p className="text-sm text-muted-foreground dark:text-slate-200">by {course.instructor}</p>
           </div>
           <div className="text-right">
             <div className="text-2xl font-bold text-purple-600">{userProgress.totalPoints}</div>
-            <div className="text-xs text-muted-foreground">Total Points</div>
+            <div className="text-xs text-muted-foreground dark:text-white">Total Points</div>
           </div>
         </div>
       </div>
 
-      {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="max-w-7xl mx-auto px-4 py-8 ">
+    <div className=" w-full flex justify-end p-5">
+      <button
+          onClick={toggleTheme}
+          className={`flex-none p-2 sm:p-3  m rounded-lg transition-all duration-300 border ${
+          isDark
+                ? "bg-slate-800 border-slate-700 hover:bg-slate-700 text-[#06B6D4]"
+                : "bg-slate-100 border-slate-300 hover:bg-slate-200 text-[#8B5CF6]"
+          }`}
+          aria-label="Toggle theme"
+        >
+          {isDark ? <Sun size={18} className="sm:w-5 sm:h-5" /> : <Moon size={18} className="sm:w-5 sm:h-5" />}
+      </button>
+      </div>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Video & Quiz Section */}
+
           <div className="lg:col-span-2 space-y-6">
             {/* Video Player */}
             <div>
-              <h2 className="font-semibold text-lg mb-3">Episode: {currentEpisode.title}</h2>
+              <h2 className="font-semibold text-lg mb-3 dark:text-white">Episode: {currentEpisode.title}</h2>
               <VideoPlayer
                 videoUrl={currentEpisode.videoUrl}
                 title={currentEpisode.title}
@@ -187,8 +226,8 @@ export default function CoursePage() {
             />
 
             {/* Course Info Card */}
-            <Card className="p-6 space-y-4">
-              <div className="aspect-video bg-muted rounded-lg overflow-hidden">
+            <Card className="p-6 space-y-4 bg-gradient-to-br from-purple-50 to-blue-50 dark:from-purple-950/20 dark:to-blue-950/20 border-purple-200 dark:border-purple-800">
+              <div className="aspect-video bg-muted  rounded-lg overflow-hidden">
                 <img
                   src={course.thumbnail || "/placeholder.svg"}
                   alt={course.title}
@@ -196,16 +235,16 @@ export default function CoursePage() {
                 />
               </div>
               <div className="space-y-2">
-                <p className="text-sm text-muted-foreground line-clamp-3">{course.description}</p>
+                <p className="text-sm text-muted-foreground dark:text-slate-200 line-clamp-3">{course.description}</p>
                 <div className="space-y-2 pt-4">
                   <div className="flex items-center gap-2 text-sm">
-                    <Badge variant="outline">{course.level}</Badge>
+                    <Badge variant="outline" className="dark:bg-primary dark:text-white">{course.level}</Badge>
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground dark:text-slate-300">
                     <Clock className="w-4 h-4" />
                     <span>{course.duration}</span>
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground dark:text-slate-300">
                     <Users className="w-4 h-4" />
                     <span>by {course.instructor}</span>
                   </div>
@@ -213,15 +252,15 @@ export default function CoursePage() {
               </div>
             </Card>
 
-            {/* Progress Card */}
+
             <Card className="p-6 bg-gradient-to-br from-purple-50 to-blue-50 dark:from-purple-950/20 dark:to-blue-950/20 border-purple-200 dark:border-purple-800">
-              <h3 className="font-semibold mb-4 flex items-center gap-2">
+              <h3 className="font-semibold mb-4 flex items-center gap-2 dark:text-white">
                 <Award className="w-5 h-5 text-purple-600" />
                 Progress Anda
               </h3>
               <div className="space-y-3">
                 <div>
-                  <p className="text-sm text-muted-foreground mb-1">Video Ditonton</p>
+                  <p className="text-sm text-muted-foreground dark:text-slate-200 mb-1">Video Ditonton</p>
                   <div className="w-full bg-muted rounded-full h-2">
                     <div
                       className={`h-full rounded-full transition-all ${
@@ -230,10 +269,10 @@ export default function CoursePage() {
                       style={{ width: `${Math.min(videoProgress, 100)}%` }}
                     />
                   </div>
-                  <p className="text-xs text-muted-foreground mt-1">{Math.round(videoProgress)}%</p>
+                  <p className="text-xs text-muted-foreground mt-1 dark:text-slate-300">{Math.round(videoProgress)}%</p>
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground mb-1">Quiz Diselesaikan</p>
+                  <p className="text-sm text-muted-foreground mb-1 dark:text-slate-200">Quiz Diselesaikan</p>
                   <div className="w-full bg-muted rounded-full h-2">
                     <div
                       className={`h-full rounded-full ${currentEpisodeProgress?.quizCompleted ? "bg-blue-500 w-full" : "w-0"}`}
@@ -241,19 +280,19 @@ export default function CoursePage() {
                   </div>
                 </div>
                 <div className="pt-3 border-t border-border">
-                  <p className="text-xs text-muted-foreground mb-1">Total Poin Diperoleh</p>
+                  <p className="text-xs text-muted-foreground mb-1 dark:text-slate-200">Total Poin Diperoleh</p>
                   <p className="text-2xl font-bold text-purple-600">{userProgress.totalPoints}</p>
                 </div>
               </div>
             </Card>
 
             {/* Quiz Info */}
-            <Card className="p-4">
-              <h4 className="font-semibold text-sm mb-2 flex items-center gap-2">
+            <Card className="p-4 bg-gradient-to-br from-purple-50 to-blue-50 dark:from-purple-950/20 dark:to-blue-950/20 border-purple-200 dark:border-purple-800">
+              <h4 className="font-semibold text-sm mb-2 dark:text-white flex items-center gap-2">
                 <Trophy className="w-4 h-4" />
                 Tentang Quiz
               </h4>
-              <ul className="text-sm text-muted-foreground space-y-1">
+              <ul className="text-sm text-muted-foreground dark:text-slate-300 space-y-1">
                 <li>• 10 soal multiple choice</li>
                 <li>• 10 poin per soal</li>
                 <li>• Total 100 poin</li>

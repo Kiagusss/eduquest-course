@@ -195,9 +195,9 @@ export function VideoPlayer({ videoUrl, title, onVideoComplete, onProgressChange
       </div>
 
       {/* Video Info */}
-      <div className="bg-card p-4 border-t border-border">
-        <h3 className="font-semibold text-foreground mb-2">{title}</h3>
-        <div className="flex items-center justify-between text-sm text-muted-foreground mb-3">
+      <div className="bg-card dark:bg-slate-700 p-4 border-t border-border dark:border-slate-500">
+        <h3 className="font-semibold text-foreground mb-2 dark:text-white">{title}</h3>
+        <div className="flex items-center justify-between text-sm text-muted-foreground dark:text-slate-300 mb-3">
           <span>Watch the video to unlock the quiz (95% needed)</span>
           <span className={`font-medium ${hasCompleted ? "text-green-600" : "text-yellow-600"}`}>
             {hasCompleted ? "✓ Video Completed" : `${Math.round(progress)}% Progress`}

@@ -1,10 +1,11 @@
 "use client"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Plus, Grid3x3, List } from "lucide-react"
 import CourseFilters from "@/components/course-filters"
 import CourseCard from "@/components/course-card"
 import Image from "next/image"
 import Link from "next/link"
+import { Moon, Sun, Trophy } from "lucide-react"
 
 const dataCourse = [
   {
@@ -67,19 +68,54 @@ export default function CourseDashboard() {
   const [viewType, setViewType] = useState<"grid" | "list">("grid")
   const [selectedCategory, setSelectedCategory] = useState("All Category")
 
+  const [theme, setTheme] = useState<"light" | "dark">("dark")
+    const [mounted, setMounted] = useState(false)
+  
+    useEffect(() => {
+      setMounted(true)
+      const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
+      const initialTheme = savedTheme || (prefersDark ? "dark" : "light")
+      setTheme(initialTheme)
+      document.documentElement.classList.toggle("dark", initialTheme === "dark")
+    }, [])
+  
+    const toggleTheme = () => {
+      const newTheme = theme === "light" ? "dark" : "light"
+      setTheme(newTheme)
+      localStorage.setItem("theme", newTheme)
+      document.documentElement.classList.toggle("dark", newTheme === "dark")
+    }
+  
+    if (!mounted) return null
+  
+    const isDark = theme === "dark"
+    
+  
   const filteredCourses =
     selectedCategory === "All Category"
       ? dataCourse
       : dataCourse.filter((course) => course.category === selectedCategory)
 
   return (
-    <div className="flex-1 p-8 bg-gradient-to-br from-white via-blue-50 to-purple-50">
+    <div className="flex-1 p-8 bg-gradient-to-br   dark:from-[#0F172A] dark:via-[#1a2540] dark:to-[#0F172A] from-white via-blue-50 to-purple-50">
+    <button
+            onClick={toggleTheme}
+            className={`flex-none p-2 sm:p-3 rounded-lg transition-all duration-300 border ${
+              isDark
+                ? "bg-slate-800 border-slate-700 hover:bg-slate-700 text-[#06B6D4]"
+                : "bg-slate-100 border-slate-300 hover:bg-slate-200 text-[#8B5CF6]"
+            }`}
+            aria-label="Toggle theme"
+          >
+            {isDark ? <Sun size={18} className="sm:w-5 sm:h-5" /> : <Moon size={18} className="sm:w-5 sm:h-5" />}
+          </button>
 
       <div className="mt-8">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h1 className="text-3xl font-bold text-foreground">Courses</h1>
-            <p className="text-muted-foreground mt-1">Belajar dengan semangat bersama kami.</p>
+            <h1 className="text-3xl font-bold text-foreground dark:text-white">Courses</h1>
+            <p className="text-muted-foreground mt-1 dark:text-slate-300">Belajar dengan semangat bersama kami.</p>
           </div>
           
         </div>
@@ -87,7 +123,7 @@ export default function CourseDashboard() {
         <CourseFilters selectedCategory={selectedCategory} onCategoryChange={setSelectedCategory} />
 
         <div className="flex items-center justify-between mb-6">
-          <span className="text-sm text-muted-foreground">{filteredCourses.length} courses</span>
+          <span className="text-sm text-muted-foreground dark:text-slate-300">{filteredCourses.length} courses</span>
           <div className="flex items-center gap-2">
             <button
               onClick={() => setViewType("grid")}
@@ -99,7 +135,7 @@ export default function CourseDashboard() {
             </button>
             <button
               onClick={() => setViewType("list")}
-              className={`p-2 rounded-lg transition-colors ${
+              className={`p-2 rounded-lg transition-colors hidden md:block ${
                 viewType === "list" ? "bg-primary text-white" : "bg-muted text-muted-foreground hover:text-foreground"
               }`}
             >
@@ -115,11 +151,11 @@ export default function CourseDashboard() {
             ))}
           </div>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-2 hidden md:block">
             {filteredCourses.map((course) => (
               <div
                 key={course.id}
-                className="bg-white rounded-lg border border-border p-4 hover:shadow-lg transition-shadow"
+                className="bg-white dark:bg-slate-800/50 dark:border-slate-700 dark:hover:border-[#06B6D4]/50 rounded-lg border border-border dark:border-slate-400 p-4 hover:shadow-lg transition-shadow"
               >
                 <div className="flex items-center gap-4">
                   <div className="relative w-24 h-16 flex-shrink-0">
@@ -131,20 +167,20 @@ export default function CourseDashboard() {
                     />
                   </div>
                   <div className="flex-1">
-                    <Link href={'/course/detail/' + course.id} className="font-semibold text-foreground">{course.title}</Link>
-                    <p className="text-sm text-muted-foreground mt-1">{course.category}</p>
+                    <Link href={'/course/' + course.id} className="font-semibold text-foreground dark:text-white hover:text-primary">{course.title}</Link>
+                    <p className="text-sm text-muted-foreground dark:text-slate-300 mt-1">{course.category}</p>
                   </div>
                   <div className="flex gap-6 text-sm">
                     <div>
-                      <p className="text-muted-foreground">Creation Date</p>
-                      <p className="font-medium text-foreground">{course.creationDate}</p>
+                      <p className="text-muted-foreground dark:text-slate-200">Creation Date</p>
+                      <p className="font-medium text-foreground dark:text-slate-300">{course.creationDate}</p>
                     </div>
                     <div>
-                      <p className="text-muted-foreground">Sales</p>
-                      <p className="font-medium text-foreground">{course.sales}</p>
+                      <p className="text-muted-foreground dark:text-slate-200">Sales</p>
+                      <p className="font-medium text-foreground dark:text-slate-300">{course.sales}</p>
                     </div>
                     <div>
-                      <p className="text-muted-foreground">Status</p>
+                      <p className="text-muted-foreground dark:text-slate-200">Status</p>
                       <p
                         className={`font-medium ${
                           course.status === "Published" ? "text-green-600" : "text-orange-600"
