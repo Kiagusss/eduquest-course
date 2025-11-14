@@ -10,12 +10,12 @@ export default function LoginPage() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false)
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
     setTimeout(() => {
       setIsLoading(false)
+      window.location.href = '/course'
     }, 2000)
   }
 
@@ -85,6 +85,7 @@ export default function LoginPage() {
               Lupa password?
             </a>
           </div>
+        
 
           <button
             type="submit"
@@ -103,6 +104,7 @@ export default function LoginPage() {
               </>
             )}
           </button>
+       
         </form>
 
 
