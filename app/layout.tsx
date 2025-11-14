@@ -26,7 +26,7 @@ export default function RootLayout({
           {children}
         </ThemeProvider>
         <Analytics />
-        
+        <script src="https://www.youtube.com/iframe_api" async defer></script>
       </body>
     </html>
   )
