@@ -1,34 +1,47 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import type { Quiz, QuizResult } from "@/lib/types"
 import { Button } from "./ui/button"
 import { Card } from "./ui/card"
-import { CheckCircle, XCircle, ChevronRight, Lock } from "lucide-react"
+import { CheckCircle, XCircle, ChevronRight, Lock } from 'lucide-react'
 import { StreakNotification } from "./streak-notification"
 
 interface QuizProps {
   quiz: Quiz
   isLocked: boolean
   onQuizComplete: (result: QuizResult) => void
-  isEpisodeUnlocked?: boolean
+  currentQuestion?: number
+  answers?: number[]
 }
 
 export function QuizComponent({ quiz, isLocked, onQuizComplete }: QuizProps) {
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers] = useState<number[]>([])
   const [showResults, setShowResults] = useState(false)
-  const [hasSubmitted, setHasSubmitted] = useState(false)
   const [streakVisible, setStreakVisible] = useState(false)
 
+  useEffect(() => {
+    setCurrentQuestion(0)
+    setAnswers([])
+    setShowResults(false)
+  }, [quiz?.id])
+
   const calculateScore = () => {
+    if (!quiz?.questions || quiz.questions.length === 0) {
+      return { score: 0, totalPoints: 0 }
+    }
+
     let correct = 0
     answers.forEach((answer, index) => {
-      if (answer === quiz.questions[index].correctAnswer) correct++
+      const question = quiz.questions[index]
+      if (question && answer === question.correctAnswer) {
+        correct++
+      }
     })
     return {
       score: correct,
-      totalPoints: correct * quiz.pointsPerQuestion,
+      totalPoints: correct * (quiz.pointsPerQuestion || 0),
     }
   }
 
@@ -45,10 +58,9 @@ export function QuizComponent({ quiz, isLocked, onQuizComplete }: QuizProps) {
     } else {
       const { score, totalPoints } = calculateScore()
       setShowResults(true)
-      setHasSubmitted(true)
 
-      if (score >= 7) {
-        setStreakVisible(true) // langsung tampilkan streak notification
+      if (score >= 7 && quiz.id === 'quiz-1') {
+        setStreakVisible(true)
       }
 
       onQuizComplete({

@@ -3,21 +3,36 @@ import { useState, useCallback, useEffect } from "react"
 import { VideoPlayer } from "@/components/video-player"
 import { QuizComponent } from "@/components/quiz"
 import { EpisodeList } from "@/components/episode-list"
+import { CourseCompletionScreen } from "@/components/course-completion-screen"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { sampleCourse, sampleQuiz } from "@/lib/quiz-data"
+import { sampleCourse, sampleQuiz, sampleQuiz2, sampleQuiz3 } from "@/lib/quiz-data"
 import type { QuizResult, UserProgress, EpisodeProgress } from "@/lib/types"
-import { ArrowLeft, Clock, Users, Award, Trophy } from "lucide-react"
+import { ArrowLeft, Clock, Users, Award, Trophy } from 'lucide-react'
 import Link from "next/link"
-import { Moon, Sun } from "lucide-react"
-
+import { Moon, Sun } from 'lucide-react'
 
 export default function CoursePage() {
+  const [theme, setTheme] = useState<"light" | "dark">("dark")
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+    const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
+    const initialTheme = savedTheme || (prefersDark ? "dark" : "light")
+    setTheme(initialTheme)
+    document.documentElement.classList.toggle("dark", initialTheme === "dark")
+  }, [])
+
   const course = sampleCourse
   const [currentEpisodeId, setCurrentEpisodeId] = useState(course.episodes[0].id)
   const [videoProgress, setVideoProgress] = useState(0)
   const [videoCompleted, setVideoCompleted] = useState(false)
-   
+  const [quizCompleted, setQuizCompleted] = useState(false)
+  const [currentQuestion, setCurrentQuestion] = useState(0)
+  const [answers, setAnswers] = useState([])
+
   const [episodeProgress, setEpisodeProgress] = useState<Record<string, EpisodeProgress>>({
     "ep-1": {
       episodeId: "ep-1",
@@ -35,7 +50,7 @@ export default function CoursePage() {
       quizCompleted: false,
       quizScore: 0,
       pointsEarned: 0,
-      isUnlocked: false, // Locked by default
+      isUnlocked: false,
     },
     "ep-3": {
       episodeId: "ep-3",
@@ -59,7 +74,12 @@ export default function CoursePage() {
 
   const currentEpisode = course.episodes.find((ep) => ep.id === currentEpisodeId)
   const currentEpisodeProgress = episodeProgress[currentEpisodeId]
-  const isVideoCompleted = videoProgress >= 95
+  const isVideoCompleted = currentEpisodeProgress?.videoWatched ?? false
+
+  const allEpisodesCompleted = course.episodes.every((episode) => {
+    const progress = episodeProgress[episode.id]
+    return progress?.videoWatched && progress?.quizCompleted
+  })
 
   const handleVideoProgress = useCallback(
     (progress: number) => {
@@ -106,6 +126,8 @@ export default function CoursePage() {
       completedQuizzes: [...prev.completedQuizzes, result],
     }))
 
+    setQuizCompleted(true)
+
     if (isPassed) {
       const currentEpisodeIndex = course.episodes.findIndex((ep) => ep.id === currentEpisodeId)
       if (currentEpisodeIndex < course.episodes.length - 1) {
@@ -125,40 +147,71 @@ export default function CoursePage() {
     setCurrentEpisodeId(episodeId)
     setVideoProgress(0)
     setVideoCompleted(false)
+    setQuizCompleted(false)
+    setCurrentQuestion(0)
+    setAnswers([])
+  }
+
+  const quizMap: Record<string, any> = {
+    "ep-1": sampleQuiz,
+    "ep-2": sampleQuiz2,
+    "ep-3": sampleQuiz3,
+  }
+
+  const currentQuiz = quizMap[currentEpisodeId]
+
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light"
+    setTheme(newTheme)
+    localStorage.setItem("theme", newTheme)
+    document.documentElement.classList.toggle("dark", newTheme === "dark")
+  }
+
+  if (!currentQuiz) {
+    console.log("[v0] Quiz not found for episode:", currentEpisodeId)
+    return (
+      <div className="min-h-screen bg-background dark:bg-gradient-to-br dark:from-[#0F172A] dark:via-[#1a2540] dark:to-[#0F172A]">
+        <div className="bg-card dark:bg-slate-700 border-b border-border sticky top-0 z-50">
+          <div className="max-w-7xl mx-auto px-4 py-4 flex items-center gap-4">
+            <Link href="/course" className="text-muted-foreground dark:text-slate-200 hover:text-foreground transition">
+              <ArrowLeft className="w-6 h-6" />
+            </Link>
+            <h1 className="font-bold text-xl dark:text-white">Error Loading Quiz</h1>
+          </div>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 py-8">
+          <Card className="p-6 text-center">
+            <p className="text-red-600">Quiz data not found for this episode</p>
+          </Card>
+        </div>
+      </div>
+    )
+  }
+
+  if (allEpisodesCompleted) {
+    return (
+      <CourseCompletionScreen
+        courseTitle={course.title}
+        totalPoints={userProgress.totalPoints}
+        instructor={course.instructor}
+        duration={course.duration}
+        onDownloadCertificate={() => {
+          console.log("Certificate downloaded")
+        }}
+      />
+    )
   }
 
   if (!currentEpisode) {
     return <div>Episode not found</div>
   }
 
-  const [theme, setTheme] = useState<"light" | "dark">("dark")
-        const [mounted, setMounted] = useState(false)
-      
-        useEffect(() => {
-          setMounted(true)
-          const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null
-          const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
-          const initialTheme = savedTheme || (prefersDark ? "dark" : "light")
-          setTheme(initialTheme)
-          document.documentElement.classList.toggle("dark", initialTheme === "dark")
-        }, [])
-      
-        const toggleTheme = () => {
-          const newTheme = theme === "light" ? "dark" : "light"
-          setTheme(newTheme)
-          localStorage.setItem("theme", newTheme)
-          document.documentElement.classList.toggle("dark", newTheme === "dark")
-        }
-      
-        if (!mounted) return null
-      
-        const isDark = theme === "dark"
-        
-      
+  if (!mounted) return null
+
+  const isDark = theme === "dark"
+
   return (
     <div className="min-h-screen bg-background dark:bg-gradient-to-br  dark:from-[#0F172A] dark:via-[#1a2540] dark:to-[#0F172A]">
-      
-     
       <div className="bg-card dark:bg-slate-700 border-b border-border sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center gap-4">
           <Link href="/course" className="text-muted-foreground dark:text-slate-200 dark:hover:text-slate-300 hover:text-foreground transition">
@@ -176,19 +229,19 @@ export default function CoursePage() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 py-8 ">
-    <div className=" w-full flex justify-end p-5">
-      <button
-          onClick={toggleTheme}
-          className={`flex-none p-2 sm:p-3  m rounded-lg transition-all duration-300 border ${
-          isDark
+        <div className=" w-full flex justify-end p-5">
+          <button
+            onClick={toggleTheme}
+            className={`flex-none p-2 sm:p-3  m rounded-lg transition-all duration-300 border ${
+              isDark
                 ? "bg-slate-800 border-slate-700 hover:bg-slate-700 text-[#06B6D4]"
                 : "bg-slate-100 border-slate-300 hover:bg-slate-200 text-[#8B5CF6]"
-          }`}
-          aria-label="Toggle theme"
-        >
-          {isDark ? <Sun size={18} className="sm:w-5 sm:h-5" /> : <Moon size={18} className="sm:w-5 sm:h-5" />}
-      </button>
-      </div>
+            }`}
+            aria-label="Toggle theme"
+          >
+            {isDark ? <Sun size={18} className="sm:w-5 sm:h-5" /> : <Moon size={18} className="sm:w-5 sm:h-5" />}
+          </button>
+        </div>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
           <div className="lg:col-span-2 space-y-6">
@@ -211,7 +264,7 @@ export default function CoursePage() {
                   {isVideoCompleted ? "Siap Dikerjakan" : "Terkunci"}
                 </Badge>
               </div>
-              <QuizComponent quiz={sampleQuiz} isLocked={!isVideoCompleted} onQuizComplete={handleQuizComplete} />
+              <QuizComponent quiz={currentQuiz} isLocked={!isVideoCompleted} onQuizComplete={handleQuizComplete} currentQuestion={currentQuestion} answers={answers} />
             </div>
           </div>
 
@@ -231,7 +284,7 @@ export default function CoursePage() {
                 <img
                   src={course.thumbnail || "/placeholder.svg"}
                   alt={course.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover" 
                 />
               </div>
               <div className="space-y-2">
@@ -264,12 +317,12 @@ export default function CoursePage() {
                   <div className="w-full bg-muted rounded-full h-2">
                     <div
                       className={`h-full rounded-full transition-all ${
-                        videoProgress >= 95 ? "bg-green-500" : "bg-yellow-500"
+                        currentEpisodeProgress?.videoProgress >= 95 ? "bg-green-500" : "bg-yellow-500"
                       }`}
-                      style={{ width: `${Math.min(videoProgress, 100)}%` }}
+                      style={{ width: `${Math.min(currentEpisodeProgress?.videoProgress ?? 0, 100)}%` }}
                     />
                   </div>
-                  <p className="text-xs text-muted-foreground mt-1 dark:text-slate-300">{Math.round(videoProgress)}%</p>
+                  <p className="text-xs text-muted-foreground mt-1 dark:text-slate-300">{Math.round(currentEpisodeProgress?.videoProgress ?? 0)}%</p>
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground mb-1 dark:text-slate-200">Quiz Diselesaikan</p>
@@ -293,9 +346,9 @@ export default function CoursePage() {
                 Tentang Quiz
               </h4>
               <ul className="text-sm text-muted-foreground dark:text-slate-300 space-y-1">
-                <li>• 10 soal Pilihan Ganda</li>
-                <li>• 10 poin per soal</li>
-                <li>• Total 100 poin</li>
+                <li>• {currentQuiz?.questions?.length || 0} soal Pilihan Ganda</li>
+                <li>• {currentQuiz?.pointsPerQuestion || 0} poin per soal</li>
+                <li>• Total {(currentQuiz?.questions?.length || 0) * (currentQuiz?.pointsPerQuestion || 0)} poin</li>
                 <li className="pt-2 text-foreground font-medium">• Min 7/10 untuk lanjut</li>
               </ul>
             </Card>
