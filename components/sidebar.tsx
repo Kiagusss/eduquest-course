@@ -10,16 +10,14 @@ import { ThemeToggle } from './theme-toggle'
 // Define navigation items with their routes
 const navigationItems = [
   { icon: Home, label: "Dashboard", href: "/dashboard" },
-  { icon: Users2, label: "Users", href: "/users" },
-  { icon: Globe, label: "Site", href: "/site" },
-  { icon: BarChart3, label: "Analytics", href: "/analytics" },
-  { icon: Mail, label: "Messages", href: "/messages", badge: 3 },
+
+
 ]
 
 const productItems = [
   { icon: Book, label: "Courses", href: "/course" },
   { icon: Video, label: "Coaching", href: "/coaching" },
-  { icon: Download, label: "Downloads", href: "/downloads" },
+
   { icon: Video, label: "Webinars", href: "/webinar" },
 ]
 
@@ -28,9 +26,6 @@ const insightItems = [
   { icon: Globe, label: "Leaderboard", href: "/leaderboard" },
 ]
 
-const systemItems = [
-  { icon: Settings, label: "Settings", href: "/settings" },
-]
 
 export default function Sidebar({ open, setOpen }: { open: boolean; setOpen: (open: boolean) => void }) {
   const pathname = usePathname()
@@ -126,7 +121,7 @@ export default function Sidebar({ open, setOpen }: { open: boolean; setOpen: (op
               href={item.href}
               open={open}
               active={pathname === item.href}
-              badge={item.badge}
+          
             />
           ))}
           
@@ -164,22 +159,7 @@ export default function Sidebar({ open, setOpen }: { open: boolean; setOpen: (op
             />
           ))}
           
-          {/* System Section */}
-          {open && (
-            <div className="mt-6 mb-3 px-3 text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase tracking-wider">
-              System
-            </div>
-          )}
-          {systemItems.map((item) => (
-            <NavItem 
-              key={item.href}
-              icon={item.icon}
-              label={item.label}
-              href={item.href}
-              open={open}
-              active={pathname === item.href}
-            />
-          ))}
+          
         </nav>
 
         {/* User Profile - Bottom */}
@@ -188,13 +168,17 @@ export default function Sidebar({ open, setOpen }: { open: boolean; setOpen: (op
             href="/profile" 
             className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors"
           >
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-green-500 to-blue-500 flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
-              A
-            </div>
+             <Image
+                          src="/images/eduquest_logo.png"
+                          alt="EduQuest Logo"
+                          width={40}
+                          height={40}
+                          className=" object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
             {open && (
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-gray-900 dark:text-white truncate">Admin User</p>
-                <p className="text-xs text-gray-500 dark:text-slate-400 truncate">admin@mentori.com</p>
+                <p className="text-sm font-medium text-gray-900 dark:text-white truncate">Ujang Asep</p>
+                <p className="text-xs text-gray-500 dark:text-slate-400 truncate">User@gmail.com</p>
               </div>
             )}
           </Link>
@@ -271,10 +255,7 @@ export function TopNav({ onMenuToggle, sidebarOpen }: { onMenuToggle: () => void
       '/coaching': 'Coaching Sessions',
       '/course': 'Courses',
       '/dashboard': 'Dashboard',
-      '/users': 'Users',
       '/analytics': 'Analytics',
-      '/messages': 'Messages',
-      '/settings': 'Settings',
     }
     return routes[pathname] || 'Dashboard'
   }
@@ -379,12 +360,16 @@ export function TopNav({ onMenuToggle, sidebarOpen }: { onMenuToggle: () => void
           </button>
 
           {/* Notifications */}
+          <Link rel="stylesheet" href="/notification" >
+          
+         
           <button className="relative p-2 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-lg transition-colors">
             <Bell className="w-5 h-5 text-gray-600 dark:text-slate-300" />
             <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
               3
             </span>
           </button>
+           </Link>
 
           {/* Profile Dropdown */}
           <div className="relative profile-dropdown">
@@ -396,8 +381,8 @@ export function TopNav({ onMenuToggle, sidebarOpen }: { onMenuToggle: () => void
                 A
               </div>
               <div className="hidden sm:block text-left">
-                <p className="text-sm font-medium text-gray-900 dark:text-white">Admin</p>
-                <p className="text-xs text-gray-500 dark:text-slate-400">Administrator</p>
+                <p className="text-sm font-medium text-gray-900 dark:text-white">Ujang Asep</p>
+                <p className="text-xs text-gray-500 dark:text-slate-400">User</p>
               </div>
               <ChevronDown className={`w-4 h-4 text-gray-400 hidden sm:block transition-transform ${isProfileOpen ? 'rotate-180' : ''}`} />
             </button>
@@ -413,14 +398,7 @@ export function TopNav({ onMenuToggle, sidebarOpen }: { onMenuToggle: () => void
                   <User className="w-4 h-4" />
                   Profile
                 </Link>
-                <Link 
-                  href="/settings" 
-                  className="flex items-center gap-3 w-full px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-700"
-                  onClick={() => setIsProfileOpen(false)}
-                >
-                  <Settings className="w-4 h-4" />
-                  Settings
-                </Link>
+              
                 <div className="border-t border-gray-200 dark:border-slate-700 my-1"></div>
                 <button 
                   className="flex items-center gap-3 w-full px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-gray-50 dark:hover:bg-slate-700"

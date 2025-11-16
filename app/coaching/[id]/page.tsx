@@ -1,5 +1,6 @@
 "use client"
 import { useState } from "react"
+import { use } from "react"
 import { ChevronLeft, Star, MapPin, Clock, Users, Award, MessageCircle } from 'lucide-react'
 import Link from "next/link"
 import Image from "next/image"
@@ -55,9 +56,11 @@ const coachingDetails = {
 export default function CoachingDetailPage({
   params,
 }: {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }) {
-  const coaching = coachingDetails[params.id as keyof typeof coachingDetails] || coachingDetails[1]
+  const { id } = use(params)
+  const coachingId = parseInt(id, 10)
+  const coaching = (coachingId in coachingDetails ? coachingDetails[coachingId as keyof typeof coachingDetails] : coachingDetails[1])
   const [activeTab, setActiveTab] = useState("overview")
 
   return (

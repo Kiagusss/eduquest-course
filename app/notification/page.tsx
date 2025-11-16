@@ -151,23 +151,7 @@ export default function NotificationsPage() {
       {/* Main Container */}
       <div className="flex-1 p-6 md:p-8 flex flex-col">
         <div className="w-full max-w-6xl mx-auto flex flex-col flex-1">
-          {/* Header with Theme Toggle */}
-          <div className="flex items-start justify-between gap-4 mb-8">
-            <div className="flex-1">
-              <h1 className="text-3xl md:text-4xl font-bold text-foreground dark:text-white flex items-center gap-3 mb-2">
-                <Bell className="w-8 h-8 text-purple-500" />
-                Notifications
-              </h1>
-              <p className="text-muted-foreground dark:text-slate-300">
-                Stay updated with your dashboard activities
-              </p>
-            </div>
-            {unreadCount > 0 && (
-              <div className="bg-red-500 text-white px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap">
-                {unreadCount} Unread
-              </div>
-            )}
-          </div>
+        
 
           {/* Action Buttons */}
           <div className="flex flex-wrap gap-3 mb-6">
@@ -194,7 +178,9 @@ export default function NotificationsPage() {
               }`}
             >
               Unread ({unreadCount})
+              
             </button>
+            
             {notifications.length > 0 && (
               <>
                 <button
