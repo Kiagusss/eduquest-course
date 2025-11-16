@@ -5,12 +5,14 @@ import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
-import { ArrowLeft, Mail, Linkedin, Github, Twitter, BookOpen, Trophy, Zap, Award, Sun, Moon } from "lucide-react"
+import { ArrowLeft, Mail, Linkedin, Github, Twitter, BookOpen, Trophy, Zap, Award, Sun, Moon, Crown, Check, X } from 'lucide-react'
 
 export default function ProfilePage() {
   const [activeTab, setActiveTab] = useState("about")
   const [isDark, setIsDark] = useState(false)
   const [mounted, setMounted] = useState(false)
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false)
+  const [showManageModal, setShowManageModal] = useState(false)
 
   useEffect(() => {
     setMounted(true)
@@ -44,6 +46,26 @@ export default function ProfilePage() {
     },
   }
 
+  const subscription = {
+    packageName: "Career Builder",
+    price: "$99",
+    billingPeriod: "/month",
+    status: "Active",
+    monthsRemaining: 2,
+    startDate: "May 2025",
+    renewalDate: "January 2026",
+    features: [
+      "Advanced AI Career Assessment",
+      "Detailed Career Roadmap",
+      "Unlimited Course Access",
+      "Priority Support",
+      "Advanced Progress Analytics",
+      "Full Gamification System",
+      "Skill Certifications",
+      "Career Community Access",
+    ],
+  }
+
   const stats = [
     { label: "Total Points", value: user.totalPoints, icon: Trophy, color: "#8B5CF6" },
     { label: "Courses Completed", value: user.coursesCompleted, icon: BookOpen, color: "#06B6D4" },
@@ -72,6 +94,25 @@ export default function ProfilePage() {
     { name: "Web Design Fundamentals", progress: 60, pointsEarned: 600, status: "In Progress", level: "Beginner" },
     { name: "Design Systems Mastery", progress: 30, pointsEarned: 300, status: "In Progress", level: "Advanced" },
     { name: "Mobile App Design", progress: 0, pointsEarned: 0, status: "Not Started", level: "Intermediate" },
+  ]
+
+  const upgradePlans = [
+    {
+      name: "Career Accelerator",
+      price: "$199",
+      billingPeriod: "/month",
+      description: "Everything in Career Builder plus premium features",
+      features: [
+        "Everything in Career Builder",
+        "1-on-1 Career Coaching",
+        "Personalized Mentorship",
+        "Job Interview Preparation",
+        "Resume & Portfolio Review",
+        "Career Transition Support",
+        "Dedicated Success Manager",
+        "Custom Learning Paths",
+      ],
+    },
   ]
 
   return (
@@ -193,6 +234,64 @@ export default function ProfilePage() {
               })}
             </div>
 
+            <section className="bg-white dark:bg-slate-800 rounded-lg border border-gray-200 dark:border-slate-700 p-6 hover:shadow-lg transition-all">
+              <div className="flex items-start justify-between mb-6">
+                <div className="flex items-center gap-3">
+                  <div className="p-3 rounded-lg bg-[#8B5CF6]/10 dark:bg-[#06B6D4]/10">
+                    <Crown className="w-6 h-6 text-[#8B5CF6] dark:text-[#06B6D4]" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold text-[#0F172A] dark:text-white">{subscription.packageName}</h3>
+                    <p className="text-sm text-gray-600 dark:text-slate-400 mt-1">Active Subscription</p>
+                  </div>
+                </div>
+                <Badge className="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400 border-0">
+                  {subscription.status}
+                </Badge>
+              </div>
+
+              {/* Subscription Details Grid */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                <div className="bg-gray-50 dark:bg-slate-900/50 rounded-lg p-4">
+                  <p className="text-xs font-medium text-gray-600 dark:text-slate-400 mb-1">Price</p>
+                  <p className="text-xl font-bold text-[#0F172A] dark:text-white">
+                    {subscription.price}<span className="text-sm font-normal text-gray-600 dark:text-slate-400">{subscription.billingPeriod}</span>
+                  </p>
+                </div>
+                <div className="bg-gray-50 dark:bg-slate-900/50 rounded-lg p-4">
+                  <p className="text-xs font-medium text-gray-600 dark:text-slate-400 mb-1">Months Remaining</p>
+                  <p className="text-xl font-bold text-[#06B6D4]">{subscription.monthsRemaining}</p>
+                </div>
+                <div className="bg-gray-50 dark:bg-slate-900/50 rounded-lg p-4">
+                  <p className="text-xs font-medium text-gray-600 dark:text-slate-400 mb-1">Start Date</p>
+                  <p className="text-sm font-semibold text-[#0F172A] dark:text-white">{subscription.startDate}</p>
+                </div>
+                <div className="bg-gray-50 dark:bg-slate-900/50 rounded-lg p-4">
+                  <p className="text-xs font-medium text-gray-600 dark:text-slate-400 mb-1">Renewal Date</p>
+                  <p className="text-sm font-semibold text-[#0F172A] dark:text-white">{subscription.renewalDate}</p>
+                </div>
+              </div>
+
+              {/* Features List */}
+              <div>
+                <p className="text-sm font-semibold text-[#0F172A] dark:text-white mb-3">Included Features</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                  {subscription.features.map((feature, idx) => (
+                    <div key={idx} className="flex items-start gap-2">
+                      <Check className="w-4 h-4 text-[#8B5CF6] dark:text-[#06B6D4] flex-shrink-0 mt-0.5" />
+                      <span className="text-sm text-gray-700 dark:text-slate-300">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* CTA Buttons */}
+              <div className="flex gap-3 mt-6 pt-6 border-t border-gray-200 dark:border-slate-700">
+                <Button onClick={() => setShowUpgradeModal(true)} className="flex-1 bg-[#8B5CF6] hover:bg-[#7C3AED] text-white">Upgrade Plan</Button>
+                <Button onClick={() => setShowManageModal(true)} variant="outline" className="flex-1">Manage Subscription</Button>
+              </div>
+            </section>
+
             {/* Achievements Section */}
             {(activeTab === "about" || activeTab === "achievements") && (
               <section>
@@ -287,13 +386,191 @@ export default function ProfilePage() {
               <p className="text-sm opacity-90 mb-4">
                 You're on a {user.currentStreak}-day streak. Keep it up and unlock more achievements!
               </p>
-              <Link href="/courses">
+              <Link href="/course/1/learn">
                 <Button className="bg-white text-[#8B5CF6] hover:bg-gray-100">Continue Learning</Button>
               </Link>
             </Card>
           </main>
         </div>
       </div>
+
+      {/* Upgrade Plan Modal */}
+      {showUpgradeModal && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <Card className="w-full max-w-md bg-white dark:bg-slate-800 border-gray-200 dark:border-slate-700 animate-in zoom-in-95 duration-200">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-slate-700">
+              <h2 className="text-lg font-bold text-[#0F172A] dark:text-white">Upgrade Your Plan</h2>
+              <button
+                onClick={() => setShowUpgradeModal(false)}
+                className="p-1 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors"
+              >
+                <X className="w-5 h-5 text-gray-600 dark:text-slate-400" />
+              </button>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-4 space-y-4 max-h-[70vh] overflow-y-auto">
+              <div>
+                <p className="text-xs font-medium text-gray-600 dark:text-slate-400 mb-2">Current Plan</p>
+                <div className="bg-gray-50 dark:bg-slate-900/50 rounded-lg p-3 border border-gray-200 dark:border-slate-700">
+                  <p className="text-sm font-semibold text-[#0F172A] dark:text-white">{subscription.packageName}</p>
+                  <p className="text-lg font-bold text-[#8B5CF6] dark:text-[#06B6D4] mt-1">
+                    {subscription.price}<span className="text-xs font-normal text-gray-600 dark:text-slate-400">{subscription.billingPeriod}</span>
+                  </p>
+                </div>
+              </div>
+
+              {/* Upgrade Option */}
+              <div>
+                <p className="text-xs font-medium text-gray-600 dark:text-slate-400 mb-2">Upgrade To</p>
+                {upgradePlans.map((plan) => (
+                  <div key={plan.name} className="border-2 border-[#8B5CF6]/20 dark:border-[#06B6D4]/20 rounded-lg p-3 hover:border-[#8B5CF6] dark:hover:border-[#06B6D4] transition-all">
+                    <div className="flex items-start justify-between mb-2">
+                      <div>
+                        <h4 className="font-semibold text-sm text-[#0F172A] dark:text-white">{plan.name}</h4>
+                        <p className="text-xs text-gray-600 dark:text-slate-400 mt-0.5">{plan.description}</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-lg font-bold text-[#8B5CF6] dark:text-[#06B6D4]">{plan.price}</p>
+                        <p className="text-xs text-gray-600 dark:text-slate-400">{plan.billingPeriod}</p>
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-1 gap-1 text-xs text-gray-700 dark:text-slate-300">
+                      {plan.features.slice(0, 4).map((feature, idx) => (
+                        <div key={idx} className="flex items-start gap-2">
+                          <Check className="w-3 h-3 text-[#8B5CF6] dark:text-[#06B6D4] flex-shrink-0 mt-0.5" />
+                          <span>{feature}</span>
+                        </div>
+                      ))}
+                      {plan.features.length > 4 && (
+                        <p className="text-gray-600 dark:text-slate-400 italic">+ {plan.features.length - 4} more features</p>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Payment Info */}
+              <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 border border-blue-200 dark:border-blue-800">
+                <p className="text-xs text-blue-900 dark:text-blue-300">
+                  Upgrade immediately with prorated pricing for your remaining billing period.
+                </p>
+              </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="flex gap-2 p-4 border-t border-gray-200 dark:border-slate-700">
+              <Button
+                onClick={() => setShowUpgradeModal(false)}
+                variant="outline"
+                className="flex-1 text-sm"
+              >
+                Cancel
+              </Button>
+              <Button className="flex-1 bg-[#8B5CF6] hover:bg-[#7C3AED] text-white text-sm">
+                Upgrade
+              </Button>
+            </div>
+          </Card>
+        </div>
+      )}
+
+      {/* Manage Subscription Modal */}
+      {showManageModal && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <Card className="w-full max-w-md bg-white dark:bg-slate-800 border-gray-200 dark:border-slate-700 animate-in zoom-in-95 duration-200">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-slate-700">
+              <h2 className="text-lg font-bold text-[#0F172A] dark:text-white">Manage Subscription</h2>
+              <button
+                onClick={() => setShowManageModal(false)}
+                className="p-1 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors"
+              >
+                <X className="w-5 h-5 text-gray-600 dark:text-slate-400" />
+              </button>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-4 space-y-4 max-h-[70vh] overflow-y-auto">
+              {/* Current Subscription Summary */}
+              <div>
+                <p className="text-xs font-medium text-gray-600 dark:text-slate-400 mb-2">Current Plan</p>
+                <div className="bg-gradient-to-br from-[#8B5CF6]/10 to-[#06B6D4]/10 dark:from-[#8B5CF6]/5 dark:to-[#06B6D4]/5 rounded-lg p-3 border border-[#8B5CF6]/20 dark:border-[#06B6D4]/20">
+                  <div className="grid grid-cols-2 gap-2">
+                    <div>
+                      <p className="text-xs text-gray-600 dark:text-slate-400">Plan</p>
+                      <p className="text-sm font-semibold text-[#0F172A] dark:text-white mt-0.5">{subscription.packageName}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-600 dark:text-slate-400">Billing</p>
+                      <p className="text-sm font-semibold text-[#0F172A] dark:text-white mt-0.5">{subscription.price}{subscription.billingPeriod}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-600 dark:text-slate-400">Renews</p>
+                      <p className="text-sm font-semibold text-[#0F172A] dark:text-white mt-0.5">{subscription.renewalDate}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-600 dark:text-slate-400">Remaining</p>
+                      <p className="text-sm font-semibold text-[#06B6D4] mt-0.5">{subscription.monthsRemaining}m</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Management Options */}
+              <div>
+                <p className="text-xs font-medium text-gray-600 dark:text-slate-400 mb-2">Quick Actions</p>
+                <div className="space-y-2">
+                  <button className="w-full text-left p-3 rounded-lg border border-gray-200 dark:border-slate-700 hover:border-[#8B5CF6] dark:hover:border-[#06B6D4] hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-all group">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm font-medium text-[#0F172A] dark:text-white group-hover:text-[#8B5CF6] dark:group-hover:text-[#06B6D4]">Update Payment</p>
+                      </div>
+                      <span className="text-gray-400 text-sm">→</span>
+                    </div>
+                  </button>
+
+                  <button className="w-full text-left p-3 rounded-lg border border-gray-200 dark:border-slate-700 hover:border-[#8B5CF6] dark:hover:border-[#06B6D4] hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-all group">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm font-medium text-[#0F172A] dark:text-white group-hover:text-[#8B5CF6] dark:group-hover:text-[#06B6D4]">Pause Subscription</p>
+                      </div>
+                      <span className="text-gray-400 text-sm">→</span>
+                    </div>
+                  </button>
+
+                  <button className="w-full text-left p-3 rounded-lg border border-gray-200 dark:border-slate-700 hover:border-red-300 dark:hover:border-red-900 hover:bg-red-50 dark:hover:bg-red-900/10 transition-all group">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm font-medium text-[#0F172A] dark:text-white group-hover:text-red-600 dark:group-hover:text-red-400">Cancel Subscription</p>
+                      </div>
+                      <span className="text-gray-400 text-sm">→</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+
+              {/* Important Info */}
+              <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-3 border border-yellow-200 dark:border-yellow-800">
+                <p className="text-xs text-yellow-900 dark:text-yellow-300">
+                  Cancellations take effect at the end of your billing period ({subscription.renewalDate}).
+                </p>
+              </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="p-4 border-t border-gray-200 dark:border-slate-700">
+              <Button
+                onClick={() => setShowManageModal(false)}
+                className="w-full bg-[#8B5CF6] hover:bg-[#7C3AED] text-white text-sm"
+              >
+                Close
+              </Button>
+            </div>
+          </Card>
+        </div>
+      )}
     </div>
   )
 }
