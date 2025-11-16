@@ -400,12 +400,16 @@ export function TopNav({ onMenuToggle, sidebarOpen }: { onMenuToggle: () => void
                 </Link>
               
                 <div className="border-t border-gray-200 dark:border-slate-700 my-1"></div>
+                
+                <Link href="/">
+               
                 <button 
                   className="flex items-center gap-3 w-full px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-gray-50 dark:hover:bg-slate-700"
                   onClick={() => setIsProfileOpen(false)}
                 >
                   Sign Out
                 </button>
+                 </Link>
               </div>
             )}
           </div>

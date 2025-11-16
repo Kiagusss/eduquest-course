@@ -121,7 +121,9 @@ export default function NotificationsPage() {
   const [notifications, setNotifications] = useState(notificationsData)
   const [filterType, setFilterType] = useState<"all" | "unread">("all")
 
-  const isDark = true // Default to dark theme as managed by sidebar
+  // Untuk demo, kita akan menggunakan state untuk toggle dark mode
+  // Dalam aplikasi nyata, Anda mungkin menggunakan context atau hook dari next-themes
+  const [isDark, setIsDark] = useState(false)
 
   const markAsRead = (id: number) => {
     setNotifications(notifications.map(notif => 
@@ -147,22 +149,36 @@ export default function NotificationsPage() {
     : notifications
 
   return (
-    <div className="flex-1 bg-gradient-to-br dark:from-[#0F172A] dark:via-[#1a2540] dark:to-[#0F172A] from-white via-blue-50 to-purple-50 min-h-screen flex flex-col">
+    <div className={`flex-1 min-h-screen flex flex-col transition-colors duration-300 ${
+      isDark 
+        ? "dark bg-gradient-to-br from-background via-[#1a2540] to-background" 
+        : ""
+    }`}>
+      {/* Theme Toggle Button untuk demo */}
+      <div className="absolute top-4 right-4">
+        <button
+          onClick={() => setIsDark(!isDark)}
+          className={`p-2 rounded-lg transition-colors ${
+            isDark 
+              ? "bg-primary text-primary-foreground hover:bg-primary/90" 
+              : "bg-secondary text-secondary-foreground hover:bg-secondary/90"
+          }`}
+        >
+          {isDark ? "☀️" : "🌙"}
+        </button>
+      </div>
+
       {/* Main Container */}
       <div className="flex-1 p-6 md:p-8 flex flex-col">
         <div className="w-full max-w-6xl mx-auto flex flex-col flex-1">
-        
-
           {/* Action Buttons */}
           <div className="flex flex-wrap gap-3 mb-6">
             <button
               onClick={() => setFilterType("all")}
               className={`px-4 py-2 rounded-lg transition-colors ${
                 filterType === "all"
-                  ? "bg-purple-500 text-white"
-                  : isDark
-                  ? "bg-slate-800 text-slate-200 hover:bg-slate-700"
-                  : "bg-slate-200 text-slate-700 hover:bg-slate-300"
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground"
               }`}
             >
               All Notifications
@@ -171,40 +187,29 @@ export default function NotificationsPage() {
               onClick={() => setFilterType("unread")}
               className={`px-4 py-2 rounded-lg transition-colors ${
                 filterType === "unread"
-                  ? "bg-purple-500 text-white"
-                  : isDark
-                  ? "bg-slate-800 text-slate-200 hover:bg-slate-700"
-                  : "bg-slate-200 text-slate-700 hover:bg-slate-300"
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground"
               }`}
             >
               Unread ({unreadCount})
-              
             </button>
             
             {notifications.length > 0 && (
               <>
                 <button
                   onClick={markAllAsRead}
-                  className={`ml-auto px-4 py-2 rounded-lg transition-colors flex items-center gap-2 ${
-                    isDark
-                      ? "bg-slate-800 text-slate-200 hover:bg-slate-700"
-                      : "bg-slate-200 text-slate-700 hover:bg-slate-300"
-                  }`}
+                  className={`ml-auto px-4 py-2 rounded-lg transition-colors flex items-center gap-2 bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground`}
                 >
                   <Check className="w-4 h-4" />
                   Mark all as read
                 </button>
-                <button
-                  onClick={deleteAllNotifications}
-                  className={`px-4 py-2 rounded-lg transition-colors flex items-center gap-2 ${
-                    isDark
-                      ? "bg-red-900/30 text-red-400 hover:bg-red-900/50"
-                      : "bg-red-100 text-red-600 hover:bg-red-200"
-                  }`}
-                >
-                  <Trash2 className="w-4 h-4" />
-                  Clear all
-                </button>
+               <button
+  onClick={deleteAllNotifications}
+  className={`px-4 py-2 rounded-lg transition-colors flex items-center gap-2 bg-destructive text-destructive-foreground hover:bg-destructive/90`}
+>
+  <Trash2 className="w-4 h-4" />
+  Clear all
+</button>
               </>
             )}
           </div>
@@ -217,12 +222,8 @@ export default function NotificationsPage() {
                   key={notification.id}
                   className={`p-4 rounded-lg border transition-all relative ${
                     notification.read
-                      ? isDark
-                        ? "bg-slate-800/30 border-slate-700/50"
-                        : "bg-white/50 border-slate-200/50"
-                      : isDark
-                      ? "bg-slate-800/80 border-purple-500/50 shadow-lg shadow-purple-500/10"
-                      : "bg-white border-purple-200 shadow-lg shadow-purple-200/30"
+                      ? "bg-card/50 border-border/50"
+                      : "bg-card border-primary/50 shadow-lg shadow-primary/10"
                   }`}
                 >
                   <div className="flex items-start gap-4">
@@ -234,21 +235,17 @@ export default function NotificationsPage() {
                     {/* Content */}
                     <div className="flex-1 min-w-0">
                       <div className="flex items-start justify-between gap-2 mb-1">
-                        <h3 className={`font-semibold ${isDark ? "text-white" : "text-foreground"}`}>
+                        <h3 className="font-semibold text-card-foreground">
                           {notification.title}
                         </h3>
-                        <span className={`text-xs px-2 py-1 rounded-full whitespace-nowrap flex-shrink-0 ${
-                          isDark
-                            ? "bg-slate-700/50 text-slate-300"
-                            : "bg-slate-200 text-slate-600"
-                        }`}>
+                        <span className={`text-xs px-2 py-1 rounded-full whitespace-nowrap flex-shrink-0 bg-muted text-muted-foreground`}>
                           {notification.category}
                         </span>
                       </div>
-                      <p className={`text-sm mb-2 ${isDark ? "text-slate-300" : "text-slate-600"}`}>
+                      <p className="text-sm mb-2 text-muted-foreground">
                         {notification.message}
                       </p>
-                      <p className={`text-xs ${isDark ? "text-slate-500" : "text-slate-500"}`}>
+                      <p className="text-xs text-muted-foreground/70">
                         {notification.timestamp}
                       </p>
                     </div>
@@ -258,11 +255,7 @@ export default function NotificationsPage() {
                       {!notification.read && (
                         <button
                           onClick={() => markAsRead(notification.id)}
-                          className={`p-2 rounded-lg transition-colors ${
-                            isDark
-                              ? "hover:bg-slate-700 text-slate-400 hover:text-green-400"
-                              : "hover:bg-slate-200 text-slate-500 hover:text-green-600"
-                          }`}
+                          className={`p-2 rounded-lg transition-colors hover:bg-accent hover:text-accent-foreground text-muted-foreground`}
                           title="Mark as read"
                         >
                           <Check className="w-4 h-4" />
@@ -270,11 +263,7 @@ export default function NotificationsPage() {
                       )}
                       <button
                         onClick={() => deleteNotification(notification.id)}
-                        className={`p-2 rounded-lg transition-colors ${
-                          isDark
-                            ? "hover:bg-red-900/30 text-slate-400 hover:text-red-400"
-                            : "hover:bg-red-100 text-slate-500 hover:text-red-600"
-                        }`}
+                        className={`p-2 rounded-lg transition-colors hover:bg-destructive/20 hover:text-destructive text-muted-foreground`}
                         title="Delete notification"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -284,22 +273,18 @@ export default function NotificationsPage() {
 
                   {/* Unread indicator */}
                   {!notification.read && (
-                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-purple-500 rounded-l-lg"></div>
+                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary rounded-l-lg"></div>
                   )}
                 </div>
               ))
             ) : (
-              <div className={`flex items-center justify-center py-12 rounded-lg border ${
-                isDark
-                  ? "bg-slate-800/30 border-slate-700/50"
-                  : "bg-white/50 border-slate-200/50"
-              }`}>
+              <div className={`flex items-center justify-center py-12 rounded-lg border bg-card/50 border-border/50`}>
                 <div className="text-center">
-                  <Bell className={`w-12 h-12 mx-auto mb-3 ${isDark ? "text-slate-500" : "text-slate-400"}`} />
-                  <p className={`text-lg font-semibold ${isDark ? "text-slate-300" : "text-slate-600"}`}>
+                  <Bell className={`w-12 h-12 mx-auto mb-3 text-muted-foreground`} />
+                  <p className={`text-lg font-semibold text-card-foreground`}>
                     No notifications
                   </p>
-                  <p className={`text-sm ${isDark ? "text-slate-400" : "text-slate-500"}`}>
+                  <p className={`text-sm text-muted-foreground`}>
                     {filterType === "unread" ? "You're all caught up!" : "Check back later for updates"}
                   </p>
                 </div>
