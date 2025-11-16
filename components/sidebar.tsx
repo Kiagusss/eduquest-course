@@ -17,13 +17,13 @@ const navigationItems = [
 const productItems = [
   { icon: Book, label: "Courses", href: "/course" },
   { icon: Video, label: "Coaching", href: "/coaching" },
-
   { icon: Video, label: "Webinars", href: "/webinar" },
 ]
 
 const insightItems = [
   { icon: BarChart3, label: "Analytics", href: "/analytics" },
   { icon: Globe, label: "Leaderboard", href: "/leaderboard" },
+  { icon: Users2, label: "Community", href: "/community" },
 ]
 
 

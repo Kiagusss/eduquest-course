@@ -81,13 +81,7 @@ export default function CommunityPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <div className="border-b border-border bg-card">
-        <div className="max-w-6xl mx-auto px-4 py-6">
-          <h1 className="text-3xl font-bold text-foreground mb-2">Course Community</h1>
-          <p className="text-muted-foreground">Connect, discuss, and collaborate with fellow learners</p>
-        </div>
-      </div>
+    
 
       {/* Main Content */}
       <div className="max-w-6xl mx-auto px-4 py-8">
