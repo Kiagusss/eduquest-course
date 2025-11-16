@@ -147,7 +147,7 @@ export function PricingSection() {
                 </ul>
                 
                 {/* Pricing Button */}
-                <a href="/login">
+                <a href="/checkout">
                     <Button
                   variant={tier.buttonVariant}
                   size="lg"

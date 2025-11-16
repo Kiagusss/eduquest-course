@@ -135,10 +135,10 @@ export const sampleQuiz: Quiz = {
 const episode1: Episode = {
   id: "ep-1",
   courseId: "course-1",
-  title: "Introduction to UI/UX Design",
+  title: "Mengenal Figma Untuk Pemula",
   description:
-    "Learn the fundamentals of UI and UX design, including user research, wireframing, and prototyping basics.",
-  videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    "Hai semuanya, video ini merupakan video pertama dari series belajar UI/UX Design menggunakan Figma. Di video pertama ini saya membahas mengenai cara menggunakan figma untuk membuat UI/UX Design bagi pemula, dimana materi yang disampaikan sangat dasar sekali seperti cara sign-up di figma hingga mengenal tools yang disediakan figma untuk membantu kita para designer ataupun developer mengembangkan project UI/UX Design.",
+  videoUrl: "https://www.youtube.com/embed/qk3R3mYiuPA?si=mvUY-A8PFp0UPlM6",
   duration: 1200,
   quizId: "quiz-1",
 }
@@ -146,9 +146,9 @@ const episode1: Episode = {
 const episode2: Episode = {
   id: "ep-2",
   courseId: "course-1",
-  title: "User Research & Analysis",
-  description: "Deep dive into user research methodologies and how to analyze user behavior patterns.",
-  videoUrl: "https://www.youtube.com/embed/jNQXAC9IVRw",
+  title: "Cara Membuat Icon di Figma",
+  description: "Di sini kalian akan belajar bagaimana cara membuat icon di figma",
+  videoUrl: "https://www.youtube.com/embed/mF-S3EqDWYA?si=xexvnS8pXSahaHm5",
   duration: 1800,
   quizId: "quiz-2",
 }
@@ -170,12 +170,12 @@ export const sampleCourse: Course = {
   title: "UI/UX Design Level Up with Prototyping",
   description:
     "In this intensive course, you will learn the complete UX/UI design process from start to finish. We cover user research methodologies, wireframing techniques, visual design principles, and advanced prototyping in Figma. By the end of the course, you will have built a complete design system and interactive prototype.",
-  instructor: "Sarah Johnson",
+  instructor: "NodBeen",
   price: 1250,
   duration: "7 days",
   level: "Intermediate",
   episodes: [episode1, episode2, episode3],
-  thumbnail: "/ui-ux-design-course.png",
+  thumbnail: "/ui.jpg",
   nextCourseId: "course-2",
 }
 
