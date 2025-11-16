@@ -1,29 +1,9 @@
-  "use client"
+"use client"
 import type React from "react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname } from 'next/navigation'
 import Image from "next/image"
-import { 
-  Home, 
-  Globe, 
-  BarChart3, 
-  Mail, 
-  Zap, 
-  Settings, 
-  Book, 
-  Users2, 
-  Download, 
-  Video, 
-  Layers,
-  Menu,
-  X,
-  ChevronDown,
-  Bell,
-  Search,
-  User,
-  ChevronLeft,
-  ChevronRight
-} from "lucide-react"
+import { Home, Globe, BarChart3, Mail, Zap, Settings, Book, Users2, Download, Video, Layers, Menu, X, ChevronDown, Bell, Search, User, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useState, useEffect } from "react"
 
 // Define navigation items with their routes
@@ -97,9 +77,11 @@ export default function Sidebar({ open, setOpen }: { open: boolean; setOpen: (op
       )}
       
       <aside
-        className={`fixed lg:sticky top-0 ${open ? 'z-50' : 'z-0'} ${
-          open ? "w-64 translate-x-0" : "w-20 translate-x-0"
-        } transition-all duration-300 bg-white dark:bg-slate-800 border-r border-gray-200 dark:border-slate-700 h-screen overflow-y-auto flex flex-col`}
+        className={`fixed lg:sticky top-0 left-0 ${open ? 'z-50' : 'z-0'} ${
+          open ? "w-64" : "w-20"
+        } transition-all duration-300 bg-white dark:bg-slate-800 border-r border-gray-200 dark:border-slate-700 h-screen overflow-y-auto flex flex-col lg:translate-x-0 ${
+          open ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+        }`}
       >
         {/* Header */}
         <div className="p-4 lg:p-6 border-b border-gray-200 dark:border-slate-700 flex-shrink-0">
@@ -120,6 +102,15 @@ export default function Sidebar({ open, setOpen }: { open: boolean; setOpen: (op
                 </span>
               )}
             </div>
+            {open && (
+              <button
+                onClick={() => setOpen(false)}
+                className="p-1.5 lg:hidden hover:bg-gray-100 dark:hover:bg-slate-700 rounded-lg transition-colors flex-shrink-0"
+                aria-label="Close sidebar"
+              >
+                <X className="w-5 h-5 text-gray-600 dark:text-slate-400" />
+              </button>
+            )}
           </div>
         </div>
 
@@ -304,7 +295,7 @@ export function TopNav({ onMenuToggle, sidebarOpen }: { onMenuToggle: () => void
   }, [])
 
   return (
-    <header className="bg-white dark:bg-slate-800/80 backdrop-blur-sm border-b border-gray-200 dark:border-slate-700 sticky top-0 z-40">
+    <header className="bg-white dark:bg-slate-800/80 backdrop-blur-sm border-b border-gray-200 dark:border-slate-700 sticky top-0 z-10">
       <div className="flex items-center justify-between p-4">
         {/* Left Section */}
         <div className="flex items-center gap-4 flex-1">

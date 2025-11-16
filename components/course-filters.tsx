@@ -18,8 +18,8 @@ export default function CourseFilters({
           className={`px-4 py-2 rounded-lg font-medium whitespace-nowrap transition-colors ${
             selectedCategory === category
               ? "bg-primary text-white"
-              : "bg-white border border-border text-foreground hover:bg-muted"
-          }`}
+              : "bg-white border border-border border-purple-800 text-foreground hover:bg-primary hover:text-white dark:hover:bg-primary dark:bg-gradient-to-br dark:border-purple-800 dark:bg-transparent dark:from-purple-950/20 dark:to-blue-950/20"
+          } `}
         >
           {category}
         </button>

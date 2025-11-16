@@ -78,7 +78,7 @@ export default function CheckoutPage() {
           <div className="flex items-center gap-2">
             <Button variant="ghost" asChild className="p-0">
               <Link href="/">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-secondary dark:to-slate-300 flex items-center justify-center">
                   <span className="text-white font-bold text-sm">C</span>
                 </div>
               </Link>
@@ -269,7 +269,7 @@ export default function CheckoutPage() {
                 <Button
                   type="submit"
                   disabled={isProcessing}
-                  className="w-full bg-gradient-to-r from-primary to-secondary hover:shadow-lg hover:shadow-primary/30 text-white font-semibold h-12 rounded-lg transition-all disabled:opacity-50"
+                  className="w-full bg-gradient-to-r from-primary to-secondary dark:to-slate-300 hover:shadow-lg hover:shadow-primary/30 text-white font-semibold h-12 rounded-lg transition-all disabled:opacity-50"
                 >
                   {isProcessing ? 'Memproses...' : `Bayar ${formatRupiah(orderSummary.total)}`}
                 </Button>
@@ -321,7 +321,7 @@ export default function CheckoutPage() {
                   </div>
                   <div className="flex items-center justify-between pt-3 border-t border-border">
                     <span className="font-semibold text-foreground">Total</span>
-                    <span className="text-lg font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                    <span className="text-lg font-bold bg-gradient-to-r from-primary to-secondary dark:to-slate-300 bg-clip-text text-transparent">
                       {formatRupiah(orderSummary.total)}
                     </span>
                   </div>
