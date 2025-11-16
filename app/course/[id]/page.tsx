@@ -232,7 +232,7 @@ export default function CourseDetailPage({ params }: PageProps) {
 
       <div className="border-b border-border">
         <div className="px-8 py-6">
-          <Link href="/" className="inline-flex items-center gap-2 text-primary hover:text-primary/80 mb-4">
+          <Link href="/course" className="inline-flex items-center gap-2 text-primary hover:text-primary/80 mb-4">
             <ChevronLeft className="h-5 w-5" />
             <span className="font-medium">Back to Courses</span>
           </Link>

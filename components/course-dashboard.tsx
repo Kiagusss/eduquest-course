@@ -5,7 +5,6 @@ import CourseFilters from "@/components/course-filters"
 import CourseCard from "@/components/course-card"
 import Image from "next/image"
 import Link from "next/link"
-import { Moon, Sun, Trophy } from "lucide-react"
 
 const dataCourse = [
   {
@@ -68,29 +67,7 @@ export default function CourseDashboard() {
   const [viewType, setViewType] = useState<"grid" | "list">("grid")
   const [selectedCategory, setSelectedCategory] = useState("All Category")
 
-  const [theme, setTheme] = useState<"light" | "dark">("dark")
-    const [mounted, setMounted] = useState(false)
   
-    useEffect(() => {
-      setMounted(true)
-      const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
-      const initialTheme = savedTheme || (prefersDark ? "dark" : "light")
-      setTheme(initialTheme)
-      document.documentElement.classList.toggle("dark", initialTheme === "dark")
-    }, [])
-  
-    const toggleTheme = () => {
-      const newTheme = theme === "light" ? "dark" : "light"
-      setTheme(newTheme)
-      localStorage.setItem("theme", newTheme)
-      document.documentElement.classList.toggle("dark", newTheme === "dark")
-    }
-  
-    if (!mounted) return null
-  
-    const isDark = theme === "dark"
-    
   
   const filteredCourses =
     selectedCategory === "All Category"
@@ -98,18 +75,8 @@ export default function CourseDashboard() {
       : dataCourse.filter((course) => course.category === selectedCategory)
 
   return (
-    <div className="flex-1 p-8 bg-gradient-to-br   dark:from-[#0F172A] dark:via-[#1a2540] dark:to-[#0F172A] from-white via-blue-50 to-purple-50">
-    <button
-            onClick={toggleTheme}
-            className={`flex-none p-2 sm:p-3 rounded-lg transition-all duration-300 border ${
-              isDark
-                ? "bg-slate-800 border-slate-700 hover:bg-slate-700 text-[#06B6D4]"
-                : "bg-slate-100 border-slate-300 hover:bg-slate-200 text-[#8B5CF6]"
-            }`}
-            aria-label="Toggle theme"
-          >
-            {isDark ? <Sun size={18} className="sm:w-5 sm:h-5" /> : <Moon size={18} className="sm:w-5 sm:h-5" />}
-          </button>
+    <div className="flex-1 p-8 bg-gradient-to-br  dark:bg-gradient-to-br dark:from-[#0F172A] dark:via-[#1a2540] dark:to-[#0F172A] from-white via-blue-50 to-purple-50">
+    
 
       <div className="mt-8">
         <div className="flex items-center justify-between mb-6">

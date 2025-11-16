@@ -108,7 +108,7 @@ export default function CoachingDashboard() {
       {/* Main Content */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Top Navigation */}
-        <TopNav onMenuToggle={() => setSidebarOpen(!sidebarOpen)} />
+        <TopNav onMenuToggle={() => setSidebarOpen(!sidebarOpen)} sidebarOpen={sidebarOpen} />
         
         {/* Main Content Area */}
         <main className="flex-1 p-4 sm:p-6 bg-gradient-to-br dark:from-[#0F172A] dark:via-[#1a2540] dark:to-[#0F172A] from-white via-blue-50 to-purple-50">
@@ -122,11 +122,7 @@ export default function CoachingDashboard() {
                 </p>
               </div>
               
-              {/* Add Session Button */}
-              <button className="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2.5 px-4 rounded-lg transition-colors flex items-center gap-2 justify-center sm:justify-start w-full sm:w-auto">
-                <Plus className="w-4 h-4" />
-                <span>New Session</span>
-              </button>
+
             </div>
 
             {/* Stats Overview */}

@@ -1,7 +1,8 @@
-"use client"
+  "use client"
 import type React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import Image from "next/image"
 import { 
   Home, 
   Globe, 
@@ -19,7 +20,9 @@ import {
   ChevronDown,
   Bell,
   Search,
-  User
+  User,
+  ChevronLeft,
+  ChevronRight
 } from "lucide-react"
 import { useState, useEffect } from "react"
 
@@ -33,16 +36,15 @@ const navigationItems = [
 ]
 
 const productItems = [
-  { icon: Book, label: "Courses", href: "/courses" },
+  { icon: Book, label: "Courses", href: "/course" },
   { icon: Video, label: "Coaching", href: "/coaching" },
   { icon: Download, label: "Downloads", href: "/downloads" },
   { icon: Video, label: "Webinars", href: "/webinars" },
 ]
 
-const managementItems = [
-  { icon: Users2, label: "Members", href: "/members" },
-  { icon: Layers, label: "Bundles", href: "/bundles" },
-  { icon: Zap, label: "Tools", href: "/tools" },
+const insightItems = [
+  { icon: BarChart3, label: "Analytics", href: "/analytics" },
+  { icon: Globe, label: "Leaderboard", href: "/leaderboard" },
 ]
 
 const systemItems = [
@@ -52,47 +54,72 @@ const systemItems = [
 export default function Sidebar({ open, setOpen }: { open: boolean; setOpen: (open: boolean) => void }) {
   const pathname = usePathname()
 
-  // Close sidebar on route change (mobile)
+  // Toggle sidebar
+  const toggleSidebar = () => {
+    setOpen(!open)
+  }
+
+  // Initialize sidebar state based on screen size
   useEffect(() => {
-    if (open) {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        // Desktop: default open
+        setOpen(true)
+      } else {
+        // Mobile: default closed
+        setOpen(false)
+      }
+    }
+
+    // Set initial state
+    handleResize()
+
+    // Add resize listener
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [setOpen])
+
+  // Close sidebar only on mobile when route changes
+  useEffect(() => {
+    if (window.innerWidth < 1024) {
       setOpen(false)
     }
-  }, [pathname, open, setOpen])
+  }, [pathname, setOpen])
 
   return (
     <>
       {/* Mobile Overlay */}
       {open && (
         <div 
-          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          className="fixed inset-0 bg-black/50 z-20 lg:hidden"
           onClick={() => setOpen(false)}
         />
       )}
       
       <aside
-        className={`fixed lg:sticky top-0 z-50 ${
-          open ? "w-64 translate-x-0" : "w-20 -translate-x-full lg:translate-x-0"
+        className={`fixed lg:sticky top-0 ${open ? 'z-50' : 'z-0'} ${
+          open ? "w-64 translate-x-0" : "w-20 translate-x-0"
         } transition-all duration-300 bg-white dark:bg-slate-800 border-r border-gray-200 dark:border-slate-700 h-screen overflow-y-auto flex flex-col`}
       >
         {/* Header */}
         <div className="p-4 lg:p-6 border-b border-gray-200 dark:border-slate-700 flex-shrink-0">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-lg bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center text-white font-bold shadow-lg">
-                M
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-3 flex-1 min-w-0">
+              <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-lg flex items-center justify-center text-white font-bold  flex-shrink-0 overflow-hidden">
+              <Image
+                          src="/images/eduquest_logo.png"
+                          alt="EduQuest Logo"
+                          width={40}
+                          height={40}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
               </div>
               {open && (
-                <span className="font-bold text-lg text-gray-900 dark:text-white hidden lg:block">
-                  Mentori
+                <span className="font-bold text-lg text-gray-900 dark:text-white truncate">
+                  EduQuest
                 </span>
               )}
             </div>
-            <button 
-              onClick={() => setOpen(false)}
-              className="lg:hidden p-1 hover:bg-gray-100 dark:hover:bg-slate-700 rounded"
-            >
-              <X className="w-5 h-5 text-gray-600 dark:text-slate-400" />
-            </button>
           </div>
         </div>
 
@@ -113,7 +140,7 @@ export default function Sidebar({ open, setOpen }: { open: boolean; setOpen: (op
           
           {/* Products Section */}
           {open && (
-            <div className="mt-6 mb-3 px-3 text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase tracking-wider hidden lg:block">
+            <div className="mt-6 mb-3 px-3 text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase tracking-wider">
               Products
             </div>
           )}
@@ -128,13 +155,13 @@ export default function Sidebar({ open, setOpen }: { open: boolean; setOpen: (op
             />
           ))}
 
-          {/* Management Section */}
+          {/* Insight Section */}
           {open && (
-            <div className="mt-6 mb-3 px-3 text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase tracking-wider hidden lg:block">
-              Management
+            <div className="mt-6 mb-3 px-3 text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase tracking-wider">
+              Insight
             </div>
           )}
-          {managementItems.map((item) => (
+          {insightItems.map((item) => (
             <NavItem 
               key={item.href}
               icon={item.icon}
@@ -147,7 +174,7 @@ export default function Sidebar({ open, setOpen }: { open: boolean; setOpen: (op
           
           {/* System Section */}
           {open && (
-            <div className="mt-6 mb-3 px-3 text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase tracking-wider hidden lg:block">
+            <div className="mt-6 mb-3 px-3 text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase tracking-wider">
               System
             </div>
           )}
@@ -173,7 +200,7 @@ export default function Sidebar({ open, setOpen }: { open: boolean; setOpen: (op
               A
             </div>
             {open && (
-              <div className="flex-1 min-w-0 hidden lg:block">
+              <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-gray-900 dark:text-white truncate">Admin User</p>
                 <p className="text-xs text-gray-500 dark:text-slate-400 truncate">admin@mentori.com</p>
               </div>
@@ -203,46 +230,62 @@ function NavItem({
   return (
     <Link
       href={href}
-      className={`flex items-center gap-3 px-3 py-3 rounded-xl transition-all duration-200 w-full group ${
+      className={`flex items-center gap-3 px-3 py-3 rounded-xl transition-all duration-200 w-full group relative ${
         active 
           ? "bg-purple-600 text-white shadow-lg shadow-purple-500/25" 
           : "text-gray-600 dark:text-slate-400 hover:bg-gray-50 dark:hover:bg-slate-700 hover:text-gray-900 dark:hover:text-white"
       }`}
     >
-      <Icon className={`w-5 h-5 flex-shrink-0 transition-transform group-hover:scale-110 ${
-        active ? "text-white" : "text-gray-400 dark:text-slate-500 group-hover:text-purple-600 dark:group-hover:text-purple-400"
-      }`} />
-      {(open || !open) && (
+      <div className="relative">
+        <Icon className={`w-5 h-5 flex-shrink-0 transition-transform group-hover:scale-110 ${
+          active ? "text-white" : "text-gray-400 dark:text-slate-500 group-hover:text-purple-600 dark:group-hover:text-purple-400"
+        }`} />
+        {/* Badge positioned on icon when sidebar collapsed */}
+        {!open && badge && (
+          <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-[10px] rounded-full flex items-center justify-center">
+            {badge > 9 ? '9+' : badge}
+          </span>
+        )}
+      </div>
+      
+      {/* Label and badge - show when sidebar is open */}
+      {open && (
         <>
-          <span className={`text-sm font-medium flex-1 ${!open ? 'lg:hidden' : ''} ${open ? 'block' : 'hidden lg:block'}`}>
+          <span className="text-sm font-medium flex-1 truncate">
             {label}
           </span>
-          {badge && (open || !open) && (
-            <span className={`bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full min-w-[20px] text-center ${!open ? 'lg:hidden' : ''} ${open ? 'block' : 'hidden lg:block'}`}>
-              {badge}
+          {badge && (
+            <span className="bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full min-w-[20px] text-center flex-shrink-0">
+              {badge > 9 ? '9+' : badge}
             </span>
           )}
         </>
       )}
-      {/* Tooltip for collapsed state */}
-      {!open && (
-        <div className="absolute left-full ml-2 px-2 py-1 bg-gray-900 dark:bg-slate-700 text-white text-sm rounded opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 whitespace-nowrap hidden lg:block">
-          {label}
-          {badge && (
-            <span className="ml-1 bg-red-500 text-white text-xs px-1 rounded">
-              {badge}
-            </span>
-          )}
-        </div>
-      )}
+
+      {/* No tooltip when collapsed - labels removed entirely when sidebar is closed */}
     </Link>
   )
 }
 
 // Top Navigation Bar Component
-export function TopNav({ onMenuToggle }: { onMenuToggle: () => void }) {
+export function TopNav({ onMenuToggle, sidebarOpen }: { onMenuToggle: () => void, sidebarOpen?: boolean }) {
   const [isProfileOpen, setIsProfileOpen] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const pathname = usePathname()
+
+  // Get current page title based on route
+  const getPageTitle = () => {
+    const routes: { [key: string]: string } = {
+      '/coaching': 'Coaching Sessions',
+      '/course': 'Courses',
+      '/dashboard': 'Dashboard',
+      '/users': 'Users',
+      '/analytics': 'Analytics',
+      '/messages': 'Messages',
+      '/settings': 'Settings',
+    }
+    return routes[pathname] || 'Dashboard'
+  }
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -265,15 +308,37 @@ export function TopNav({ onMenuToggle }: { onMenuToggle: () => void }) {
       <div className="flex items-center justify-between p-4">
         {/* Left Section */}
         <div className="flex items-center gap-4 flex-1">
+          {/* Hamburger Menu - Always visible */}
           <button
             onClick={onMenuToggle}
-            className="p-2 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-lg transition-colors lg:hidden"
+            className="p-2 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
           >
             <Menu className="w-5 h-5 text-gray-600 dark:text-slate-300" />
           </button>
-          
+
+          {/* Page Title - Show on mobile when search is not open */}
+          {!isSearchOpen && sidebarOpen !== false && (
+            <div className="md:hidden">
+              <h1 className="text-lg font-semibold text-gray-900 dark:text-white">
+                {getPageTitle()}
+              </h1>
+            </div>
+          )}
+
+          {/* Desktop Page Title */}
+          {sidebarOpen !== false && (
+            <div className="hidden md:block ml-2">
+              <h1 className="text-xl font-semibold text-gray-900 dark:text-white">
+                {getPageTitle()}
+              </h1>
+              <p className="text-sm text-gray-500 dark:text-slate-400 mt-1">
+                Manage your coaching sessions and courses
+              </p>
+            </div>
+          )}
+
           {/* Search Bar - Desktop */}
-          <div className="relative hidden md:block search-container flex-1 max-w-lg">
+          <div className="relative hidden md:block search-container flex-1 max-w-lg ml-8">
             <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <input
               type="text"
@@ -311,7 +376,11 @@ export function TopNav({ onMenuToggle }: { onMenuToggle: () => void }) {
             onClick={() => setIsSearchOpen(!isSearchOpen)}
             className="p-2 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-lg transition-colors md:hidden"
           >
-            <Search className="w-5 h-5 text-gray-600 dark:text-slate-300" />
+            {isSearchOpen ? (
+              <X className="w-5 h-5 text-gray-600 dark:text-slate-300" />
+            ) : (
+              <Search className="w-5 h-5 text-gray-600 dark:text-slate-300" />
+            )}
           </button>
 
           {/* Notifications */}
@@ -341,16 +410,27 @@ export function TopNav({ onMenuToggle }: { onMenuToggle: () => void }) {
             {/* Dropdown Menu */}
             {isProfileOpen && (
               <div className="absolute right-0 top-12 w-48 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg shadow-lg py-2 z-50">
-                <Link href="/profile" className="flex items-center gap-3 w-full px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-700">
+                <Link 
+                  href="/profile" 
+                  className="flex items-center gap-3 w-full px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-700"
+                  onClick={() => setIsProfileOpen(false)}
+                >
                   <User className="w-4 h-4" />
                   Profile
                 </Link>
-                <Link href="/settings" className="flex items-center gap-3 w-full px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-700">
+                <Link 
+                  href="/settings" 
+                  className="flex items-center gap-3 w-full px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-700"
+                  onClick={() => setIsProfileOpen(false)}
+                >
                   <Settings className="w-4 h-4" />
                   Settings
                 </Link>
                 <div className="border-t border-gray-200 dark:border-slate-700 my-1"></div>
-                <button className="flex items-center gap-3 w-full px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-gray-50 dark:hover:bg-slate-700">
+                <button 
+                  className="flex items-center gap-3 w-full px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-gray-50 dark:hover:bg-slate-700"
+                  onClick={() => setIsProfileOpen(false)}
+                >
                   Sign Out
                 </button>
               </div>

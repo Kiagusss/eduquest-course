@@ -14,6 +14,9 @@ interface CourseCardProps {
 }
 export default function CourseCard({ course }: CourseCardProps) {
   return (
+   <Link href={'/course/' + course.id}>
+
+   
     <div className="bg-white dark:bg-slate-800/50 dark:border-slate-700 dark:hover:border-[#06B6D4]/50 rounded-xl border border-border overflow-hidden hover:shadow-lg transition-shadow group cursor-pointer">
       <div className="relative overflow-hidden h-40 bg-gradient-to-br from-purple-100 to-cyan-100">
         <Image src={course.image} alt={course.title} fill/>
@@ -23,9 +26,9 @@ export default function CourseCard({ course }: CourseCardProps) {
       </div>
 
       <div className="p-4">
-        <Link href={'/course/' + course.id} className="font-bold text-foreground line-clamp-2 group-hover:text-primary dark:text-white dark:group-hover:text-primary transition-colors mb-3">
+        <span className="font-bold text-foreground line-clamp-2 group-hover:text-primary dark:text-white dark:group-hover:text-primary transition-colors mb-3">
           {course.title}
-        </Link>
+        </span>
 
         <div className="space-y-2 text-sm">
           <div className="flex items-center justify-between text-muted-foreground dark:text-slate-200">
@@ -49,5 +52,6 @@ export default function CourseCard({ course }: CourseCardProps) {
         </div>
       </div>
     </div>
+    </Link>
   )
 }
