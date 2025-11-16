@@ -2,11 +2,12 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { ChevronLeft, Play, Download, Share2, BookOpen } from "lucide-react"
+import { ChevronLeft, Play, Download, Share2, BookOpen } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import Image from "next/image"
-import { Moon, Sun, Trophy } from "lucide-react"
+import { Moon, Sun, Trophy } from 'lucide-react'
+import { ShareDialog } from "@/components/share-dialog"
 
 const coursesData = [
   {
@@ -160,6 +161,12 @@ const coursesData = [
   },
 ]
 
+const difficultyColor = {
+  Beginner: "bg-green-100 text-green-700",
+  Intermediate: "bg-blue-100 text-blue-700",
+  Advanced: "bg-red-100 text-red-700",
+}
+
 interface PageProps {
   params: Promise<{ id: string }>
 }
@@ -170,29 +177,27 @@ export default function CourseDetailPage({ params }: PageProps) {
   const [expandedEpisode, setExpandedEpisode] = useState<number | null>(0)
 
   const [theme, setTheme] = useState<"light" | "dark">("dark")
-      const [mounted, setMounted] = useState(false)
-    
-      useEffect(() => {
-        setMounted(true)
-        const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null
-        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
-        const initialTheme = savedTheme || (prefersDark ? "dark" : "light")
-        setTheme(initialTheme)
-        document.documentElement.classList.toggle("dark", initialTheme === "dark")
-      }, [])
-    
-      const toggleTheme = () => {
-        const newTheme = theme === "light" ? "dark" : "light"
-        setTheme(newTheme)
-        localStorage.setItem("theme", newTheme)
-        document.documentElement.classList.toggle("dark", newTheme === "dark")
-      }
-    
-      if (!mounted) return null
-    
-      const isDark = theme === "dark"
-      
-    
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+    const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
+    const initialTheme = savedTheme || (prefersDark ? "dark" : "light")
+    setTheme(initialTheme)
+    document.documentElement.classList.toggle("dark", initialTheme === "dark")
+  }, [])
+
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light"
+    setTheme(newTheme)
+    localStorage.setItem("theme", newTheme)
+    document.documentElement.classList.toggle("dark", newTheme === "dark")
+  }
+
+  if (!mounted) return null
+
+  const isDark = theme === "dark"
 
   if (!course) {
     return (
@@ -205,12 +210,6 @@ export default function CourseDetailPage({ params }: PageProps) {
         </div>
       </div>
     )
-  }
-
-  const difficultyColor = {
-    Beginner: "bg-green-100 text-green-700",
-    Intermediate: "bg-blue-100 text-blue-700",
-    Advanced: "bg-red-100 text-red-700",
   }
 
   return (
@@ -256,7 +255,6 @@ export default function CourseDetailPage({ params }: PageProps) {
                   />
                 </div>
 
-
               <div className="space-y-4">
                 <div>
                   <h2 className="text-xl font-bold text-foreground mb-2 dark:text-slate-200">About this course</h2>
@@ -288,10 +286,10 @@ export default function CourseDetailPage({ params }: PageProps) {
                     <Button className="w-full bg-primary hover:bg-primary/90 text-white">
                       Buy By Your Point
                     </Button>
-                    <Button variant="outline" className="w-full bg-transparent dark:bg-slate-600 text-white hover:bg-primary/90">
-                      <Share2 className="h-4 w-4 mr-2" />
-                      Share
-                    </Button>
+                    <ShareDialog 
+                      title={course.title}
+                      url={typeof window !== 'undefined' ? window.location.href : ''}
+                    />
                   </div>
                 </div>
               </Card>
