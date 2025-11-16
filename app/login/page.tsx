@@ -15,7 +15,7 @@ export default function LoginPage() {
     setIsLoading(true)
     setTimeout(() => {
       setIsLoading(false)
-      window.location.href = '/course'
+      window.location.href = '/onboarding-screen'
     }, 2000)
   }
 
