@@ -293,7 +293,7 @@ export default function CoursePage() {
                 Tentang Quiz
               </h4>
               <ul className="text-sm text-muted-foreground dark:text-slate-300 space-y-1">
-                <li>• 10 soal multiple choice</li>
+                <li>• 10 soal Pilihan Ganda</li>
                 <li>• 10 poin per soal</li>
                 <li>• Total 100 poin</li>
                 <li className="pt-2 text-foreground font-medium">• Min 7/10 untuk lanjut</li>
