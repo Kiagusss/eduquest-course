@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation'
 import Image from "next/image"
 import { Home, Globe, BarChart3, Mail, Zap, Settings, Book, Users2, Download, Video, Layers, Menu, X, ChevronDown, Bell, Search, User, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useState, useEffect } from "react"
+import { ThemeToggle } from './theme-toggle'
 
 // Define navigation items with their routes
 const navigationItems = [
@@ -19,7 +20,7 @@ const productItems = [
   { icon: Book, label: "Courses", href: "/course" },
   { icon: Video, label: "Coaching", href: "/coaching" },
   { icon: Download, label: "Downloads", href: "/downloads" },
-  { icon: Video, label: "Webinar", href: "/webinar" },
+  { icon: Video, label: "Webinars", href: "/webinar" },
 ]
 
 const insightItems = [
@@ -362,6 +363,9 @@ export function TopNav({ onMenuToggle, sidebarOpen }: { onMenuToggle: () => void
 
         {/* Right Section */}
         <div className="flex items-center gap-2 sm:gap-3">
+          {/* Theme Toggle */}
+          <ThemeToggle />
+
           {/* Mobile Search Toggle */}
           <button 
             onClick={() => setIsSearchOpen(!isSearchOpen)}

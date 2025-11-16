@@ -43,20 +43,6 @@ export default function DashboardPage() {
 
   return (
     <div className="flex-1 p-8 bg-gradient-to-br dark:from-[#0F172A] dark:via-[#1a2540] dark:to-[#0F172A] from-white via-blue-50 to-purple-50 min-h-screen">
-      {/* Theme Toggle */}
-      <button
-        onClick={toggleTheme}
-        className={`flex-none p-2 sm:p-3 rounded-lg transition-all duration-300 border mb-8 ${
-          isDark
-            ? "bg-slate-800 border-slate-700 hover:bg-slate-700 text-[#06B6D4]"
-            : "bg-slate-100 border-slate-300 hover:bg-slate-200 text-[#8B5CF6]"
-        }`}
-        aria-label="Toggle theme"
-      >
-        {isDark ? <Sun size={18} className="sm:w-5 sm:h-5" /> : <Moon size={18} className="sm:w-5 sm:h-5" />}
-      </button>
-
-      {/* Header */}
       <div className="mb-8">
         <h1 className="text-4xl font-bold text-foreground dark:text-white mb-2">
           Dashboard
