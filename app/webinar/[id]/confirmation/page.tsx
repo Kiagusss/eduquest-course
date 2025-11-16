@@ -1,5 +1,6 @@
 "use client"
 
+import { use } from "react"
 import { Check, Calendar, Clock, Users, Mail, ArrowRight, Download } from 'lucide-react'
 import Link from "next/link"
 import Image from "next/image"
@@ -7,8 +8,9 @@ import Image from "next/image"
 export default function WebinarConfirmationPage({
   params,
 }: {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }) {
+  const { id } = use(params)
   return (
     <div className="flex-1 bg-gradient-to-br dark:from-[#0F172A] dark:via-[#1a2540] dark:to-[#0F172A] from-white via-blue-50 to-purple-50 min-h-screen flex items-center justify-center p-4">
       <div className="max-w-2xl w-full">
@@ -147,7 +149,7 @@ export default function WebinarConfirmationPage({
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4">
             <Link
-              href={`/webinar/${params.id}`}
+              href={`/webinar/${id}`}
               className="flex-1 py-3 px-4 rounded-lg font-semibold border-2 border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-colors"
             >
               Back to Webinar
