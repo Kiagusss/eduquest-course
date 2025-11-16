@@ -39,7 +39,7 @@ const productItems = [
   { icon: Book, label: "Courses", href: "/course" },
   { icon: Video, label: "Coaching", href: "/coaching" },
   { icon: Download, label: "Downloads", href: "/downloads" },
-  { icon: Video, label: "Webinars", href: "/webinars" },
+  { icon: Video, label: "Webinar", href: "/webinar" },
 ]
 
 const insightItems = [

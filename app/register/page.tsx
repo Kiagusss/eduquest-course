@@ -24,7 +24,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white flex">
+    <div className="min-h-screen bg-white dark:bg-slate-950 flex">
    
        <div className="hidden lg:flex w-1/2 bg-gradient-to-br from-[#8B5CF6] via-purple-500 to-[#06B6D4] relative overflow-hidden items-center justify-center">
 
@@ -65,22 +65,22 @@ export default function LoginPage() {
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#8B5CF6] to-[#06B6D4] flex items-center justify-center">
               <span className="text-white font-bold text-sm">∞</span>
             </div>
-            <span className="text-xl font-bold text-[#0F172A]">Edutech</span>
+            <span className="text-xl font-bold text-[#0F172A] dark:text-white">Edutech</span>
           </div>
         </div>
 
         <div className="mb-8 lg:mb-10">
-          <h1 className="lg:text-5xl md:text-4xl text-3xl font-bold text-[#0F172A] mb-3">
+          <h1 className="lg:text-5xl md:text-4xl text-3xl font-bold text-[#0F172A] dark:text-white mb-3">
             Halo,
             <br />
             Ayo Belajar
           </h1>
-          <p className="text-gray-500 text-base">Ayo Belajar, di jamin seru dan menyenangkan</p>
+          <p className="text-gray-500 dark:text-gray-400 text-base">Ayo Belajar, di jamin seru dan menyenangkan</p>
         </div>
 
         <form onSubmit={handleSubmit} className="w-full space-y-6">
           <div className="space-y-2">
-            <label className="text-sm font-semibold text-[#0F172A]">Nama</label>
+            <label className="text-sm font-semibold text-[#0F172A] dark:text-white">Nama</label>
             <div className="relative group">
               <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#8B5CF6]/60 group-focus-within:text-[#8B5CF6] transition-colors" />
               <input
@@ -88,13 +88,13 @@ export default function LoginPage() {
                 value={user}
                 onChange={(e) => setUser(e.target.value)}
                 placeholder="Nama Anda..."
-                className="w-full bg-gray-50 border border-gray-200 rounded-lg pl-12 pr-4 py-3.5 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-[#8B5CF6] focus:ring-2 focus:ring-[#8B5CF6]/20 focus:bg-white transition-all"
+                className="w-full bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-lg pl-12 pr-4 py-3.5 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-[#8B5CF6] focus:ring-2 focus:ring-[#8B5CF6]/20 focus:bg-white dark:focus:bg-slate-800 transition-all"
               />
             </div>
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-semibold text-[#0F172A]">Email</label>
+            <label className="text-sm font-semibold text-[#0F172A] dark:text-white">Email</label>
             <div className="relative group">
               <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#8B5CF6]/60 group-focus-within:text-[#8B5CF6] transition-colors" />
               <input
@@ -102,13 +102,13 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
-                className="w-full bg-gray-50 border border-gray-200 rounded-lg pl-12 pr-4 py-3.5 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-[#8B5CF6] focus:ring-2 focus:ring-[#8B5CF6]/20 focus:bg-white transition-all"
+                className="w-full bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-lg pl-12 pr-4 py-3.5 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-[#8B5CF6] focus:ring-2 focus:ring-[#8B5CF6]/20 focus:bg-white dark:focus:bg-slate-800 transition-all"
               />
             </div>
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-semibold text-[#0F172A]">Password</label>
+            <label className="text-sm font-semibold text-[#0F172A] dark:text-white">Password</label>
             <div className="relative group">
               <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#8B5CF6]/60 group-focus-within:text-[#8B5CF6] transition-colors" />
               <input
@@ -116,12 +116,12 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full bg-gray-50 border border-gray-200 rounded-lg pl-12 pr-12 py-3.5 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-[#8B5CF6] focus:ring-2 focus:ring-[#8B5CF6]/20 focus:bg-white transition-all"
+                className="w-full bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-lg pl-12 pr-12 py-3.5 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-[#8B5CF6] focus:ring-2 focus:ring-[#8B5CF6]/20 focus:bg-white dark:focus:bg-slate-800 transition-all"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#8B5CF6] transition-colors"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 hover:text-[#8B5CF6] transition-colors"
               >
                 {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
               </button>
@@ -129,7 +129,7 @@ export default function LoginPage() {
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-semibold text-[#0F172A]">Konfirmasi Password</label>
+            <label className="text-sm font-semibold text-[#0F172A] dark:text-white">Konfirmasi Password</label>
             <div className="relative group">
               <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#8B5CF6]/60 group-focus-within:text-[#8B5CF6] transition-colors" />
               <input
@@ -137,12 +137,12 @@ export default function LoginPage() {
                 value={confirm}
                 onChange={(e) => setConfirm(e.target.value)}
                 placeholder="••••••••"
-                className="w-full bg-gray-50 border border-gray-200 rounded-lg pl-12 pr-12 py-3.5 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-[#8B5CF6] focus:ring-2 focus:ring-[#8B5CF6]/20 focus:bg-white transition-all"
+                className="w-full bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-lg pl-12 pr-12 py-3.5 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-[#8B5CF6] focus:ring-2 focus:ring-[#8B5CF6]/20 focus:bg-white dark:focus:bg-slate-800 transition-all"
               />
               <button
                 type="button"
                 onClick={() => setShowConfirm(!showConfirm)}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#8B5CF6] transition-colors"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 hover:text-[#8B5CF6] transition-colors"
               >
                 {showConfirm ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
               </button>
@@ -168,7 +168,7 @@ export default function LoginPage() {
           </button>
         </form>
 
-        <p className="mt-8 text-gray-600 text-sm text-center lg:text-left">
+        <p className="mt-8 text-gray-600 dark:text-gray-400 text-sm text-center lg:text-left">
           Sudah punya akun?{" "}
           <a href="/login" className="text-[#8B5CF6] hover:text-[#06B6D4] font-semibold transition-colors">
             Masuk sekarang

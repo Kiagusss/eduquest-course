@@ -215,21 +215,7 @@ export default function CourseDetailPage({ params }: PageProps) {
 
   return (
     <div className="min-h-screen bg-background dark:bg-gradient-to-br dark:from-[#0F172A] dark:via-[#1a2540] dark:to-[#0F172A]">
-      <div className=" w-full flex justify-end p-5">
-
-      <button
-        onClick={toggleTheme}
-        className={`flex-none p-2 sm:p-3  m rounded-lg transition-all duration-300 border ${
-        isDark
-              ? "bg-slate-800 border-slate-700 hover:bg-slate-700 text-[#06B6D4]"
-              : "bg-slate-100 border-slate-300 hover:bg-slate-200 text-[#8B5CF6]"
-        }`}
-        aria-label="Toggle theme"
-        >
-          {isDark ? <Sun size={18} className="sm:w-5 sm:h-5" /> : <Moon size={18} className="sm:w-5 sm:h-5" />}
-            </button>
-      </div>
-
+      
       <div className="border-b border-border">
         <div className="px-8 py-6">
           <Link href="/course" className="inline-flex items-center gap-2 text-primary hover:text-primary/80 mb-4">

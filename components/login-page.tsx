@@ -19,7 +19,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white flex">
+    <div className="min-h-screen bg-white dark:bg-slate-950 flex">
       {/* Left side - Form */}
       <div className="w-full lg:w-1/2 flex flex-col justify-center px-6 sm:px-12 lg:px-16 py-12">
         {/* Logo */}
@@ -28,25 +28,25 @@ export default function LoginPage() {
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#8B5CF6] to-[#06B6D4] flex items-center justify-center">
               <span className="text-white font-bold text-sm">∞</span>
             </div>
-            <span className="text-xl font-bold text-[#0F172A]">Edutech</span>
+            <span className="text-xl font-bold text-[#0F172A] dark:text-white">Edutech</span>
           </div>
         </div>
 
         {/* Heading */}
         <div className="mb-8">
-          <h1 className="text-4xl sm:text-5xl font-bold text-[#0F172A] mb-3">
+          <h1 className="text-4xl sm:text-5xl font-bold text-[#0F172A] dark:text-white mb-3">
             Halo,
             <br />
             Selamat Kembali
           </h1>
-          <p className="text-gray-600 text-base">Lanjutkan pembelajaran Anda di platform terbaik</p>
+          <p className="text-gray-600 dark:text-gray-400 text-base">Lanjutkan pembelajaran Anda di platform terbaik</p>
         </div>
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-5 max-w-md">
           {/* Email */}
           <div>
-            <label className="text-sm font-medium text-[#0F172A] mb-2 block">Email</label>
+            <label className="text-sm font-medium text-[#0F172A] dark:text-white mb-2 block">Email</label>
             <div className="relative">
               <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#8B5CF6]/50 pointer-events-none" />
               <input
@@ -54,14 +54,14 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
-                className="w-full bg-gray-50 border border-gray-200 rounded-xl pl-10 pr-4 py-3 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-[#8B5CF6] focus:ring-2 focus:ring-[#8B5CF6]/20 transition-all"
+                className="w-full bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-xl pl-10 pr-4 py-3 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-[#8B5CF6] focus:ring-2 focus:ring-[#8B5CF6]/20 transition-all"
               />
             </div>
           </div>
 
           {/* Password */}
           <div>
-            <label className="text-sm font-medium text-[#0F172A] mb-2 block">Password</label>
+            <label className="text-sm font-medium text-[#0F172A] dark:text-white mb-2 block">Password</label>
             <div className="relative">
               <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#8B5CF6]/50 pointer-events-none" />
               <input
@@ -69,12 +69,12 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full bg-gray-50 border border-gray-200 rounded-xl pl-10 pr-10 py-3 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-[#8B5CF6] focus:ring-2 focus:ring-[#8B5CF6]/20 transition-all"
+                className="w-full bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-xl pl-10 pr-10 py-3 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:outline-none focus:border-[#8B5CF6] focus:ring-2 focus:ring-[#8B5CF6]/20 transition-all"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-[#8B5CF6] transition-colors"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 hover:text-[#8B5CF6] transition-colors"
               >
                 {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
               </button>
@@ -85,7 +85,7 @@ export default function LoginPage() {
           <div className="flex items-center justify-between text-sm">
             <label className="flex items-center gap-2 cursor-pointer">
               <input type="checkbox" className="w-4 h-4 accent-[#8B5CF6] cursor-pointer rounded" />
-              <span className="text-gray-600">Ingat saya</span>
+              <span className="text-gray-600 dark:text-gray-400">Ingat saya</span>
             </label>
             <a href="#" className="text-[#8B5CF6] hover:text-[#06B6D4] font-medium transition-colors">
               Lupa password?
@@ -113,7 +113,7 @@ export default function LoginPage() {
         </form>
 
         {/* Sign Up Link */}
-        <p className="mt-8 text-gray-600 text-sm">
+        <p className="mt-8 text-gray-600 dark:text-gray-400 text-sm">
           Belum punya akun?{" "}
           <a href="#" className="text-[#8B5CF6] hover:text-[#06B6D4] font-semibold transition-colors">
             Daftar sekarang

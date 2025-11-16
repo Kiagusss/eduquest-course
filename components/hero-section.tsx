@@ -172,7 +172,7 @@ export function HeroSection() {
             className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-6 text-lg group shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all"
             asChild
           >
-            <a href="#survey">
+            <a href="/login">
               Discover Your Path
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </a>
@@ -184,7 +184,7 @@ export function HeroSection() {
   className="border-2 border-primary/20 text-foreground hover:text-primary font-semibold px-8 py-6 text-lg backdrop-blur-sm transition-all"
   asChild
 >
-  <a href="#how-it-works">How It Works</a>
+  <a href="#process">How It Works</a>
 </Button>
 
         </motion.div>
