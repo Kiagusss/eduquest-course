@@ -5,6 +5,7 @@ import { use } from "react"
 import { ChevronLeft, Calendar, Clock, Users, Check } from 'lucide-react'
 import Link from "next/link"
 import Image from "next/image"
+import Chatbot from "@/components/chatbot"
 
 export default function WebinarRegistrationPage({
   params,
@@ -358,6 +359,7 @@ export default function WebinarRegistrationPage({
           </div>
         </div>
       </div>
+       <Chatbot />
     </div>
   )
 }

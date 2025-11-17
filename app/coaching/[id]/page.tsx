@@ -4,6 +4,7 @@ import { use } from "react"
 import { ChevronLeft, Star, MapPin, Clock, Users, Award, MessageCircle } from 'lucide-react'
 import Link from "next/link"
 import Image from "next/image"
+import Chatbot from "@/components/chatbot"
 
 const coachingDetails = {
   1: {
@@ -311,6 +312,7 @@ export default function CoachingDetailPage({
           </div>
         </div>
       </div>
+       <Chatbot />
     </div>
   )
 }

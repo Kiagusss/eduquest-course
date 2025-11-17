@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import Sidebar, { TopNav } from "@/components/sidebar"
 import CourseDashboard from "@/components/course-dashboard"
+import Chatbot from "@/components/chatbot"
 
 export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -31,6 +32,7 @@ export default function Home() {
 
         <main className="flex-1 overflow-auto">
           <CourseDashboard />
+          <Chatbot/>
         </main>
       </div>
     </div>

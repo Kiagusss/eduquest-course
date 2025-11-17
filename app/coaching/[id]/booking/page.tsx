@@ -3,6 +3,7 @@ import { useState } from "react"
 import { ChevronLeft, Calendar, Clock } from 'lucide-react'
 import Link from "next/link"
 import Image from "next/image"
+import Chatbot from "@/components/chatbot"
 
 export default function CoachingBookingPage({
   params,
@@ -429,6 +430,7 @@ export default function CoachingBookingPage({
 
         </div>
       </div>
+       <Chatbot />
     </div>
   )
 }

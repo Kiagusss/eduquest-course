@@ -5,6 +5,7 @@ import CoachingFilters from "@/components/coaching-filters"
 import CoachingSessionCard from "@/components/coaching-session-card"
 import Sidebar, { TopNav } from "@/components/sidebar"
 import Image from "next/image"
+import Chatbot from "@/components/chatbot"
 
 const dataCoachingSessions = [
   {
@@ -266,6 +267,7 @@ export default function CoachingDashboard() {
           </div>
         </main>
       </div>
+       <Chatbot />
     </div>
   )
 }

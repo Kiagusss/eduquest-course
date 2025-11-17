@@ -11,6 +11,7 @@ import type { QuizResult, UserProgress, EpisodeProgress } from "@/lib/types"
 import { ArrowLeft, Clock, Users, Award, Trophy } from 'lucide-react'
 import Link from "next/link"
 import { Moon, Sun } from 'lucide-react'
+import Chatbot from "@/components/chatbot"
 
 export default function CoursePage() {
   const [theme, setTheme] = useState<"light" | "dark">("dark")
@@ -334,6 +335,7 @@ export default function CoursePage() {
           </div>
         </div>
       </div>
+       <Chatbot />
     </div>
   )
 }

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import { Trophy } from 'lucide-react'
 import Sidebar, { TopNav } from "@/components/sidebar"
+import Chatbot from "@/components/chatbot"
 
 interface LeaderboardEntry {
   rank: number
@@ -253,6 +254,7 @@ export default function LeaderboardPage() {
           </div>
         </main>
       </div>
+       <Chatbot />
     </div>
   )
 }

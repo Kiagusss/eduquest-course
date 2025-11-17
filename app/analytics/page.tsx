@@ -8,6 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Progress } from '@/components/ui/progress'
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
 import Sidebar, { TopNav } from '@/components/sidebar'
+import Chatbot from '@/components/chatbot'
 
 export default function AnalyticsPage() {
   const [timeRange, setTimeRange] = useState('week')
@@ -249,6 +250,7 @@ export default function AnalyticsPage() {
           </div>
         </main>
       </div>
+      <Chatbot/>
     </div>
   )
 }

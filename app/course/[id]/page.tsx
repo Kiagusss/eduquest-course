@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/card"
 import Image from "next/image"
 import { Moon, Sun, Trophy } from "lucide-react"
 import { ShareDialog } from "@/components/share-dialog"
+import Chatbot from "@/components/chatbot"
 
 const coursesData = [
   {
@@ -234,6 +235,7 @@ export default function CourseDetailPage({ params }: PageProps) {
           </div>
         </div>
       </div>
+       <Chatbot />
     </div>
   )
 }

@@ -2,6 +2,7 @@
 import { Check, Calendar, Clock, Users, ArrowRight } from 'lucide-react'
 import Link from "next/link"
 import Image from "next/image"
+import Chatbot from '@/components/chatbot'
 
 export default function CoachingConfirmationPage({
   params,
@@ -134,6 +135,7 @@ export default function CoachingConfirmationPage({
           </div>
         </div>
       </div>
+       <Chatbot />
     </div>
   )
 }

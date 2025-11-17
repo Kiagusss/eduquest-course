@@ -3,6 +3,7 @@
 import React, { useState } from "react"
 import Sidebar from "@/components/sidebar"
 import { TopNav } from "@/components/sidebar"
+import Chatbot from "@/components/chatbot"
 
 export default function DashboardLayout({
   children,
@@ -21,6 +22,7 @@ export default function DashboardLayout({
         />
         <main className="flex-1 overflow-y-auto">
           {children}
+           <Chatbot />
         </main>
       </div>
     </div>

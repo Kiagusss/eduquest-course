@@ -4,6 +4,7 @@ import { use } from "react"
 import { Check, Calendar, Clock, Users, Mail, ArrowRight, Download } from 'lucide-react'
 import Link from "next/link"
 import Image from "next/image"
+import Chatbot from "@/components/chatbot"
 
 export default function WebinarConfirmationPage({
   params,
@@ -157,6 +158,7 @@ export default function WebinarConfirmationPage({
           </div>
         </div>
       </div>
+       <Chatbot />
     </div>
   )
 }
