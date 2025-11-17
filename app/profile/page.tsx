@@ -29,12 +29,12 @@ export default function ProfilePage() {
 
   const user = {
     id: "1",
-    name: "Sarah Johnson",
+    name: "Ujang Asep",
     role: "UI/UX Designer & Learner",
     email: "sarah@example.com",
-    location: "San Francisco, CA",
+    location: "Cilegon, Banten",
     bio: "Passionate designer crafting beautiful digital experiences and continuously expanding my skillset through learning.",
-    avatar: "/user-profile-avatar.png",
+    avatar: "/avatarrr.jpg",
     totalPoints: 3200,
     coursesCompleted: 8,
     currentStreak: 15,
@@ -56,7 +56,7 @@ export default function ProfilePage() {
     renewalDate: "January 2026",
     features: [
       "Advanced AI Career Assessment",
-      "Detailed Career Roadmap",
+      "Detailed sCareer Roadmap",
       "Unlimited Course Access",
       "Priority Support",
       "Advanced Progress Analytics",
@@ -117,11 +117,10 @@ export default function ProfilePage() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#0F172A] transition-colors">
-      {/* Header */}
       <header className="border-b border-gray-200 dark:border-slate-700 sticky top-0 z-50 bg-white/80 dark:bg-[#0F172A]/80 backdrop-blur-md transition-colors">
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 flex items-center justify-between">
           <Link
-            href="/"
+            href="/course"
             className="flex items-center gap-2 text-gray-600 dark:text-slate-400 hover:text-[#8B5CF6] dark:hover:text-[#06B6D4] transition-colors group"
           >
             <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
@@ -140,10 +139,8 @@ export default function ProfilePage() {
         </div>
       </header>
 
-      {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 md:px-6 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Sidebar */}
           <aside className="lg:col-span-1">
             <div className="space-y-6">
               <div className="text-center lg:text-left">
@@ -160,7 +157,6 @@ export default function ProfilePage() {
                 <p className="text-[#8B5CF6] dark:text-[#06B6D4] text-sm font-medium mb-4">{user.role}</p>
                 <p className="text-gray-600 dark:text-slate-400 text-sm leading-relaxed mb-6">{user.bio}</p>
 
-                {/* Social Links */}
                 <div className="flex justify-center lg:justify-start gap-3 mb-6">
                   <a
                     href={user.social.linkedin}
@@ -182,7 +178,6 @@ export default function ProfilePage() {
                   </a>
                 </div>
 
-                {/* Contact Info */}
                 <div className="space-y-2 text-sm text-gray-600 dark:text-slate-400 border-t border-gray-200 dark:border-slate-700 pt-6">
                   <div className="flex items-center gap-2">
                     <Mail className="w-4 h-4 text-[#8B5CF6]" />
@@ -193,7 +188,6 @@ export default function ProfilePage() {
                 </div>
               </div>
 
-              {/* Navigation Tabs */}
               <nav className="border-t border-gray-200 dark:border-slate-700 pt-6 hidden lg:block">
                 <div className="space-y-2">
                   {["about", "achievements", "courses"].map((tab) => (
@@ -214,9 +208,7 @@ export default function ProfilePage() {
             </div>
           </aside>
 
-          {/* Main Content */}
           <main className="lg:col-span-3 space-y-8">
-            {/* Stats Grid */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {stats.map((stat) => {
                 const Icon = stat.icon
@@ -250,7 +242,6 @@ export default function ProfilePage() {
                 </Badge>
               </div>
 
-              {/* Subscription Details Grid */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                 <div className="bg-gray-50 dark:bg-slate-900/50 rounded-lg p-4">
                   <p className="text-xs font-medium text-gray-600 dark:text-slate-400 mb-1">Price</p>
@@ -272,7 +263,6 @@ export default function ProfilePage() {
                 </div>
               </div>
 
-              {/* Features List */}
               <div>
                 <p className="text-sm font-semibold text-[#0F172A] dark:text-white mb-3">Included Features</p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -285,14 +275,12 @@ export default function ProfilePage() {
                 </div>
               </div>
 
-              {/* CTA Buttons */}
               <div className="flex gap-3 mt-6 pt-6 border-t border-gray-200 dark:border-slate-700">
                 <Button onClick={() => setShowUpgradeModal(true)} className="flex-1 bg-[#8B5CF6] hover:bg-[#7C3AED] text-white">Upgrade Plan</Button>
                 <Button onClick={() => setShowManageModal(true)} variant="outline" className="flex-1">Manage Subscription</Button>
               </div>
             </section>
 
-            {/* Achievements Section */}
             {(activeTab === "about" || activeTab === "achievements") && (
               <section>
                 <h3 className="text-2xl font-bold text-[#0F172A] dark:text-white mb-6">Achievements</h3>
@@ -334,7 +322,6 @@ export default function ProfilePage() {
               </section>
             )}
 
-            {/* Courses Section */}
             {(activeTab === "about" || activeTab === "courses") && (
               <section>
                 <h3 className="text-2xl font-bold text-[#0F172A] dark:text-white mb-6">Learning Progress</h3>
@@ -364,7 +351,7 @@ export default function ProfilePage() {
                         </div>
                       </div>
 
-                      {/* Progress Bar */}
+                    
                       <div className="space-y-2">
                         <div className="w-full bg-gray-200 dark:bg-slate-700 rounded-full h-2 overflow-hidden border border-gray-300 dark:border-slate-600">
                           <div
@@ -380,7 +367,7 @@ export default function ProfilePage() {
               </section>
             )}
 
-            {/* CTA Section */}
+        
             <Card className="border-0 p-8 text-white bg-gradient-to-r from-[#8B5CF6] to-[#06B6D4]">
               <h3 className="text-2xl font-bold mb-2">Keep Growing!</h3>
               <p className="text-sm opacity-90 mb-4">
@@ -394,11 +381,9 @@ export default function ProfilePage() {
         </div>
       </div>
 
-      {/* Upgrade Plan Modal */}
       {showUpgradeModal && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-200">
           <Card className="w-full max-w-md bg-white dark:bg-slate-800 border-gray-200 dark:border-slate-700 animate-in zoom-in-95 duration-200">
-            {/* Modal Header */}
             <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-slate-700">
               <h2 className="text-lg font-bold text-[#0F172A] dark:text-white">Upgrade Your Plan</h2>
               <button
@@ -409,7 +394,6 @@ export default function ProfilePage() {
               </button>
             </div>
 
-            {/* Modal Content */}
             <div className="p-4 space-y-4 max-h-[70vh] overflow-y-auto">
               <div>
                 <p className="text-xs font-medium text-gray-600 dark:text-slate-400 mb-2">Current Plan</p>
@@ -421,7 +405,6 @@ export default function ProfilePage() {
                 </div>
               </div>
 
-              {/* Upgrade Option */}
               <div>
                 <p className="text-xs font-medium text-gray-600 dark:text-slate-400 mb-2">Upgrade To</p>
                 {upgradePlans.map((plan) => (
@@ -451,7 +434,7 @@ export default function ProfilePage() {
                 ))}
               </div>
 
-              {/* Payment Info */}
+      
               <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 border border-blue-200 dark:border-blue-800">
                 <p className="text-xs text-blue-900 dark:text-blue-300">
                   Upgrade immediately with prorated pricing for your remaining billing period.
@@ -459,7 +442,6 @@ export default function ProfilePage() {
               </div>
             </div>
 
-            {/* Modal Footer */}
             <div className="flex gap-2 p-4 border-t border-gray-200 dark:border-slate-700">
               <Button
                 onClick={() => setShowUpgradeModal(false)}
@@ -476,7 +458,6 @@ export default function ProfilePage() {
         </div>
       )}
 
-      {/* Manage Subscription Modal */}
       {showManageModal && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-200">
           <Card className="w-full max-w-md bg-white dark:bg-slate-800 border-gray-200 dark:border-slate-700 animate-in zoom-in-95 duration-200">
@@ -491,9 +472,7 @@ export default function ProfilePage() {
               </button>
             </div>
 
-            {/* Modal Content */}
             <div className="p-4 space-y-4 max-h-[70vh] overflow-y-auto">
-              {/* Current Subscription Summary */}
               <div>
                 <p className="text-xs font-medium text-gray-600 dark:text-slate-400 mb-2">Current Plan</p>
                 <div className="bg-gradient-to-br from-[#8B5CF6]/10 to-[#06B6D4]/10 dark:from-[#8B5CF6]/5 dark:to-[#06B6D4]/5 rounded-lg p-3 border border-[#8B5CF6]/20 dark:border-[#06B6D4]/20">
@@ -518,7 +497,6 @@ export default function ProfilePage() {
                 </div>
               </div>
 
-              {/* Management Options */}
               <div>
                 <p className="text-xs font-medium text-gray-600 dark:text-slate-400 mb-2">Quick Actions</p>
                 <div className="space-y-2">
@@ -551,7 +529,6 @@ export default function ProfilePage() {
                 </div>
               </div>
 
-              {/* Important Info */}
               <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-3 border border-yellow-200 dark:border-yellow-800">
                 <p className="text-xs text-yellow-900 dark:text-yellow-300">
                   Cancellations take effect at the end of your billing period ({subscription.renewalDate}).
@@ -559,7 +536,6 @@ export default function ProfilePage() {
               </div>
             </div>
 
-            {/* Modal Footer */}
             <div className="p-4 border-t border-gray-200 dark:border-slate-700">
               <Button
                 onClick={() => setShowManageModal(false)}

@@ -73,9 +73,7 @@ export default function WebinarDetailPage({
 
       <div className="max-w-6xl mx-auto px-6 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
-            {/* Hero Image */}
             <div className="relative w-full h-80 rounded-xl overflow-hidden">
               <Image
                 src={webinar.image || "/placeholder.svg"}
@@ -89,7 +87,6 @@ export default function WebinarDetailPage({
               </div>
             </div>
 
-            {/* Title */}
             <div>
               <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">
                 {webinar.title}
@@ -99,7 +96,6 @@ export default function WebinarDetailPage({
               </p>
             </div>
 
-            {/* Presenter Card */}
             <div className="bg-white dark:bg-slate-800/50 rounded-xl border border-gray-200 dark:border-slate-700 p-6">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                 About Presenter
@@ -139,7 +135,6 @@ export default function WebinarDetailPage({
               </div>
             </div>
 
-            {/* Tabs */}
             <div className="border-b border-gray-200 dark:border-slate-700">
               <div className="flex gap-8">
                 {["overview", "agenda", "requirements"].map((tab) => (
@@ -158,7 +153,6 @@ export default function WebinarDetailPage({
               </div>
             </div>
 
-            {/* Overview Tab */}
             {activeTab === "overview" && (
               <div className="bg-white dark:bg-slate-800/50 rounded-xl border border-gray-200 dark:border-slate-700 p-6 space-y-6">
                 <div>
@@ -198,7 +192,6 @@ export default function WebinarDetailPage({
               </div>
             )}
 
-            {/* Agenda Tab */}
             {activeTab === "agenda" && (
               <div className="bg-white dark:bg-slate-800/50 rounded-xl border border-gray-200 dark:border-slate-700 p-6">
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">
@@ -219,7 +212,6 @@ export default function WebinarDetailPage({
               </div>
             )}
 
-            {/* Requirements Tab */}
             {activeTab === "requirements" && (
               <div className="bg-white dark:bg-slate-800/50 rounded-xl border border-gray-200 dark:border-slate-700 p-6">
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
@@ -242,10 +234,8 @@ export default function WebinarDetailPage({
             )}
           </div>
 
-          {/* Sidebar */}
           <div className="lg:col-span-1">
             <div className="sticky top-20 bg-white dark:bg-slate-800/50 rounded-xl border border-gray-200 dark:border-slate-700 p-6 shadow-lg space-y-6">
-              {/* Price */}
               <div>
                 <p className="text-gray-600 dark:text-slate-400 text-sm mb-1">
                   Price
@@ -255,7 +245,6 @@ export default function WebinarDetailPage({
                 </p>
               </div>
 
-              {/* Quick Info */}
               <div className="space-y-3 pb-6 border-b border-gray-200 dark:border-slate-700">
                 <div className="flex items-center gap-3 text-sm">
                   <Calendar className="w-4 h-4 text-[#7C3AED]" />
@@ -277,7 +266,6 @@ export default function WebinarDetailPage({
                 </div>
               </div>
 
-              {/* Register Button */}
               <Link
                 href={`/webinar/${webinar.id}/register`}
                 className="w-full bg-[#7C3AED] hover:bg-[#6D28D9] text-white font-semibold py-3 px-4 rounded-lg transition-colors text-center block"
@@ -285,7 +273,6 @@ export default function WebinarDetailPage({
                 Register Now
               </Link>
 
-              {/* Reminder Button */}
               <button
                 onClick={() => setIsReminded(!isReminded)}
                 className={`w-full py-3 px-4 rounded-lg font-semibold transition-all ${
@@ -298,7 +285,6 @@ export default function WebinarDetailPage({
                 {isReminded ? "Reminder Set" : "Set Reminder"}
               </button>
 
-              {/* Share Button */}
               <button className="w-full border-2 border-gray-200 dark:border-slate-700 text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 font-semibold py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2">
                 <Share2 className="w-4 h-4" />
                 Share

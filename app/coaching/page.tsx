@@ -1,4 +1,3 @@
-// app/coaching/page.tsx
 "use client"
 import { useState, useEffect } from "react"
 import { Plus, Grid3x3, List } from 'lucide-react'
@@ -7,7 +6,6 @@ import CoachingSessionCard from "@/components/coaching-session-card"
 import Sidebar, { TopNav } from "@/components/sidebar"
 import Image from "next/image"
 
-// Pastikan data sesuai dengan tipe CoachingSession
 const dataCoachingSessions = [
   {
     id: 1,
@@ -102,17 +100,12 @@ export default function CoachingDashboard() {
 
   return (
     <div className="flex min-h-screen bg-gray-50 dark:bg-slate-900">
-      {/* Sidebar */}
       <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
       
-      {/* Main Content */}
       <div className="flex-1 flex flex-col min-w-0">
-        {/* Top Navigation */}
         <TopNav onMenuToggle={() => setSidebarOpen(!sidebarOpen)} sidebarOpen={sidebarOpen} />
         
-        {/* Main Content Area */}
         <main className="flex-1 p-4 sm:p-6 bg-gradient-to-br dark:from-[#0F172A] dark:via-[#1a2540] dark:to-[#0F172A] from-white via-blue-50 to-purple-50">
-          {/* Header Section */}
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
               <div className="mb-4 sm:mb-0">
@@ -121,11 +114,8 @@ export default function CoachingDashboard() {
                   Belajar langsung dari mentor berpengalaman kami.
                 </p>
               </div>
-              
-
             </div>
 
-            {/* Stats Overview */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
               <div className="bg-white dark:bg-slate-800/50 rounded-lg border border-gray-200 dark:border-slate-700 p-3 sm:p-4">
                 <p className="text-xs sm:text-sm text-gray-600 dark:text-slate-400">Total Sessions</p>
@@ -151,10 +141,8 @@ export default function CoachingDashboard() {
               </div>
             </div>
 
-            {/* Filters */}
             <CoachingFilters selectedCategory={selectedCategory} onCategoryChange={setSelectedCategory} />
 
-            {/* View Controls and Counter */}
             <div className="flex items-center justify-between mb-6 mt-6">
               <span className="text-sm text-gray-600 dark:text-slate-300">
                 {filteredSessions.length} session mentoring ditemukan
@@ -183,7 +171,6 @@ export default function CoachingDashboard() {
               </div>
             </div>
 
-            {/* Sessions Grid/List */}
             {viewType === "grid" ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                 {filteredSessions.map((session) => (
@@ -191,7 +178,6 @@ export default function CoachingDashboard() {
                 ))}
               </div>
             ) : (
-              /* List View */
               <div className="space-y-4">
                 {filteredSessions.map((session) => (
                   <div
@@ -199,7 +185,6 @@ export default function CoachingDashboard() {
                     className="bg-white dark:bg-slate-800/50 rounded-lg border border-gray-200 dark:border-slate-700 p-4 sm:p-6 hover:shadow-lg transition-shadow"
                   >
                     <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
-                      {/* Thumbnail */}
                       <div className="relative w-full sm:w-32 h-40 sm:h-20 flex-shrink-0">
                         <Image
                           src={session.image || "/placeholder.svg"}
@@ -220,7 +205,6 @@ export default function CoachingDashboard() {
                         </div>
                       </div>
 
-                      {/* Session Info */}
                       <div className="flex-1 min-w-0">
                         <h3 className="font-semibold text-lg text-gray-900 dark:text-white mb-1 line-clamp-2">
                           {session.title}
@@ -228,8 +212,7 @@ export default function CoachingDashboard() {
                         <p className="text-purple-600 dark:text-purple-400 text-sm font-medium mb-2">
                           {session.category} • by {session.mentor}
                         </p>
-                        
-                        {/* Mobile Details */}
+
                         <div className="sm:hidden space-y-2 text-sm">
                           <div className="flex justify-between">
                             <span className="text-gray-600 dark:text-slate-400">Tanggal:</span>
@@ -248,7 +231,6 @@ export default function CoachingDashboard() {
                         </div>
                       </div>
 
-                      {/* Desktop Details Grid */}
                       <div className="hidden sm:flex gap-6 lg:gap-8 text-sm flex-shrink-0">
                         <div className="text-center">
                           <p className="text-gray-600 dark:text-slate-400">Tanggal</p>
@@ -271,7 +253,6 @@ export default function CoachingDashboard() {
                         </div>
                       </div>
 
-                      {/* Mobile Action Button */}
                       <div className="sm:hidden">
                         <button className="w-full bg-purple-600 hover:bg-purple-700 text-white font-medium py-2.5 px-4 rounded-lg transition-colors">
                           View Details

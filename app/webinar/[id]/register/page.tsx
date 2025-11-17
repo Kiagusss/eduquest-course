@@ -55,7 +55,6 @@ export default function WebinarRegistrationPage({
      
 
       <div className="max-w-4xl mx-auto px-6 py-8">
-        {/* Progress Bar */}
         <div className="mb-8">
           <div className="flex gap-2 mb-4">
             {[1, 2, 3].map((s) => (
@@ -72,9 +71,7 @@ export default function WebinarRegistrationPage({
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Content */}
           <div className="lg:col-span-2">
-            {/* Step 1: Select Ticket */}
             {step === 1 && (
               <div className="bg-white dark:bg-slate-800/50 rounded-xl border border-gray-200 dark:border-slate-700 p-8 space-y-6">
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
@@ -131,7 +128,6 @@ export default function WebinarRegistrationPage({
               </div>
             )}
 
-            {/* Step 2: Personal Information */}
             {step === 2 && (
               <div className="bg-white dark:bg-slate-800/50 rounded-xl border border-gray-200 dark:border-slate-700 p-8 space-y-6">
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
@@ -230,14 +226,12 @@ export default function WebinarRegistrationPage({
               </div>
             )}
 
-            {/* Step 3: Review & Confirm */}
             {step === 3 && (
               <div className="bg-white dark:bg-slate-800/50 rounded-xl border border-gray-200 dark:border-slate-700 p-8 space-y-6">
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
                   Review Your Registration
                 </h2>
 
-                {/* Webinar Details */}
                 <div className="space-y-4 pb-6 border-b border-gray-200 dark:border-slate-700">
                   <h3 className="font-semibold text-gray-900 dark:text-white">
                     Webinar Details
@@ -258,7 +252,6 @@ export default function WebinarRegistrationPage({
                   </div>
                 </div>
 
-                {/* Personal Information */}
                 <div className="space-y-4 pb-6 border-b border-gray-200 dark:border-slate-700">
                   <h3 className="font-semibold text-gray-900 dark:text-white">
                     Your Information
@@ -271,7 +264,7 @@ export default function WebinarRegistrationPage({
                   </div>
                 </div>
 
-                {/* Ticket Selection */}
+                
                 <div className="space-y-2 pb-6 border-b border-gray-200 dark:border-slate-700">
                   <p className="flex justify-between font-semibold text-gray-900 dark:text-white">
                     <span>Selected Ticket:</span>
@@ -305,14 +298,12 @@ export default function WebinarRegistrationPage({
             )}
           </div>
 
-          {/* Sidebar - Registration Summary */}
           <div className="lg:col-span-1">
             <div className="sticky top-20 bg-white dark:bg-slate-800/50 rounded-xl border border-gray-200 dark:border-slate-700 p-6">
               <h3 className="font-semibold text-gray-900 dark:text-white mb-4">
                 Registration Summary
               </h3>
 
-              {/* Webinar Info */}
               <div className="flex items-center gap-3 mb-6 pb-6 border-b border-gray-200 dark:border-slate-700">
                 <div className="relative w-12 h-12 flex-shrink-0 rounded-full overflow-hidden">
                   <Image
@@ -332,7 +323,6 @@ export default function WebinarRegistrationPage({
                 </div>
               </div>
 
-              {/* Quick Details */}
               <div className="space-y-3 mb-6 pb-6 border-b border-gray-200 dark:border-slate-700 text-sm">
                 <div className="flex items-center gap-2 text-gray-700 dark:text-slate-300">
                   <Calendar className="w-4 h-4 text-[#7C3AED]" />
@@ -348,7 +338,6 @@ export default function WebinarRegistrationPage({
                 </div>
               </div>
 
-              {/* Pricing */}
               {selectedTicket && (
                 <div className="space-y-2 pb-6 border-b border-gray-200 dark:border-slate-700">
                   <p className="text-sm text-gray-600 dark:text-slate-400">

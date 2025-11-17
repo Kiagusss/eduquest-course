@@ -30,32 +30,25 @@ const insightItems = [
 export default function Sidebar({ open, setOpen }: { open: boolean; setOpen: (open: boolean) => void }) {
   const pathname = usePathname()
 
-  // Toggle sidebar
   const toggleSidebar = () => {
     setOpen(!open)
   }
 
-  // Initialize sidebar state based on screen size
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 1024) {
-        // Desktop: default open
         setOpen(true)
       } else {
-        // Mobile: default closed
         setOpen(false)
       }
     }
 
-    // Set initial state
     handleResize()
 
-    // Add resize listener
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [setOpen])
 
-  // Close sidebar only on mobile when route changes
   useEffect(() => {
     if (window.innerWidth < 1024) {
       setOpen(false)
@@ -64,7 +57,6 @@ export default function Sidebar({ open, setOpen }: { open: boolean; setOpen: (op
 
   return (
     <>
-      {/* Mobile Overlay */}
       {open && (
         <div 
           className="fixed inset-0 bg-black/50 z-20 lg:hidden"
@@ -79,7 +71,6 @@ export default function Sidebar({ open, setOpen }: { open: boolean; setOpen: (op
           open ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         }`}
       >
-        {/* Header */}
         <div className="p-4 lg:p-6 border-b border-gray-200 dark:border-slate-700 flex-shrink-0">
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-3 flex-1 min-w-0">
@@ -110,9 +101,7 @@ export default function Sidebar({ open, setOpen }: { open: boolean; setOpen: (op
           </div>
         </div>
 
-        {/* Navigation */}
         <nav className="flex-1 p-3 lg:p-4 space-y-1 overflow-y-auto">
-          {/* Main Menu */}
           {navigationItems.map((item) => (
             <NavItem 
               key={item.href}
@@ -125,7 +114,6 @@ export default function Sidebar({ open, setOpen }: { open: boolean; setOpen: (op
             />
           ))}
           
-          {/* Products Section */}
           {open && (
             <div className="mt-6 mb-3 px-3 text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase tracking-wider">
               Products
@@ -142,7 +130,6 @@ export default function Sidebar({ open, setOpen }: { open: boolean; setOpen: (op
             />
           ))}
 
-          {/* Insight Section */}
           {open && (
             <div className="mt-6 mb-3 px-3 text-xs font-semibold text-gray-500 dark:text-slate-400 uppercase tracking-wider">
               Insight
@@ -162,7 +149,6 @@ export default function Sidebar({ open, setOpen }: { open: boolean; setOpen: (op
           
         </nav>
 
-        {/* User Profile - Bottom */}
         <div className="p-3 lg:p-4 border-t border-gray-200 dark:border-slate-700 flex-shrink-0">
           <Link 
             href="/profile" 
@@ -216,7 +202,6 @@ function NavItem({
         <Icon className={`w-5 h-5 flex-shrink-0 transition-transform group-hover:scale-110 ${
           active ? "text-white" : "text-gray-400 dark:text-slate-500 group-hover:text-purple-600 dark:group-hover:text-purple-400"
         }`} />
-        {/* Badge positioned on icon when sidebar collapsed */}
         {!open && badge && (
           <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-[10px] rounded-full flex items-center justify-center">
             {badge > 9 ? '9+' : badge}
@@ -224,7 +209,6 @@ function NavItem({
         )}
       </div>
       
-      {/* Label and badge - show when sidebar is open */}
       {open && (
         <>
           <span className="text-sm font-medium flex-1 truncate">
@@ -238,18 +222,15 @@ function NavItem({
         </>
       )}
 
-      {/* No tooltip when collapsed - labels removed entirely when sidebar is closed */}
     </Link>
   )
 }
 
-// Top Navigation Bar Component
 export function TopNav({ onMenuToggle, sidebarOpen }: { onMenuToggle: () => void, sidebarOpen?: boolean }) {
   const [isProfileOpen, setIsProfileOpen] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const pathname = usePathname()
 
-  // Get current page title based on route
   const getPageTitle = () => {
     const routes: { [key: string]: string } = {
       '/coaching': 'Coaching Sessions',
@@ -260,7 +241,6 @@ export function TopNav({ onMenuToggle, sidebarOpen }: { onMenuToggle: () => void
     return routes[pathname] || 'Dashboard'
   }
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement
@@ -279,9 +259,7 @@ export function TopNav({ onMenuToggle, sidebarOpen }: { onMenuToggle: () => void
   return (
     <header className="bg-white dark:bg-slate-800/80 backdrop-blur-sm border-b border-gray-200 dark:border-slate-700 sticky top-0 z-10">
       <div className="flex items-center justify-between p-4">
-        {/* Left Section */}
         <div className="flex items-center gap-4 flex-1">
-          {/* Hamburger Menu - Always visible */}
           <button
             onClick={onMenuToggle}
             className="p-2 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
@@ -289,7 +267,6 @@ export function TopNav({ onMenuToggle, sidebarOpen }: { onMenuToggle: () => void
             <Menu className="w-5 h-5 text-gray-600 dark:text-slate-300" />
           </button>
 
-          {/* Page Title - Show on mobile when search is not open */}
           {!isSearchOpen && sidebarOpen !== false && (
             <div className="md:hidden">
               <h1 className="text-lg font-semibold text-gray-900 dark:text-white">
@@ -298,7 +275,6 @@ export function TopNav({ onMenuToggle, sidebarOpen }: { onMenuToggle: () => void
             </div>
           )}
 
-          {/* Desktop Page Title */}
           {sidebarOpen !== false && (
             <div className="hidden md:block ml-2">
               <h1 className="text-xl font-semibold text-gray-900 dark:text-white">
@@ -310,7 +286,6 @@ export function TopNav({ onMenuToggle, sidebarOpen }: { onMenuToggle: () => void
             </div>
           )}
 
-          {/* Search Bar - Desktop */}
           <div className="relative hidden md:block search-container flex-1 max-w-lg ml-8">
             <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <input
@@ -320,7 +295,6 @@ export function TopNav({ onMenuToggle, sidebarOpen }: { onMenuToggle: () => void
             />
           </div>
 
-          {/* Search Bar - Mobile */}
           {isSearchOpen && (
             <div className="md:hidden absolute left-4 right-4 top-16 z-50 search-container">
               <div className="relative">
@@ -342,12 +316,9 @@ export function TopNav({ onMenuToggle, sidebarOpen }: { onMenuToggle: () => void
           )}
         </div>
 
-        {/* Right Section */}
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* Theme Toggle */}
           <ThemeToggle />
 
-          {/* Mobile Search Toggle */}
           <button 
             onClick={() => setIsSearchOpen(!isSearchOpen)}
             className="p-2 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-lg transition-colors md:hidden"
@@ -359,7 +330,6 @@ export function TopNav({ onMenuToggle, sidebarOpen }: { onMenuToggle: () => void
             )}
           </button>
 
-          {/* Notifications */}
           <Link rel="stylesheet" href="/notification" >
           
          
@@ -371,7 +341,6 @@ export function TopNav({ onMenuToggle, sidebarOpen }: { onMenuToggle: () => void
           </button>
            </Link>
 
-          {/* Profile Dropdown */}
           <div className="relative profile-dropdown">
             <button
               onClick={() => setIsProfileOpen(!isProfileOpen)}
@@ -387,7 +356,6 @@ export function TopNav({ onMenuToggle, sidebarOpen }: { onMenuToggle: () => void
               <ChevronDown className={`w-4 h-4 text-gray-400 hidden sm:block transition-transform ${isProfileOpen ? 'rotate-180' : ''}`} />
             </button>
 
-            {/* Dropdown Menu */}
             {isProfileOpen && (
               <div className="absolute right-0 top-12 w-48 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-lg shadow-lg py-2 z-50">
                 <Link 

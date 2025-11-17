@@ -115,7 +115,6 @@ export default function WebinarsPage() {
 
   return (
     <div className="p-6 md:p-8 bg-gradient-to-br dark:from-[#0F172A] dark:via-[#1a2540] dark:to-[#0F172A] from-white via-blue-50 to-purple-50 min-h-screen">
-      {/* Header */}
       <div className="mb-8">
         <h1 className="text-4xl font-bold text-foreground dark:text-white mb-2">
           Webinars
@@ -125,7 +124,6 @@ export default function WebinarsPage() {
         </p>
       </div>
 
-      {/* Search Bar */}
       <div className="mb-8 relative">
         <Search className="absolute left-4 top-3 w-5 h-5 text-gray-400" />
         <input
@@ -137,13 +135,11 @@ export default function WebinarsPage() {
         />
       </div>
 
-      {/* Filters */}
       <WebinarFilters
         selectedCategory={selectedCategory}
         onCategoryChange={setSelectedCategory}
       />
 
-      {/* Controls */}
       <div className="flex items-center justify-between mb-6">
         <span className="text-sm text-muted-foreground dark:text-slate-300">
           {filteredWebinars.length} webinar
@@ -172,7 +168,6 @@ export default function WebinarsPage() {
         </div>
       </div>
 
-      {/* Grid View */}
       {viewType === "grid" ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredWebinars.map((webinar) => (
@@ -180,7 +175,6 @@ export default function WebinarsPage() {
           ))}
         </div>
       ) : (
-        /* List View */
         <div className="space-y-4 hidden md:block">
           {filteredWebinars.map((webinar) => (
             <div

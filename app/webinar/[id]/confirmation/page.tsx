@@ -14,9 +14,7 @@ export default function WebinarConfirmationPage({
   return (
     <div className="flex-1 bg-gradient-to-br dark:from-[#0F172A] dark:via-[#1a2540] dark:to-[#0F172A] from-white via-blue-50 to-purple-50 min-h-screen flex items-center justify-center p-4">
       <div className="max-w-2xl w-full">
-        {/* Success Card */}
         <div className="bg-white dark:bg-slate-800/50 rounded-2xl border border-gray-200 dark:border-slate-700 p-8 md:p-12 text-center">
-          {/* Success Icon */}
           <div className="flex justify-center mb-6">
             <div className="relative w-20 h-20 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center">
               <Check className="w-10 h-10 text-green-600 dark:text-green-400" />
@@ -30,7 +28,6 @@ export default function WebinarConfirmationPage({
             You are now registered for the webinar. Check your email for confirmation.
           </p>
 
-          {/* Registration Reference */}
           <div className="bg-gray-50 dark:bg-slate-700/30 rounded-lg p-6 mb-8 text-left">
             <p className="text-sm text-gray-600 dark:text-slate-400 mb-2">
               Registration Reference
@@ -40,7 +37,6 @@ export default function WebinarConfirmationPage({
             </p>
           </div>
 
-          {/* Webinar Details */}
           <div className="bg-gray-50 dark:bg-slate-700/30 rounded-lg p-8 mb-8 space-y-6 text-left">
             <h3 className="font-semibold text-gray-900 dark:text-white text-lg">
               Webinar Details
@@ -104,7 +100,6 @@ export default function WebinarConfirmationPage({
             </div>
           </div>
 
-          {/* What to Expect */}
           <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900/30 rounded-lg p-6 mb-8 text-left">
             <h3 className="font-semibold text-gray-900 dark:text-white mb-4">
               What to Expect
@@ -129,7 +124,6 @@ export default function WebinarConfirmationPage({
             </ol>
           </div>
 
-          {/* Download Options */}
           <div className="bg-gray-50 dark:bg-slate-700/30 rounded-lg p-6 mb-8 space-y-3">
             <h3 className="font-semibold text-gray-900 dark:text-white text-left">
               Download Resources
@@ -146,7 +140,6 @@ export default function WebinarConfirmationPage({
             </div>
           </div>
 
-          {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4">
             <Link
               href={`/webinar/${id}`}

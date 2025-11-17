@@ -2,11 +2,11 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { ChevronLeft, Play, Download, Share2, BookOpen } from 'lucide-react'
+import { ChevronLeft, Play, Download, Share2, BookOpen } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import Image from "next/image"
-import { Moon, Sun, Trophy } from 'lucide-react'
+import { Moon, Sun, Trophy } from "lucide-react"
 import { ShareDialog } from "@/components/share-dialog"
 
 const coursesData = [
@@ -25,10 +25,8 @@ const coursesData = [
     instructor: "Sarah Johnson",
     duration: "7 days",
     difficulty: "Intermediate",
-    episodes: [
-      "Day 1. Design Fundamentals & User Research",
-    ],
-  }
+    episodes: ["Day 1. Design Fundamentals & User Research"],
+  },
 ]
 
 const difficultyColor = {
@@ -45,7 +43,6 @@ export default function CourseDetailPage({ params }: PageProps) {
   const { id } = require("react").use(params)
   const course = coursesData.find((c) => c.id === Number.parseInt(id))
   const [expandedEpisode, setExpandedEpisode] = useState<number | null>(0)
-
   const [theme, setTheme] = useState<"light" | "dark">("dark")
   const [mounted, setMounted] = useState(false)
 
@@ -84,7 +81,6 @@ export default function CourseDetailPage({ params }: PageProps) {
 
   return (
     <div className="min-h-screen bg-background dark:bg-gradient-to-br dark:from-[#0F172A] dark:via-[#1a2540] dark:to-[#0F172A]">
-      
       <div className="border-b border-border">
         <div className="px-8 py-6">
           <Link href="/course" className="inline-flex items-center gap-2 text-primary hover:text-primary/80 mb-4">
@@ -93,7 +89,6 @@ export default function CourseDetailPage({ params }: PageProps) {
           </Link>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-6">
-            {/* Main Content */}
             <div className="lg:col-span-2">
               <div className="flex items-start gap-3 mb-4">
                 <span className="bg-primary text-white text-xs font-semibold px-3 py-1 rounded-full">
@@ -115,26 +110,25 @@ export default function CourseDetailPage({ params }: PageProps) {
                 </span>
               </div>
 
-              <h1 className="text-4xl font-bold text-foreground dark:text-white mb-4 text-balance">{course.title}</h1>
-                <div className="w-full h-96 relative rounded-xl mb-6 overflow-hidden">
-                  <Image
-                    src={course.image || "/placeholder.svg"}
-                    alt={course.title}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
+              <h1 className="text-4xl font-bold text-foreground dark:text-white mb-4 text-balance">
+                {course.title}
+              </h1>
+
+              <div className="w-full h-96 relative rounded-xl mb-6 overflow-hidden">
+                <Image src={course.image || "/placeholder.svg"} alt={course.title} fill className="object-cover" />
+              </div>
 
               <div className="space-y-4">
                 <div>
                   <h2 className="text-xl font-bold text-foreground mb-2 dark:text-slate-200">About this course</h2>
-                  <p className="text-muted-foreground leading-relaxed dark:text-slate-300">{course.longDescription}</p>
+                  <p className="text-muted-foreground leading-relaxed dark:text-slate-300">
+                    {course.longDescription}
+                  </p>
                 </div>
               </div>
             </div>
 
-            {/* Sidebar */}
-            <div className="lg:col-span-1 ">
+            <div className="lg:col-span-1">
               <Card className="p-6 sticky top-6 dark:bg-slate-700 dark:border-slate-700">
                 <div className="space-y-4">
                   <div>
@@ -153,12 +147,10 @@ export default function CourseDetailPage({ params }: PageProps) {
                   </div>
 
                   <div className="border-t border-border pt-4 space-y-2">
-                    <Button className="w-full bg-primary hover:bg-primary/90 text-white">
-                      Buy By Your Point
-                    </Button>
-                    <ShareDialog 
+                    <Button className="w-full bg-primary hover:bg-primary/90 text-white">Buy By Your Point</Button>
+                    <ShareDialog
                       title={course.title}
-                      url={typeof window !== 'undefined' ? window.location.href : ''}
+                      url={typeof window !== "undefined" ? window.location.href : ""}
                     />
                   </div>
                 </div>
@@ -168,7 +160,6 @@ export default function CourseDetailPage({ params }: PageProps) {
         </div>
       </div>
 
-      {/* Episodes Section */}
       <div className="px-8 py-8">
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center gap-3 mb-6">
@@ -195,6 +186,7 @@ export default function CourseDetailPage({ params }: PageProps) {
                       <p className="text-sm text-muted-foreground dark:text-slate-300">~45 minutes</p>
                     </div>
                   </div>
+
                   <div className="flex items-center gap-2">
                     <span className="text-xs bg-accent/10 text-accent px-2 py-1 rounded font-medium">Video</span>
                     <svg
@@ -205,12 +197,7 @@ export default function CourseDetailPage({ params }: PageProps) {
                       stroke="currentColor"
                       viewBox="0 0 24 24"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 14l-7 7m0 0l-7-7m7 7V3"
-                      />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                     </svg>
                   </div>
                 </button>
@@ -225,11 +212,16 @@ export default function CourseDetailPage({ params }: PageProps) {
                         <li>Apply knowledge to your own projects</li>
                       </ul>
                     </div>
+
                     <div className="flex gap-2">
-                      <Link href={`/course/${course.id}/learn`} className="inline-flex items-center bg-primary hover:bg-primary/90 text-white px-3 py-1 rounded">
+                      <Link
+                        href={`/course/${course.id}/learn`}
+                        className="inline-flex items-center bg-primary hover:bg-primary/90 text-white px-3 py-1 rounded"
+                      >
                         <Play className="h-4 w-4 mr-2" />
                         Watch
                       </Link>
+
                       <Button size="sm" variant="outline" className="dark:text-white">
                         <Download className="h-4 w-4 mr-2 dark:text-white" />
                         Resources

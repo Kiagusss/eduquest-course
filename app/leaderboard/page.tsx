@@ -32,7 +32,6 @@ export default function LeaderboardPage() {
 
   useEffect(() => {
     setMounted(true)
-    // Set sidebar state based on screen size on mount
     const handleResize = () => {
       if (window.innerWidth >= 1024) {
         setSidebarOpen(true)
@@ -53,23 +52,17 @@ export default function LeaderboardPage() {
 
   return (
     <div className="flex min-h-screen bg-gray-50 dark:bg-slate-900">
-
       <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
       
-
       <div className="flex-1 flex flex-col transition-all duration-300">
-
         <TopNav 
           onMenuToggle={() => setSidebarOpen(!sidebarOpen)} 
           sidebarOpen={sidebarOpen}
         />
 
-        {/* Main Content Area */}
         <main className="flex-1 overflow-auto p-4 sm:p-6 bg-gradient-to-br dark:from-[#0F172A] dark:via-[#1a2540] dark:to-[#0F172A] from-slate-50 via-white to-slate-100">
           <div className="max-w-7xl mx-auto">
-            {/* Top 3 Section */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-6 sm:mb-8 md:mb-12">
-              {/* 1st Place */}
               {topThree[0] && (
                 <div
                   className={`flex flex-col items-center p-4 sm:p-6 rounded-2xl border-2 transition-all lg:scale-105 relative bg-white dark:bg-slate-800 border-purple-300 dark:border-[#8B5CF6]`}
@@ -108,7 +101,6 @@ export default function LeaderboardPage() {
                 </div>
               )}
 
-              {/* 2nd Place */}
               {topThree[1] && (
                 <div
                   className={`flex flex-col items-center p-4 sm:p-6 rounded-2xl border-2 transition-all relative bg-white/50 dark:bg-slate-800/50 border-slate-300 dark:border-slate-700 hover:border-cyan-300 dark:hover:border-[#06B6D4]/50`}
@@ -139,7 +131,6 @@ export default function LeaderboardPage() {
                 </div>
               )}
 
-              {/* 3rd Place */}
               {topThree[2] && (
                 <div
                   className={`flex flex-col items-center p-4 sm:p-6 rounded-2xl border-2 transition-all relative bg-white/50 dark:bg-slate-800/50 border-slate-300 dark:border-slate-700 hover:border-orange-300 dark:hover:border-orange-500/50`}
@@ -171,9 +162,7 @@ export default function LeaderboardPage() {
               )}
             </div>
 
-            {/* Rest of Leaderboard */}
             <div>
-              {/* Table header - hidden on mobile */}
               <div className="hidden md:grid grid-cols-5 gap-4 px-6 py-4 mb-2 text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">
                 <div>Rank</div>
                 <div className="col-span-2">User name</div>
@@ -181,7 +170,6 @@ export default function LeaderboardPage() {
                 <div className="text-right">Courses</div>
               </div>
 
-              {/* Desktop table view */}
               <div className=" md:space-y-2">
                 {restOfLeaderboard.map((entry) => (
                   <div
@@ -217,7 +205,6 @@ export default function LeaderboardPage() {
                 ))}
               </div>
 
-              {/* Mobile card view */}
               <div className="block md:hidden space-y-3 sm:space-y-4">
                 {restOfLeaderboard.map((entry) => (
                   <div
@@ -261,6 +248,7 @@ export default function LeaderboardPage() {
                   </div>
                 ))}
               </div>
+
             </div>
           </div>
         </main>

@@ -168,7 +168,6 @@ export default function CoursePage() {
   }
 
   if (!currentQuiz) {
-    console.log("[v0] Quiz not found for episode:", currentEpisodeId)
     return (
       <div className="min-h-screen bg-background dark:bg-gradient-to-br dark:from-[#0F172A] dark:via-[#1a2540] dark:to-[#0F172A]">
         <div className="bg-card dark:bg-slate-700 border-b border-border sticky top-0 z-50">
@@ -195,9 +194,7 @@ export default function CoursePage() {
         totalPoints={userProgress.totalPoints}
         instructor={course.instructor}
         duration={course.duration}
-        onDownloadCertificate={() => {
-          console.log("Certificate downloaded")
-        }}
+        onDownloadCertificate={() => {}}
       />
     )
   }
@@ -229,23 +226,11 @@ export default function CoursePage() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 py-8 ">
-        <div className=" w-full flex justify-end p-5">
-          <button
-            onClick={toggleTheme}
-            className={`flex-none p-2 sm:p-3  m rounded-lg transition-all duration-300 border ${
-              isDark
-                ? "bg-slate-800 border-slate-700 hover:bg-slate-700 text-[#06B6D4]"
-                : "bg-slate-100 border-slate-300 hover:bg-slate-200 text-[#8B5CF6]"
-            }`}
-            aria-label="Toggle theme"
-          >
-            {isDark ? <Sun size={18} className="sm:w-5 sm:h-5" /> : <Moon size={18} className="sm:w-5 sm:h-5" />}
-          </button>
-        </div>
+        
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
           <div className="lg:col-span-2 space-y-6">
-            {/* Video Player */}
+
             <div>
               <h2 className="font-semibold text-lg mb-3 dark:text-white">Episode: {currentEpisode.title}</h2>
               <VideoPlayer
@@ -256,7 +241,6 @@ export default function CoursePage() {
               />
             </div>
 
-            {/* Quiz Section */}
             <div>
               <div className="flex items-center justify-between mb-4">
                 <h2 className="font-semibold text-lg">Quiz</h2>
@@ -268,9 +252,7 @@ export default function CoursePage() {
             </div>
           </div>
 
-          {/* Sidebar */}
           <div className="space-y-4">
-            {/* Episodes List */}
             <EpisodeList
               episodes={course.episodes}
               currentEpisodeId={currentEpisodeId}
@@ -278,7 +260,6 @@ export default function CoursePage() {
               onSelectEpisode={handleSelectEpisode}
             />
 
-            {/* Course Info Card */}
             <Card className="p-6 space-y-4 bg-gradient-to-br from-purple-50 to-blue-50 dark:from-purple-950/20 dark:to-blue-950/20 border-purple-200 dark:border-purple-800">
               <div className="aspect-video bg-muted  rounded-lg overflow-hidden">
                 <img
@@ -304,7 +285,6 @@ export default function CoursePage() {
                 </div>
               </div>
             </Card>
-
 
             <Card className="p-6 bg-gradient-to-br from-purple-50 to-blue-50 dark:from-purple-950/20 dark:to-blue-950/20 border-purple-200 dark:border-purple-800">
               <h3 className="font-semibold mb-4 flex items-center gap-2 dark:text-white">
@@ -339,7 +319,6 @@ export default function CoursePage() {
               </div>
             </Card>
 
-            {/* Quiz Info */}
             <Card className="p-4 bg-gradient-to-br from-purple-50 to-blue-50 dark:from-purple-950/20 dark:to-blue-950/20 border-purple-200 dark:border-purple-800">
               <h4 className="font-semibold text-sm mb-2 dark:text-white flex items-center gap-2">
                 <Trophy className="w-4 h-4" />

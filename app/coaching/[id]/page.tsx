@@ -65,7 +65,6 @@ export default function CoachingDetailPage({
 
   return (
     <div className="flex-1 bg-gradient-to-br dark:from-[#0F172A] dark:via-[#1a2540] dark:to-[#0F172A] from-white via-blue-50 to-purple-50 min-h-screen">
-      {/* Header with Back Button */}
       <div className="bg-white dark:bg-slate-800/50 border-b border-gray-200 dark:border-slate-700 sticky top-0 z-40">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center gap-4">
           <Link
@@ -87,9 +86,7 @@ export default function CoachingDetailPage({
 
       <div className="max-w-6xl mx-auto px-6 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
-            {/* Hero Image */}
             <div className="relative w-full h-80 rounded-xl overflow-hidden">
               <Image
                 src={coaching.image || "/placeholder.svg"}
@@ -99,7 +96,6 @@ export default function CoachingDetailPage({
               />
             </div>
 
-            {/* Mentor Card */}
             <div className="bg-white dark:bg-slate-800/50 rounded-xl border border-gray-200 dark:border-slate-700 p-6">
               <div className="flex items-start gap-4 mb-6">
                 <div className="relative w-24 h-24 flex-shrink-0 rounded-full overflow-hidden border-4 border-[#7C3AED]">
@@ -135,7 +131,6 @@ export default function CoachingDetailPage({
                 </div>
               </div>
 
-              {/* Stats */}
               <div className="grid grid-cols-3 gap-4 py-4 border-y border-gray-200 dark:border-slate-700">
                 <div className="text-center">
                   <p className="text-2xl font-bold text-[#7C3AED]">
@@ -162,7 +157,6 @@ export default function CoachingDetailPage({
               </div>
             </div>
 
-            {/* Bio */}
             <div className="bg-white dark:bg-slate-800/50 rounded-xl border border-gray-200 dark:border-slate-700 p-6">
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
                 About Mentor
@@ -172,7 +166,6 @@ export default function CoachingDetailPage({
               </p>
             </div>
 
-            {/* Highlights */}
             <div className="bg-white dark:bg-slate-800/50 rounded-xl border border-gray-200 dark:border-slate-700 p-6">
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
                 What You'll Learn
@@ -191,7 +184,6 @@ export default function CoachingDetailPage({
               </div>
             </div>
 
-            {/* Qualifications */}
             <div className="bg-white dark:bg-slate-800/50 rounded-xl border border-gray-200 dark:border-slate-700 p-6">
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
                 <Award className="w-5 h-5 text-[#7C3AED]" />
@@ -210,7 +202,6 @@ export default function CoachingDetailPage({
               </ul>
             </div>
 
-            {/* Schedule */}
             <div className="bg-white dark:bg-slate-800/50 rounded-xl border border-gray-200 dark:border-slate-700 p-6">
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
                 <Clock className="w-5 h-5 text-[#7C3AED]" />
@@ -233,7 +224,6 @@ export default function CoachingDetailPage({
               </div>
             </div>
 
-            {/* Student Reviews */}
             <div className="bg-white dark:bg-slate-800/50 rounded-xl border border-gray-200 dark:border-slate-700 p-6">
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
                 <MessageCircle className="w-5 h-5 text-[#7C3AED]" />
@@ -270,7 +260,6 @@ export default function CoachingDetailPage({
             </div>
           </div>
 
-          {/* Sidebar - Booking Card */}
           <div className="lg:col-span-1">
             <div className="sticky top-20 bg-white dark:bg-slate-800/50 rounded-xl border border-gray-200 dark:border-slate-700 p-6 shadow-lg">
               <div className="mb-6">
@@ -287,7 +276,6 @@ export default function CoachingDetailPage({
                 </div>
               </div>
 
-              {/* Quick Info */}
               <div className="space-y-3 mb-6 pb-6 border-b border-gray-200 dark:border-slate-700">
                 <div className="flex items-center gap-3 text-sm">
                   <Clock className="w-4 h-4 text-[#7C3AED]" />
@@ -309,7 +297,6 @@ export default function CoachingDetailPage({
                 </div>
               </div>
 
-              {/* Book Button */}
               <Link
                 href={`/coaching/${coaching.id}/booking`}
                 className="w-full bg-[#7C3AED] hover:bg-[#6D28D9] text-white font-semibold py-3 px-4 rounded-lg transition-colors mb-3 block text-center"
@@ -317,7 +304,6 @@ export default function CoachingDetailPage({
                 Book Session
               </Link>
 
-              {/* Contact Button */}
               <button className="w-full border-2 border-[#7C3AED] text-[#7C3AED] hover:bg-[#7C3AED]/10 font-semibold py-3 px-4 rounded-lg transition-colors">
                 Message Mentor
               </button>
