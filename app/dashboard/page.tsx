@@ -37,8 +37,8 @@ export default function DashboardPage() {
 
   const recentWebinars = [
     { id: 1, title: "Advanced Web Development with Next.js 15", presenter: "David Wilson", date: "20 Jan 2025", attendees: 342, registrations: 450, image: "/web-development.jpeg" },
-    { id: 2, title: "UI/UX Design Trends 2025", presenter: "Sarah Chen", date: "21 Jan 2025", attendees: 512, registrations: 580, image: "/ui-ux-design-mentor-coaching.jpg" },
-    { id: 3, title: "Building Scalable SaaS Applications", presenter: "Michael Chen", date: "19 Jan 2025", attendees: 287, registrations: 320, image: "/web-development.jpeg" },
+    { id: 2, title: "UI/UX Design Trends 2025", presenter: "Sarah Chen", date: "21 Jan 2025", attendees: 512, registrations: 580, image: "/ui-ux.jpg" },
+    { id: 3, title: "Building Scalable SaaS Applications", presenter: "Michael Chen", date: "19 Jan 2025", attendees: 287, registrations: 320, image: "/web.jpg" },
   ]
 
   return (

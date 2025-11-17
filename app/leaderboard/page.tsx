@@ -96,7 +96,7 @@ export default function LeaderboardPage() {
                       <span style={{ color: "#8B5CF6" }} className="text-xl sm:text-2xl font-black">
                         {(topThree[0].points / 1000).toFixed(0)}K
                       </span>
-                      <span className="text-xs sm:text-sm text-slate-500 dark:text-slate-300">Prize</span>
+                      <span className="text-xs sm:text-sm text-slate-500 dark:text-slate-300">Point</span>
                     </div>
                   </div>
                 </div>
@@ -126,7 +126,7 @@ export default function LeaderboardPage() {
                       <span style={{ color: "#06B6D4" }} className="text-lg sm:text-xl font-black">
                         {(topThree[1].points / 1000).toFixed(0)}K
                       </span>
-                      <span className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">Prize</span>
+                      <span className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">Point</span>
                     </div>
                   </div>
                 </div>
@@ -156,7 +156,7 @@ export default function LeaderboardPage() {
                       <span style={{ color: "#f97316" }} className="text-lg sm:text-xl font-black">
                         {(topThree[2].points / 1000).toFixed(0)}K
                       </span>
-                      <span className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">Prize</span>
+                      <span className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">Point</span>
                     </div>
                   </div>
                 </div>
