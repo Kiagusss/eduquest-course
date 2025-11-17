@@ -45,7 +45,7 @@ export default function WebinarConfirmationPage({
             <div className="flex items-center gap-4 pb-6 border-b border-gray-200 dark:border-slate-600">
               <div className="relative w-16 h-16 flex-shrink-0 rounded-full overflow-hidden border-2 border-[#7C3AED]">
                 <Image
-                  src="/professional-man.jpg"
+                  src="/profileMen.jpg"
                   alt="David Wilson"
                   fill
                   className="object-cover"

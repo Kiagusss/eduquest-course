@@ -12,7 +12,7 @@ const webinarDetails = {
     title: "Advanced Web Development with Next.js 15",
     description: "Pelajari advanced features di Next.js 15 termasuk Server Components, App Router, dan optimization techniques terbaru untuk membangun aplikasi web yang scalable dan performant.",
     presenter: "David Wilson",
-    presenterImage: "/professional-man.jpg",
+    presenterImage: "/profileMen.jpg",
     category: "Development",
     image: "/web-development.jpeg",
     startDate: "20 Jan 2025",

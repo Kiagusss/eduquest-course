@@ -9,9 +9,9 @@ const coachingDetails = {
   1: {
     id: 1,
     mentorName: "Sarah Chen",
-    mentorImage: "/professional-woman-designer.png",
+    mentorImage: "/profile.jpg",
     category: "UI/UX Design",
-    image: "/ui-ux-design-mentor-coaching.jpg",
+    image: "/ui-uxx.jpg",
     price: "$80",
     rating: 4.9,
     reviews: 245,

@@ -25,7 +25,7 @@ export default function WebinarRegistrationPage({
   const webinarInfo = {
     title: "Advanced Web Development with Next.js 15",
     presenter: "David Wilson",
-    presenterImage: "/professional-man.jpg",
+    presenterImage: "/profileMen.jpg",
     startDate: "20 Jan 2025",
     startTime: "2:00 PM",
     duration: "90 mins",

@@ -22,7 +22,7 @@ export default function CoachingBookingPage({
 
   const mentorInfo = {
     mentorName: "Sarah Chen",
-    mentorImage: "/professional-woman-diverse.png",
+    mentorImage: "/profile.jpg",
     price: "$80",
     duration: "60 min",
   }
