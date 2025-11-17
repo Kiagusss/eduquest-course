@@ -1,12 +1,12 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { TrendingUp, Clock, CheckCircle, Target, Award, BarChart3 } from 'lucide-react'
+import { TrendingUp, Clock, CheckCircle, Award } from 'lucide-react'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Progress } from '@/components/ui/progress'
-import { LineChart, Line, BarChart, Bar, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
 import Sidebar, { TopNav } from '@/components/sidebar'
 
 export default function AnalyticsPage() {
@@ -57,18 +57,13 @@ export default function AnalyticsPage() {
 
   return (
     <div className="flex min-h-screen bg-gray-50 dark:bg-slate-900">
-      {/* Sidebar */}
       <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
-      
-      {/* Main Content */}
       <div className="flex-1 flex flex-col min-w-0">
-        {/* Top Navigation */}
         <TopNav onMenuToggle={() => setSidebarOpen(!sidebarOpen)} sidebarOpen={sidebarOpen} />
-        
-        {/* Main Content Area */}
+
         <main className="flex-1 p-4 sm:p-6 bg-gradient-to-br dark:from-[#0F172A] dark:via-[#1a2540] dark:to-[#0F172A] from-white via-blue-50 to-purple-50">
           <div className="max-w-7xl mx-auto">
-            {/* Header */}
+
             <div className="mb-8">
               <div className="flex justify-between items-start">
                 <div>
@@ -91,7 +86,6 @@ export default function AnalyticsPage() {
               </div>
             </div>
 
-            {/* KPI Cards */}
             <div className="grid md:grid-cols-4 gap-4 mb-8">
               <Card className="p-6 bg-white dark:bg-slate-800/50 border border-gray-200 dark:border-slate-700">
                 <div className="flex items-center justify-between">
@@ -150,7 +144,6 @@ export default function AnalyticsPage() {
                 <TabsTrigger value="engagement">Engagement</TabsTrigger>
               </TabsList>
 
-              {/* Progress Trend */}
               <TabsContent value="progress">
                 <Card className="p-6 bg-white dark:bg-slate-800/50 border border-gray-200 dark:border-slate-700">
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Weekly Learning Progress</h3>
@@ -172,7 +165,6 @@ export default function AnalyticsPage() {
                 </Card>
               </TabsContent>
 
-              {/* Module Performance */}
               <TabsContent value="modules">
                 <Card className="p-6 bg-white dark:bg-slate-800/50 border border-gray-200 dark:border-slate-700">
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Module Completion Rate</h3>
@@ -190,7 +182,6 @@ export default function AnalyticsPage() {
                 </Card>
               </TabsContent>
 
-              {/* Skills Assessment */}
               <TabsContent value="skills">
                 <Card className="p-6 bg-white dark:bg-slate-800/50 border border-gray-200 dark:border-slate-700">
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Skill Mastery Level</h3>
@@ -208,7 +199,6 @@ export default function AnalyticsPage() {
                 </Card>
               </TabsContent>
 
-              {/* Engagement */}
               <TabsContent value="engagement" className="grid md:grid-cols-2 gap-6">
                 <Card className="p-6 bg-white dark:bg-slate-800/50 border border-gray-200 dark:border-slate-700">
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Activity Distribution</h3>
@@ -225,7 +215,7 @@ export default function AnalyticsPage() {
                         dataKey="value"
                       >
                         {engagementData.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                          <Cell key={index} fill={COLORS[index % COLORS.length]} />
                         ))}
                       </Pie>
                       <Tooltip />

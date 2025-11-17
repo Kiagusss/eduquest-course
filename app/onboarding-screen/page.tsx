@@ -18,19 +18,14 @@ export default function Page() {
   const handleSurveyComplete = (answers: number[], career: string) => {
     setSurveyAnswers(answers)
     setMatchedCareer(career)
-
-    // Play celebratory sound
     playCelebrationSound()
-
     setStep("results")
   }
 
   const playCelebrationSound = () => {
-    // Create audio context for celebration sound
     const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)()
     const now = audioContext.currentTime
 
-    // Create celebratory melody (ascending notes with harmonics)
     const playNote = (frequency: number, duration: number, startTime: number) => {
       const osc = audioContext.createOscillator()
       const gain = audioContext.createGain()
@@ -48,12 +43,11 @@ export default function Page() {
       osc.stop(startTime + duration)
     }
 
-    // Celebratory melody pattern (ascending)
     const notes = [
-      { freq: 523.25, duration: 0.15 }, // C5
-      { freq: 659.25, duration: 0.15 }, // E5
-      { freq: 783.99, duration: 0.15 }, // G5
-      { freq: 1046.5, duration: 0.3 }, // C6 (held longer)
+      { freq: 523.25, duration: 0.15 },
+      { freq: 659.25, duration: 0.15 },
+      { freq: 783.99, duration: 0.15 },
+      { freq: 1046.5, duration: 0.3 },
     ]
 
     let currentTime = now

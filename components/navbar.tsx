@@ -18,13 +18,11 @@ export function Navbar() {
       setIsDesktop(window.innerWidth >= 1024) // 1024px = xl breakpoint
     }
 
-    // Initial check
     checkScreenSize()
 
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10)
 
-      // Improved active section detection
       const sections = [
         "home",
         "services",
@@ -53,7 +51,6 @@ export function Navbar() {
         }
       }
 
-      // Fallback: if no section found, check which section is closest to top
       if (!currentSection) {
         let closestSection = ""
         let closestDistance = Infinity
@@ -106,7 +103,6 @@ export function Navbar() {
     >
       <div className="container mx-auto px-3 sm:px-4 lg:px-6">
         <div className="flex h-14 sm:h-16 items-center justify-between">
-          {/* Logo */}
           <Link
             href="/"
             className="flex items-center gap-2 hover:opacity-80 transition-opacity"
@@ -119,7 +115,6 @@ export function Navbar() {
             </span>
           </Link>
 
-          {/* Desktop Navigation - Only show on screens >= 1024px */}
           <div className="hidden xl:flex items-center justify-center gap-6 flex-1">
             {navItems.map((item) => (
               <Link
@@ -139,9 +134,7 @@ export function Navbar() {
             ))}
           </div>
 
-          {/* Right Section */}
           <div className="flex items-center gap-2 sm:gap-3">
-            {/* Desktop Auth Buttons - Only show on screens >= 1024px */}
             <div className="hidden xl:flex items-center gap-2">
               <Button
                 variant="ghost"
@@ -166,16 +159,13 @@ export function Navbar() {
               </Button>
             </div>
 
-            {/* Desktop Theme Toggle - Only show on screens >= 1024px */}
             <div className="hidden xl:flex">
               <ThemeToggle />
             </div>
 
-            {/* Mobile Section - Show on screens < 1024px */}
             <div className="flex xl:hidden items-center gap-2">
               <ThemeToggle />
 
-              {/* Compact buttons for mobile */}
               <Button
                 variant="ghost"
                 size="icon"
@@ -198,7 +188,6 @@ export function Navbar() {
                 </Link>
               </Button>
 
-              {/* Mobile Menu - Always visible on screens < 1024px */}
               <MobileMenu />
             </div>
           </div>

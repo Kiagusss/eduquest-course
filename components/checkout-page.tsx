@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import Link from 'next/link';
 import SuccessModal from './success-modal';
+import Image from 'next/image';
 
 interface CartItem {
   id: string;
@@ -72,18 +73,14 @@ export default function CheckoutPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
       <header className="border-b border-border bg-background/50 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Button variant="ghost" asChild className="p-0">
               <Link href="/">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-secondary dark:to-slate-300 flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">C</span>
-                </div>
+                <Image src="/images/eduquest_logo.png" width={50} height={50} alt='Eduquest Logo'/>
               </Link>
-            </Button>
-            <span className="text-xl font-bold text-foreground">CareerFlow</span>
+           
+            <span className="text-xl font-bold text-foreground">EduQuest</span>
           </div>
           <Button variant="ghost" asChild>
             <Link href="/">Kembali ke Harga</Link>

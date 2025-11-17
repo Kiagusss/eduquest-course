@@ -168,7 +168,6 @@ export default function ResultsDisplay({ career, onRetake }: ResultsDisplayProps
   return (
     <div className="min-h-screen bg-background py-12 px-4">
       <div className="max-w-4xl mx-auto">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -188,7 +187,6 @@ export default function ResultsDisplay({ career, onRetake }: ResultsDisplayProps
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">{details.description}</p>
         </motion.div>
 
-        {/* Key Info Cards */}
         <div className="grid md:grid-cols-2 gap-6 mb-12">
           <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}>
             <Card className="p-6 bg-card border border-border hover:shadow-md transition-all">
@@ -215,7 +213,6 @@ export default function ResultsDisplay({ career, onRetake }: ResultsDisplayProps
           </motion.div>
         </div>
 
-        {/* Skills */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -238,7 +235,6 @@ export default function ResultsDisplay({ career, onRetake }: ResultsDisplayProps
           </div>
         </motion.div>
 
-        {/* Learning Resources */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -266,7 +262,6 @@ export default function ResultsDisplay({ career, onRetake }: ResultsDisplayProps
           </div>
         </motion.div>
 
-        {/* Call to Action */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -282,8 +277,8 @@ export default function ResultsDisplay({ career, onRetake }: ResultsDisplayProps
               asChild
               className="gap-2 bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg flex-1 sm:flex-none transition-all duration-300"
             >
-              <Link href="/course">
-                Go to Course
+              <Link href="/checkout">
+                Go to Subscription
                 <ArrowRight className="w-5 h-5" />
               </Link>
             </Button>

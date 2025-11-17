@@ -105,13 +105,11 @@ export function CoursesExample() {
 
   return (
     <section id="courses" className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/5 animate-pulse" />
       <div className="absolute top-10 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
 
       <div className="container mx-auto max-w-7xl relative z-10">
-        {/* Header Section */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold">
             <PlayCircle className="h-4 w-4" />
@@ -126,7 +124,6 @@ export function CoursesExample() {
           </p>
         </div>
 
-        {/* Category Filter */}
         <div className="flex flex-wrap gap-2 justify-center mb-8">
           {categories.map((category) => (
             <Button
@@ -140,14 +137,12 @@ export function CoursesExample() {
           ))}
         </div>
 
-        {/* Courses Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {filteredCourses.map((course) => (
             <Card
               key={course.id}
               className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-2 hover:border-primary/20 relative overflow-hidden bg-background/50 backdrop-blur-sm"
             >
-              {/* Status Badge */}
               <div className="absolute top-4 right-4 z-10">
                 <Badge 
                   className={`
@@ -161,7 +156,6 @@ export function CoursesExample() {
                 </Badge>
               </div>
 
-              {/* Course Image */}
               <div className="relative h-48 w-full overflow-hidden">
                 <Image
                   src={course.image}
@@ -191,7 +185,6 @@ export function CoursesExample() {
               </CardHeader>
 
               <CardContent className="pb-4">
-                {/* Course Stats */}
                 <div className="grid grid-cols-2 gap-4 text-sm text-muted-foreground mb-4">
                   <div className="flex items-center gap-2">
                     <Clock className="h-4 w-4" />
@@ -211,7 +204,6 @@ export function CoursesExample() {
                   </div>
                 </div>
 
-                {/* Additional Info */}
                 <div className="flex items-center justify-between text-xs text-muted-foreground">
                   <div className="flex items-center gap-1">
                     <Calendar className="h-3 w-3" />
@@ -232,21 +224,7 @@ export function CoursesExample() {
           ))}
         </div>
 
-        {/* CTA Section */}
-        <div className="text-center">
-          <div className="inline-flex flex-col sm:flex-row gap-4 items-center justify-center">
-            <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-6 text-lg">
-              View All Courses
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-            <Button size="lg" variant="outline" className="border-2 border-primary/20 font-semibold px-8 py-6 text-lg">
-              Take Career Assessment
-            </Button>
-          </div>
-          <p className="text-muted-foreground mt-6 max-w-2xl mx-auto">
-            Not sure where to start? Take our 5-minute AI assessment to discover your perfect career path.
-          </p>
-        </div>
+       
       </div>
     </section>
   )

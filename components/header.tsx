@@ -10,13 +10,11 @@ export default function Header() {
     <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
           <div className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-gradient-to-br from-[#8B5CF6] to-[#06B6D4] rounded-lg"></div>
             <span className="text-xl font-bold text-[#0F172A]">LearnHub</span>
           </div>
 
-          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             <a href="#courses" className="text-gray-600 hover:text-[#8B5CF6] transition-colors">
               Courses
@@ -32,7 +30,6 @@ export default function Header() {
             </a>
           </nav>
 
-          {/* Auth Buttons */}
           <div className="hidden md:flex items-center space-x-4">
             <button className="text-gray-600 hover:text-[#8B5CF6] transition-colors">Sign In</button>
             <button className="px-6 py-2 bg-gradient-to-r from-[#8B5CF6] to-[#06B6D4] text-white rounded-lg hover:shadow-lg hover:shadow-purple-500/30 transition-all">
@@ -40,13 +37,11 @@ export default function Header() {
             </button>
           </div>
 
-          {/* Mobile Menu Button */}
           <button className="md:hidden text-[#0F172A]" onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
-        {/* Mobile Navigation */}
         {isOpen && (
           <div className="md:hidden pb-4 space-y-4">
             <a href="#courses" className="block text-gray-600 hover:text-[#8B5CF6]">

@@ -37,7 +37,7 @@ export function CourseCompletionScreen({
       instructor: "Michael Chen",
       level: "Intermediate",
       duration: "8 days",
-      thumbnail: "/graphic-design-concept.png",
+      thumbnail: "/design-graph.jpg",
       category: "Graphic Design",
       learners: "1,245",
     },
@@ -47,7 +47,7 @@ export function CourseCompletionScreen({
       instructor: "Alex Thompson",
       level: "Advanced",
       duration: "7 days",
-      thumbnail: "/advanced-design-patterns.jpg",
+      thumbnail: "/ui-ux.jpg",
       category: "UI/UX Design",
       learners: "892",
     },
@@ -57,7 +57,7 @@ export function CourseCompletionScreen({
       instructor: "David Park",
       level: "Advanced",
       duration: "9 days",
-      thumbnail: "/web-development-concept.png",
+      thumbnail: "/web-development.jpeg",
       category: "Web Development",
       learners: "2,156",
     },
@@ -262,7 +262,7 @@ export function CourseCompletionScreen({
                 >
                   <Button
                     variant="outline"
-                    className="text-white border-slate-400 hover:bg-slate-700/50 hover:border-slate-300 font-semibold flex items-center justify-center gap-2 px-8 py-3 text-lg"
+                    className="text-white bg-transparent border-slate-400 hover:bg-slate-700/50 hover:border-slate-300 font-semibold dark: flex items-center justify-center gap-2 px-8 py-3 text-lg dark:bg-slate-800/50 dark:border-slate-700 dark:hover:border-[#06B6D4]/50"
                   >
                     <Share2 className="w-5 h-5" />
                     Bagikan Pencapaian

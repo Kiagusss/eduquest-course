@@ -2,7 +2,6 @@
 import { useState } from "react"
 import { Bell, Trash2, Check, Users, FileText, ShoppingCart, Mail, Zap, Award } from 'lucide-react'
 
-// Notification data with diverse content from sidebar items
 const notificationsData = [
   {
     id: 1,
@@ -120,13 +119,10 @@ const getIcon = (type: string) => {
 export default function NotificationsPage() {
   const [notifications, setNotifications] = useState(notificationsData)
   const [filterType, setFilterType] = useState<"all" | "unread">("all")
-
-  // Untuk demo, kita akan menggunakan state untuk toggle dark mode
-  // Dalam aplikasi nyata, Anda mungkin menggunakan context atau hook dari next-themes
   const [isDark, setIsDark] = useState(false)
 
   const markAsRead = (id: number) => {
-    setNotifications(notifications.map(notif => 
+    setNotifications(notifications.map(notif =>
       notif.id === id ? { ...notif, read: true } : notif
     ))
   }
@@ -144,8 +140,8 @@ export default function NotificationsPage() {
   }
 
   const unreadCount = notifications.filter(n => !n.read).length
-  const filteredNotifications = filterType === "unread" 
-    ? notifications.filter(n => !n.read) 
+  const filteredNotifications = filterType === "unread"
+    ? notifications.filter(n => !n.read)
     : notifications
 
   return (
@@ -154,7 +150,6 @@ export default function NotificationsPage() {
         ? "dark bg-gradient-to-br from-background via-[#1a2540] to-background" 
         : ""
     }`}>
-      {/* Theme Toggle Button untuk demo */}
       <div className="absolute top-4 right-4">
         <button
           onClick={() => setIsDark(!isDark)}
@@ -168,10 +163,8 @@ export default function NotificationsPage() {
         </button>
       </div>
 
-      {/* Main Container */}
       <div className="flex-1 p-6 md:p-8 flex flex-col">
         <div className="w-full max-w-6xl mx-auto flex flex-col flex-1">
-          {/* Action Buttons */}
           <div className="flex flex-wrap gap-3 mb-6">
             <button
               onClick={() => setFilterType("all")}
@@ -183,6 +176,7 @@ export default function NotificationsPage() {
             >
               All Notifications
             </button>
+
             <button
               onClick={() => setFilterType("unread")}
               className={`px-4 py-2 rounded-lg transition-colors ${
@@ -193,28 +187,28 @@ export default function NotificationsPage() {
             >
               Unread ({unreadCount})
             </button>
-            
+
             {notifications.length > 0 && (
               <>
                 <button
                   onClick={markAllAsRead}
-                  className={`ml-auto px-4 py-2 rounded-lg transition-colors flex items-center gap-2 bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground`}
+                  className="ml-auto px-4 py-2 rounded-lg transition-colors flex items-center gap-2 bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground"
                 >
                   <Check className="w-4 h-4" />
                   Mark all as read
                 </button>
-               <button
-  onClick={deleteAllNotifications}
-  className={`px-4 py-2 rounded-lg transition-colors flex items-center gap-2 bg-destructive text-destructive-foreground hover:bg-destructive/90`}
->
-  <Trash2 className="w-4 h-4" />
-  Clear all
-</button>
+
+                <button
+                  onClick={deleteAllNotifications}
+                  className="px-4 py-2 rounded-lg transition-colors flex items-center gap-2 bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                >
+                  <Trash2 className="w-4 h-4" />
+                  Clear all
+                </button>
               </>
             )}
           </div>
 
-          {/* Notifications List - Flex1 to fill remaining space */}
           <div className="flex-1 space-y-3 overflow-y-auto">
             {filteredNotifications.length > 0 ? (
               filteredNotifications.map((notification) => (
@@ -227,70 +221,70 @@ export default function NotificationsPage() {
                   }`}
                 >
                   <div className="flex items-start gap-4">
-                    {/* Icon */}
                     <div className={`p-3 rounded-lg flex-shrink-0 ${notification.color} text-white`}>
                       {getIcon(notification.type)}
                     </div>
 
-                    {/* Content */}
                     <div className="flex-1 min-w-0">
                       <div className="flex items-start justify-between gap-2 mb-1">
                         <h3 className="font-semibold text-card-foreground">
                           {notification.title}
                         </h3>
-                        <span className={`text-xs px-2 py-1 rounded-full whitespace-nowrap flex-shrink-0 bg-muted text-muted-foreground`}>
+                        <span className="text-xs px-2 py-1 rounded-full whitespace-nowrap flex-shrink-0 bg-muted text-muted-foreground">
                           {notification.category}
                         </span>
                       </div>
+
                       <p className="text-sm mb-2 text-muted-foreground">
                         {notification.message}
                       </p>
+
                       <p className="text-xs text-muted-foreground/70">
                         {notification.timestamp}
                       </p>
                     </div>
 
-                    {/* Actions */}
                     <div className="flex items-center gap-2 flex-shrink-0">
                       {!notification.read && (
                         <button
                           onClick={() => markAsRead(notification.id)}
-                          className={`p-2 rounded-lg transition-colors hover:bg-accent hover:text-accent-foreground text-muted-foreground`}
-                          title="Mark as read"
+                          className="p-2 rounded-lg transition-colors hover:bg-accent hover:text-accent-foreground text-muted-foreground"
                         >
                           <Check className="w-4 h-4" />
                         </button>
                       )}
+
                       <button
                         onClick={() => deleteNotification(notification.id)}
-                        className={`p-2 rounded-lg transition-colors hover:bg-destructive/20 hover:text-destructive text-muted-foreground`}
-                        title="Delete notification"
+                        className="p-2 rounded-lg transition-colors hover:bg-destructive/20 hover:text-destructive text-muted-foreground"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
                     </div>
                   </div>
 
-                  {/* Unread indicator */}
                   {!notification.read && (
                     <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary rounded-l-lg"></div>
                   )}
                 </div>
               ))
             ) : (
-              <div className={`flex items-center justify-center py-12 rounded-lg border bg-card/50 border-border/50`}>
+              <div className="flex items-center justify-center py-12 rounded-lg border bg-card/50 border-border/50">
                 <div className="text-center">
-                  <Bell className={`w-12 h-12 mx-auto mb-3 text-muted-foreground`} />
-                  <p className={`text-lg font-semibold text-card-foreground`}>
+                  <Bell className="w-12 h-12 mx-auto mb-3 text-muted-foreground" />
+                  <p className="text-lg font-semibold text-card-foreground">
                     No notifications
                   </p>
-                  <p className={`text-sm text-muted-foreground`}>
-                    {filterType === "unread" ? "You're all caught up!" : "Check back later for updates"}
+                  <p className="text-sm text-muted-foreground">
+                    {filterType === "unread"
+                      ? "You're all caught up!"
+                      : "Check back later for updates"}
                   </p>
                 </div>
               </div>
             )}
           </div>
+
         </div>
       </div>
     </div>

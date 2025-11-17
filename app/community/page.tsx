@@ -81,14 +81,9 @@ export default function CommunityPage() {
 
   return (
     <div className="min-h-screen bg-background">
-    
-
-      {/* Main Content */}
       <div className="max-w-6xl mx-auto px-4 py-8">
         <div className="grid md:grid-cols-3 gap-8">
-          {/* Left Column - Discussions & Resources */}
           <div className="md:col-span-2">
-            {/* Search & Filter */}
             <div className="flex gap-3 mb-6">
               <div className="flex-1 relative">
                 <Search className="absolute left-3 top-3 w-5 h-5 text-muted-foreground" />
@@ -104,7 +99,6 @@ export default function CommunityPage() {
               </Button>
             </div>
 
-            {/* Tabs */}
             <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
               <div className="flex items-center justify-between">
                 <TabsList>
@@ -118,7 +112,6 @@ export default function CommunityPage() {
                 </Button>
               </div>
 
-              {/* Discussions Tab */}
               <TabsContent value="discussions" className="space-y-4">
                 {discussionPosts.map(post => (
                   <Card key={post.id} className="p-4 hover:border-primary/50 transition-colors">
@@ -159,7 +152,6 @@ export default function CommunityPage() {
                 ))}
               </TabsContent>
 
-              {/* Resources Tab */}
               <TabsContent value="resources" className="space-y-4">
                 {resources.map(resource => (
                   <Card key={resource.id} className="p-4 hover:border-primary/50 transition-colors">
@@ -183,7 +175,6 @@ export default function CommunityPage() {
                 ))}
               </TabsContent>
 
-              {/* Members Tab */}
               <TabsContent value="members" className="space-y-4">
                 <div className="grid gap-4">
                   {[1, 2, 3, 4, 5, 6].map(i => (
@@ -205,9 +196,7 @@ export default function CommunityPage() {
             </Tabs>
           </div>
 
-          {/* Right Column - Sidebar */}
           <div className="space-y-4">
-            {/* Community Stats */}
             <Card className="p-4">
               <h3 className="font-semibold text-foreground mb-4">Community Stats</h3>
               <div className="space-y-3">
@@ -226,7 +215,6 @@ export default function CommunityPage() {
               </div>
             </Card>
 
-            {/* Featured Members */}
             <Card className="p-4">
               <h3 className="font-semibold text-foreground mb-4">Top Contributors</h3>
               <div className="space-y-3">
@@ -244,7 +232,6 @@ export default function CommunityPage() {
               </div>
             </Card>
 
-            {/* Guidelines */}
             <Card className="p-4 bg-muted/30">
               <h3 className="font-semibold text-foreground mb-3 text-sm">Community Guidelines</h3>
               <ul className="text-xs text-muted-foreground space-y-2">

@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react"
-import { ChevronLeft, Calendar, Clock, Users, Check } from 'lucide-react'
+import { ChevronLeft, Calendar, Clock } from 'lucide-react'
 import Link from "next/link"
 import Image from "next/image"
 
@@ -22,7 +22,7 @@ export default function CoachingBookingPage({
 
   const mentorInfo = {
     mentorName: "Sarah Chen",
-    mentorImage: "/professional-woman-diverse.png",
+    mentorImage: "/profile.jpg",
     price: "$80",
     duration: "60 min",
   }
@@ -59,7 +59,7 @@ export default function CoachingBookingPage({
 
   return (
     <div className="flex-1 bg-gradient-to-br dark:from-[#0F172A] dark:via-[#1a2540] dark:to-[#0F172A] from-white via-blue-50 to-purple-50 min-h-screen">
-      {/* Header */}
+
       <div className="bg-white dark:bg-slate-800/50 border-b border-gray-200 dark:border-slate-700 sticky top-0 z-40">
         <div className="max-w-4xl mx-auto px-6 py-4 flex items-center gap-4">
           <Link
@@ -80,16 +80,14 @@ export default function CoachingBookingPage({
       </div>
 
       <div className="max-w-4xl mx-auto px-6 py-8">
-        {/* Progress Bar */}
+
         <div className="mb-8">
           <div className="flex gap-2 mb-4">
             {[1, 2, 3].map((s) => (
               <div
                 key={s}
                 className={`flex-1 h-2 rounded-full transition-colors ${
-                  s <= step
-                    ? "bg-[#7C3AED]"
-                    : "bg-gray-200 dark:bg-slate-700"
+                  s <= step ? "bg-[#7C3AED]" : "bg-gray-200 dark:bg-slate-700"
                 }`}
               />
             ))}
@@ -97,16 +95,15 @@ export default function CoachingBookingPage({
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Content */}
+
           <div className="lg:col-span-2">
-            {/* Step 1: Date & Time Selection */}
+
             {step === 1 && (
               <div className="bg-white dark:bg-slate-800/50 rounded-xl border border-gray-200 dark:border-slate-700 p-8 space-y-6">
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
                   Select Date & Time
                 </h2>
 
-                {/* Session Type */}
                 <div>
                   <label className="block text-lg font-semibold text-gray-900 dark:text-white mb-4">
                     Session Type
@@ -114,16 +111,8 @@ export default function CoachingBookingPage({
                   <div className="space-y-3">
                     {[
                       { id: "beginner", label: "Beginner Consultation", desc: "New to design" },
-                      {
-                        id: "portfolio",
-                        label: "Portfolio Review",
-                        desc: "Get feedback on your work",
-                      },
-                      {
-                        id: "advanced",
-                        label: "Advanced Coaching",
-                        desc: "Deep dive into specific topics",
-                      },
+                      { id: "portfolio", label: "Portfolio Review", desc: "Get feedback on your work" },
+                      { id: "advanced", label: "Advanced Coaching", desc: "Deep dive into specific topics" },
                     ].map((type) => (
                       <label
                         key={type.id}
@@ -154,7 +143,6 @@ export default function CoachingBookingPage({
                   </div>
                 </div>
 
-                {/* Date Selection */}
                 <div>
                   <label className="block text-lg font-semibold text-gray-900 dark:text-white mb-4">
                     <Calendar className="w-5 h-5 inline mr-2" />
@@ -180,7 +168,6 @@ export default function CoachingBookingPage({
                   </div>
                 </div>
 
-                {/* Time Selection */}
                 <div>
                   <label className="block text-lg font-semibold text-gray-900 dark:text-white mb-4">
                     <Clock className="w-5 h-5 inline mr-2" />
@@ -203,7 +190,6 @@ export default function CoachingBookingPage({
                   </div>
                 </div>
 
-                {/* Next Button */}
                 <button
                   onClick={() => setStep(2)}
                   disabled={!isStep1Complete}
@@ -218,7 +204,6 @@ export default function CoachingBookingPage({
               </div>
             )}
 
-            {/* Step 2: Personal Details */}
             {step === 2 && (
               <div className="bg-white dark:bg-slate-800/50 rounded-xl border border-gray-200 dark:border-slate-700 p-8 space-y-6">
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
@@ -303,14 +288,12 @@ export default function CoachingBookingPage({
               </div>
             )}
 
-            {/* Step 3: Review & Confirm */}
             {step === 3 && (
               <div className="bg-white dark:bg-slate-800/50 rounded-xl border border-gray-200 dark:border-slate-700 p-8 space-y-6">
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
                   Review & Confirm
                 </h2>
 
-                {/* Session Details */}
                 <div className="space-y-4 pb-6 border-b border-gray-200 dark:border-slate-700">
                   <h3 className="font-semibold text-gray-900 dark:text-white">
                     Session Details
@@ -338,12 +321,13 @@ export default function CoachingBookingPage({
                     </p>
                     <p className="flex justify-between text-gray-700 dark:text-slate-300">
                       <span>Duration:</span>
-                      <span className="font-semibold">{mentorInfo.duration}</span>
+                      <span className="font-semibold">
+                        {mentorInfo.duration}
+                      </span>
                     </p>
                   </div>
                 </div>
 
-                {/* Personal Information */}
                 <div className="space-y-4 pb-6 border-b border-gray-200 dark:border-slate-700">
                   <h3 className="font-semibold text-gray-900 dark:text-white">
                     Your Information
@@ -394,14 +378,12 @@ export default function CoachingBookingPage({
             )}
           </div>
 
-          {/* Sidebar - Order Summary */}
           <div className="lg:col-span-1">
             <div className="sticky top-20 bg-white dark:bg-slate-800/50 rounded-xl border border-gray-200 dark:border-slate-700 p-6">
               <h3 className="font-semibold text-gray-900 dark:text-white mb-4">
                 Order Summary
               </h3>
 
-              {/* Mentor Info */}
               <div className="flex items-center gap-3 mb-6 pb-6 border-b border-gray-200 dark:border-slate-700">
                 <div className="relative w-12 h-12 flex-shrink-0 rounded-full overflow-hidden">
                   <Image
@@ -421,7 +403,6 @@ export default function CoachingBookingPage({
                 </div>
               </div>
 
-              {/* Pricing */}
               <div className="space-y-3 mb-6 pb-6 border-b border-gray-200 dark:border-slate-700">
                 <div className="flex justify-between text-gray-700 dark:text-slate-300">
                   <span>Session Price</span>
@@ -437,7 +418,6 @@ export default function CoachingBookingPage({
                 </div>
               </div>
 
-              {/* Booking Info */}
               <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900/30 rounded-lg p-4 text-sm text-blue-900 dark:text-blue-200">
                 <p>
                   You will receive a confirmation email with meeting details
@@ -446,6 +426,7 @@ export default function CoachingBookingPage({
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>

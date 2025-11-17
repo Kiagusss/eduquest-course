@@ -1,5 +1,5 @@
 "use client"
-import { Check, Calendar, Clock, Users, Mail, ArrowRight } from 'lucide-react'
+import { Check, Calendar, Clock, Users, ArrowRight } from 'lucide-react'
 import Link from "next/link"
 import Image from "next/image"
 
@@ -11,9 +11,7 @@ export default function CoachingConfirmationPage({
   return (
     <div className="flex-1 bg-gradient-to-br dark:from-[#0F172A] dark:via-[#1a2540] dark:to-[#0F172A] from-white via-blue-50 to-purple-50 min-h-screen flex items-center justify-center p-4">
       <div className="max-w-2xl w-full">
-        {/* Success Card */}
         <div className="bg-white dark:bg-slate-800/50 rounded-2xl border border-gray-200 dark:border-slate-700 p-8 md:p-12 text-center">
-          {/* Success Icon */}
           <div className="flex justify-center mb-6">
             <div className="relative w-20 h-20 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center">
               <Check className="w-10 h-10 text-green-600 dark:text-green-400" />
@@ -27,7 +25,6 @@ export default function CoachingConfirmationPage({
             Your coaching session has been successfully booked.
           </p>
 
-          {/* Booking Reference */}
           <div className="bg-gray-50 dark:bg-slate-700/30 rounded-lg p-6 mb-8 text-left">
             <p className="text-sm text-gray-600 dark:text-slate-400 mb-2">
               Booking Reference
@@ -37,7 +34,6 @@ export default function CoachingConfirmationPage({
             </p>
           </div>
 
-          {/* Session Details */}
           <div className="bg-gray-50 dark:bg-slate-700/30 rounded-lg p-8 mb-8 space-y-6 text-left">
             <h3 className="font-semibold text-gray-900 dark:text-white text-lg">
               Session Details
@@ -101,7 +97,6 @@ export default function CoachingConfirmationPage({
             </div>
           </div>
 
-          {/* What Happens Next */}
           <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900/30 rounded-lg p-6 mb-8 text-left">
             <h3 className="font-semibold text-gray-900 dark:text-white mb-4">
               What Happens Next?
@@ -109,8 +104,7 @@ export default function CoachingConfirmationPage({
             <ol className="space-y-3 text-sm text-gray-700 dark:text-slate-300">
               <li className="flex gap-3">
                 <span className="font-bold text-[#7C3AED]">1</span>
-                You will receive a confirmation email with meeting details and
-                Zoom link.
+                You will receive a confirmation email with meeting details and Zoom link.
               </li>
               <li className="flex gap-3">
                 <span className="font-bold text-[#7C3AED]">2</span>
@@ -118,13 +112,11 @@ export default function CoachingConfirmationPage({
               </li>
               <li className="flex gap-3">
                 <span className="font-bold text-[#7C3AED]">3</span>
-                After the session, you can leave feedback and get a recording
-                link.
+                After the session, you can leave feedback and get a recording link.
               </li>
             </ol>
           </div>
 
-          {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4">
             <Link
               href={`/coaching/${params.id}`}

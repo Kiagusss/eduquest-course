@@ -605,9 +605,9 @@ const episode2: Episode = {
 const episode3: Episode = {
   id: "ep-3",
   courseId: "course-1",
-  title: "Advanced Design Principles & Prototyping",
+  title: "Design System untuk apa?",
   description: "Pelajari prinsip-prinsip design lanjutan dan teknik prototyping interaktif di Figma untuk membuat pengalaman user yang luar biasa.",
-  videoUrl: "https://www.youtube.com/embed/9bZkp7q19f0?si=dQw4w9WgXcQ",
+  videoUrl: "https://www.youtube.com/embed/FscX5Q1rihE?si=ys0wF_kx4fL99meH",
   duration: 2400,
   quizId: "quiz-3",
 }
